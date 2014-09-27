@@ -2,6 +2,8 @@ TODO:
 
 === LIB ===
 
+- add README.md
+
 - document all library classes and methods
 
 - provide a simple and complete ProgressBarView
