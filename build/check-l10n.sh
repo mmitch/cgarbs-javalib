@@ -1,7 +1,11 @@
 #!/bin/bash
 
 echo
-echo checking MainWindow UI:
-./check-l10n.pl ../src/de/cgarbs/knittr/resource/MainWindow*
+echo checking cgarbs-javalib:
+./check-l10n.pl ../src/de/cgarbs/lib/i18n/resource/*
+
+echo
+echo checking Guesser demo:
+./check-l10n.pl ../src-demos/guesser/Guesser*.properties
 
 echo
