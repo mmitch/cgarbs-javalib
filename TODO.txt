@@ -25,6 +25,8 @@ TODO:
 
 === UI ===
 
+- bugfix: returning from ERROR color to NORMAL color switches to wrong color
+
 - print validation error for every element
   - validate/invalidate directly on value change
   - remove FormattedTextFieldVerifier class
@@ -39,6 +41,9 @@ TODO:
 
 - SimpleVerticalLayout:
   - print headers bold or bigger, they are not really visible
+  
+- Metal L&F:
+  - fix insets (text labels lower than textfields - looks good in other L&Fs)  
 
 - later: improve controls/bindings
   - variable text on "..." buttons in ColorBinding and FileBinding
