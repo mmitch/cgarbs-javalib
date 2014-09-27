@@ -22,6 +22,7 @@ abstract public class Binding
 	protected String     txtLabel;
 
 	private Set<Binding> listeningBindings = new HashSet<Binding>(); // FIXME or List? -> check!
+	private Color originalColor;
 
 	public abstract Object getViewValue();
 
@@ -50,6 +51,7 @@ abstract public class Binding
 		}
 		this.jLabel = createJLabel(txtLabel);
 		this.jData  = createDataEntryComponent();
+		originalColor = jData.getBackground();
 	}
 
 	abstract protected JComponent createDataEntryComponent(); // FIXME NAME cdec <-> JData
@@ -88,7 +90,7 @@ abstract public class Binding
 		jData.setToolTipText(text);
 		if (text == null)
 		{
-			jData.setBackground(null);
+			jData.setBackground(originalColor);
 		}
 		else
 		{
