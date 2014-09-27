@@ -10,7 +10,6 @@ TODO:
 
 - add demo projects
   - simple calculator
-  - guess-the-number
 
 ? simple logging framework
 
@@ -39,7 +38,7 @@ TODO:
 - do something when image file is no image file (preview icon == null)
 
 - SimpleVerticalLayout:
-  - print headers bold or bigger, they are not really visible 
+  - print headers bold or bigger, they are not really visible
 
 - later: improve controls/bindings
   - variable text on "..." buttons in ColorBinding and FileBinding
