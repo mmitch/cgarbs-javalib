@@ -1,13 +1,26 @@
 TODO:
 
-=== KNITTR ===
+=== LIB ===
 
-- SVG render:
-  - fix bug on rescale of last page when there is only one page left
-    (then only 1 page is rendered and it is not scaled to fit)
-  - show progress bar during rendering (busy cursor is not enough)
+- document all library classes and methods
 
-? allow "print two pages wide"?
+- provide a simple and complete ProgressBarView
+
+- add demo projects
+  - simple calculator
+  - guess-the-number
+
+? simple logging framework
+
+? general utilities class (like safe String.setToMxLength())
+
+? general methods for look&feel selection / AutoLayout selection
+
+=== BUILD ===
+
+- check-l10n: only call with path, detect and sort relevant files automatically
+
+- use paths relative to project, not to workspace in launch configurations
 
 === UI ===
 
@@ -48,22 +61,3 @@ TODO:
   - pro: manual editing possible
   - serialized Java objects should be forward-compatible through JRE versions
 
-=== LIB ===
-
-- document all library classes and methods
-
-- provide a simple and complete ProgressBarView
-
-- add demo projects
-  - simple calculator
-  - guess-the-number
-
-? simple logging framework
-
-? general utilities class (like safe String.setToMxLength())
-
-? general methods for look&feel selection / AutoLayout selection
-
-=== BUILD ===
-
-- check-l10n: only call with path, detect and sort relevant files automatically
