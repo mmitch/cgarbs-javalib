@@ -20,6 +20,7 @@ import de.cgarbs.lib.exception.ValidationErrorList;
 import de.cgarbs.lib.glue.Binding;
 import de.cgarbs.lib.glue.Glue;
 import de.cgarbs.lib.i18n.Resource;
+import de.cgarbs.lib.ui.LookAndFeelChanger;
 import de.cgarbs.lib.ui.layout.SimpleVerticalLayout;
 
 public class GuesserUI extends JFrame
@@ -36,6 +37,10 @@ public class GuesserUI extends JFrame
 	 */
 	public static void main(String[] arguments)
 	{
+		// set nice Look and Feel
+		LookAndFeelChanger.setNiceLookAndFeel();
+
+		// open main window
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
