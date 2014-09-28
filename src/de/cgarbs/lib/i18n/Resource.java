@@ -10,6 +10,11 @@ public class Resource
 	private ResourceBundle rb;
 	private Pattern pattern = Pattern.compile("(\\$?)\\$(\\d*+)");
 
+	public Resource(Class<?> c)
+	{
+		this(c.getName());
+	}
+
 	public Resource(String baseName)
 	{
 		rb = ResourceBundle.getBundle(baseName);
