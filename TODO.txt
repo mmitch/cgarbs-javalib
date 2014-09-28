@@ -25,6 +25,8 @@ TODO:
 
 === UI ===
 
+- BUG: tooltip with error text missing on FileBinding
+
 - print validation error for every element
   - validate/invalidate directly on value change
   - remove FormattedTextFieldVerifier class
