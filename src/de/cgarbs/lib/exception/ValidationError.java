@@ -45,7 +45,7 @@ public class ValidationError extends LocalizedException
 		MESSAGEKEY.put(ERROR.NULL_NOT_ALLOWED,  "NULL_NOT_ALLOWED");
 	}
 
-	private static Resource R = new Resource("de.cgarbs.lib.i18n.resource.ValidationError");
+	private static Resource R = new Resource(ValidationError.class);
 
 	private DataAttribute attribute;
 
