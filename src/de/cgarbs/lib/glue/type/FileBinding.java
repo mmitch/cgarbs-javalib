@@ -36,6 +36,7 @@ public class FileBinding extends Binding
 		jTextField.setEditable(false);
 
 		jButton = new JButton("...");
+		jButton.setToolTipText(R._("TIT_FILECHOOSER", txtLabel));
 
 		jButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
@@ -55,10 +56,10 @@ public class FileBinding extends Binding
 					}
 				}
 				fc.setSelectedFile((File)getViewValue());
-				fc.setDialogTitle("choose "+txtLabel); // FIXME i18n
+				fc.setDialogTitle(R._("TIT_FILECHOOSER", txtLabel));
 				if (fc.showDialog(
 						jButton,
-						"choose file") // FIXME i18n
+						R._("BTN_FILECHOOSER"))
 						== JFileChooser.APPROVE_OPTION)
 				{
 					setViewValue(fc.getSelectedFile());

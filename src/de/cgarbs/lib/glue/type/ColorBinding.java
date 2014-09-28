@@ -36,14 +36,16 @@ public class ColorBinding extends Binding
 	protected JComponent createDataEntryComponent()
 	{
 		jPanel = new JPanel();
+
 		jButton = new JButton("...");
+		jButton.setToolTipText(R._("TIT_COLORCHOOSER", txtLabel));
 
 		jButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
 				Color newColor = JColorChooser.showDialog(
 						jButton,
-						"choose "+txtLabel, // FIXME i18n
+						R._("TIT_COLORCHOOSER", txtLabel),
 						jPanel.getBackground());
 				if (newColor != null)
 				{

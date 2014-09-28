@@ -24,6 +24,8 @@ abstract public class Binding
 	private Set<Binding> listeningBindings = new HashSet<Binding>(); // FIXME or List? -> check!
 	private Color originalColor;
 
+	protected static Resource R = new Resource(Binding.class);
+
 	public abstract Object getViewValue();
 
 	public JComponent getJLabel()
