@@ -85,6 +85,8 @@ abstract public class AutoLayout
 	 */
 	public static void showComponent(JComponent component)
 	{
+		// FIXME move over to Binding class?
+
 		Rectangle r     = component.getBounds();
 		Container c     = component.getParent();
 		Container cLast = component;

@@ -11,6 +11,7 @@ import de.cgarbs.lib.data.DataAttribute;
 import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.ValidationError;
 import de.cgarbs.lib.i18n.Resource;
+import de.cgarbs.lib.ui.AutoLayout;
 
 abstract public class Binding
 {
@@ -124,6 +125,17 @@ abstract public class Binding
 		}
 	}
 
+	/**
+	 * ensure that a component is visible within an AutoLayout
+	 * This method will work upwards through all parent objects and
+	 * scroll as needed.
+	 *
+	 * @param component the component to show
+	 */
+	public void show()
+	{
+		AutoLayout.showComponent(getJData());
+	}
 //	public DataAttribute getAttribute() // FIXME: why is the field attribute visible, it's protected?!
 //	{
 //		return attribute;
