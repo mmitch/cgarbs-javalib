@@ -49,6 +49,12 @@ TODO:
 
 - later: use message footer to print help text/validation error for current element
 
+=== I18N ===
+
+? don't give Resource as a parameter to Binding creation, give the complete String
+  (it's optionally possible anyways)
+  ? recheck this: every addBinding() with a R._("LBL_"+getAttributeName()..." would be stupid
+
 === DATA ===
 
 - additional constraints
