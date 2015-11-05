@@ -17,6 +17,7 @@ import de.cgarbs.lib.exception.ValidationError;
 import de.cgarbs.lib.exception.ValidationErrorList;
 import de.cgarbs.lib.i18n.Resource;
 
+// FIXME: user Builder pattern, not abstract getModelName() and Resource constructor...
 abstract public class DataModel implements Serializable
 {
 	/**
