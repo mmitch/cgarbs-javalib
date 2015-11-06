@@ -1,9 +1,10 @@
 apply plugin: 'java'
+apply plugin: 'jacoco'
 
 repositories {
 	jcenter()
 }
 
 dependencies {
-	testCompile 'junit:junit:4.+', 'org.jacoco:jacoco-maven-plugin:0.7.+'
+	testCompile 'junit:junit:4.+'
 }
