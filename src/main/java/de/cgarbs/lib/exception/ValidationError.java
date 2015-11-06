@@ -29,7 +29,7 @@ public class ValidationError extends LocalizedException
 		NUMBER_TOO_SMALL,
 		NUMBER_TOO_LARGE,
 		NUMBER_FORMAT,
-		NULL_NOT_ALLOWED
+		NULL_NOT_ALLOWED,
 	}
 
 	static
@@ -45,20 +45,24 @@ public class ValidationError extends LocalizedException
 		MESSAGEKEY.put(ERROR.NULL_NOT_ALLOWED,  "NULL_NOT_ALLOWED");
 	}
 
-	private static Resource R = new Resource(ValidationError.class);
+	protected static Resource R = new Resource(ValidationError.class);
 
-	private DataAttribute attribute;
+	protected DataAttribute attribute;
+
+	protected ERROR error;
 
 	public ValidationError(DataAttribute attribute, String message, ERROR error, String... params)
 	{
 		super(message, R._(MESSAGEKEY.get(error), params));
 		this.attribute = attribute;
+		this.error = error;
 	}
 
 	public ValidationError(DataAttribute attribute, String message, String localizedMessage)
 	{
 		super(message, localizedMessage);
 		this.attribute = attribute;
+		// FIXME: set an ERROR value!
 	}
 
 	public ValidationError(DataAttribute attribute, DataException e)
@@ -69,5 +73,10 @@ public class ValidationError extends LocalizedException
 	public String getMessage()
 	{
 		return attribute.getAttributeName() + ": " + super.getMessage();
+	}
+
+	public ERROR getError()
+	{
+		return error;
 	}
 }
