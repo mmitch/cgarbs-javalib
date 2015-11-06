@@ -5,6 +5,13 @@ repositories {
 	jcenter()
 }
 
+jacocoTestReport {
+	reports {
+		xml.enabled true
+		csv.enabled true
+	}
+}
+
 dependencies {
 	testCompile 'junit:junit:4.+'
 }
