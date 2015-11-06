@@ -5,5 +5,5 @@ repositories {
 }
 
 dependencies {
-	testCompile 'junit:junit:4.+'
+	testCompile 'junit:junit:4.+', 'org.jacoco:jacoco-maven-plugin:0.7.+'
 }
