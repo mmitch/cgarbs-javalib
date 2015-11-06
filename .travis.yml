@@ -10,6 +10,7 @@ jdk:
 before_script:
   - pip install --user codecov
 after_success:
+  - gradle jacocoTestReport
   - codecov
 
 # Gradle specific cache handling
