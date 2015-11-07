@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'jacoco'
+apply plugin: 'maven-publish'
 
 repositories {
 	jcenter()
@@ -14,3 +15,25 @@ jacocoTestReport {
 dependencies {
 	testCompile 'junit:junit:4.+'
 }
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			groupId 'de.cgarbs'
+			artifactId 'javalib'
+			version '0.1'
+
+			from components.java
+		}
+	}
+}
+publishing {
+	repositories {
+		maven {
+			name "cgarbs.de local repo"
+			url "file:/home/mitch/pub/www/maven2"
+			/* sad panda: aparrently SFTP currently only works with passwords, not with pubkey */
+		}
+	}
+}
+ 
