@@ -12,7 +12,7 @@ public class GlueExceptionTest
 	public static final ERROR GIVEN_ERROR = ERROR.UNDEFINED;
 	public static final String GIVEN_THROWABLE_MESSAGE = "bazinga!";
 	public static final Throwable GIVEN_THROWABLE = new RuntimeException(GIVEN_THROWABLE_MESSAGE);
-	
+
 	@Test
 	public void checkForMissingMessages()
 	{
@@ -24,7 +24,7 @@ public class GlueExceptionTest
 			assertTrue(exception.getMessage().length() > 0);
 		}
 	}
-	
+
 	@Test
 	public void checkConstructors()
 	{
@@ -55,13 +55,13 @@ public class GlueExceptionTest
 			assertEquals(GIVEN_THROWABLE, exception.getCause());
 		}
 	}
-	
+
 	@Test
 	public void checkPrependMessage()
 	{
 		final GlueException exception = new GlueException(GIVEN_ERROR, GIVEN_MESSAGE)
 											.prependMessage(GIVEN_THROWABLE_MESSAGE);
-		
+
 		{
 			final String msg = exception.getMessage();
 			assertTrue(msg.contains(GIVEN_MESSAGE));
