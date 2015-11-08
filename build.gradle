@@ -20,7 +20,7 @@ publishing {
 	publications {
 		mavenJava(MavenPublication) {
 			groupId 'de.cgarbs'
-			artifactId 'javalib'
+			artifactId 'cgarbs-javalib'
 			version '0.1'
 
 			from components.java
