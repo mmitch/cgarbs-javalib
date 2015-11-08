@@ -7,6 +7,8 @@ import java.util.regex.Pattern;
 
 public class Resource
 {
+	// FIXME: implement cacheing per class?
+
 	private ResourceBundle rb;
 	private Pattern pattern = Pattern.compile("(\\$?)\\$(\\d*+)");
 
@@ -20,6 +22,14 @@ public class Resource
 		rb = ResourceBundle.getBundle(baseName);
 	}
 
+	/**
+	 * parameter markers are $0, $1, $2...
+	 * $$ escapes a $
+	 *
+	 * @param key
+	 * @param values
+	 * @return
+	 */
 	public String _(String key, String... values)
 	{
 		if (key == null)
