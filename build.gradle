@@ -1,9 +1,21 @@
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'maven-publish'
+apply plugin: 'com.cinnober.gradle.semver-git'
 
 repositories {
 	jcenter()
+}
+
+/* deduce build version number from git tags
+   source: https://github.com/cinnober/semver-git */
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath group: 'com.cinnober.gradle', name: 'semver-git', version: '2.2.1'
+	}
 }
 
 jacocoTestReport {
@@ -21,7 +33,6 @@ publishing {
 		mavenJava(MavenPublication) {
 			groupId 'de.cgarbs'
 			artifactId 'cgarbs-javalib'
-			version '0.1'
 
 			from components.java
 		}
