@@ -11,23 +11,23 @@ public abstract class LocalizedException extends Exception
 
 	public LocalizedException(String message)
 	{
-		super(message);
+		this(message, message);
 	}
 
 	public LocalizedException(String message, String localizedMessage)
 	{
-		this(message);
+		super(message);
 		this.localizedMessage = localizedMessage;
 	}
 
 	public LocalizedException(String message, Throwable t)
 	{
-		super(message, t);
+		this(message, message, t);
 	}
 
 	public LocalizedException(String message, String localizedMessage, Throwable t)
 	{
-		this(message, t);
+		super(message, t);
 		this.localizedMessage = localizedMessage;
 	}
 
