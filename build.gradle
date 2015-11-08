@@ -1,12 +1,17 @@
 apply plugin: 'java'
-apply plugin: 'jacoco'
-apply plugin: 'maven-publish'
-apply plugin: 'com.cinnober.gradle.semver-git'
+/* we are a Java project, obviously */
 
-repositories {
-	jcenter()
+
+apply plugin: 'jacoco'
+/* generate Java code coverage reports */
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
 }
 
+
+apply plugin: 'com.cinnober.gradle.semver-git'
 /* deduce build version number from git tags
    source: https://github.com/cinnober/semver-git */
 buildscript {
@@ -18,16 +23,9 @@ buildscript {
 	}
 }
 
-jacocoTestReport {
-	reports {
-		xml.enabled true
-	}
-}
 
-dependencies {
-	testCompile 'junit:junit:4.+'
-}
-
+apply plugin: 'maven-publish'
+/* publish directly to maven repositories */
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
@@ -46,5 +44,13 @@ publishing {
 			/* sad panda: aparrently SFTP currently only works with passwords, not with pubkey */
 		}
 	}
+}
+
+
+repositories {
+	jcenter()
+}
+dependencies {
+	testCompile 'junit:junit:4.+'
 }
  
