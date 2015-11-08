@@ -3,6 +3,7 @@ package de.cgarbs.lib.i18n;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -29,6 +30,8 @@ public class ResourceTest
 	public static final String PARAM_UNEXPANDED = " $ $ ";
 
 	public static final String KEY_MISSING = "missing";
+
+	public static final String KEY_NULL = null;
 
 	@Test
 	public void checkLocales()
@@ -106,6 +109,15 @@ public class ResourceTest
 			assertFalse(msg.contains(PARAM_2));
 			assertTrue(msg.contains(PARAM_UNEXPANDED));
 		}
+	}
+
+	@Test
+	public void checkNullKey()
+	{
+		final Resource r = new Resource(ResourceTest.class);
+
+		assertNull(r._(KEY_NULL));
+		assertNull(r._(KEY_NULL, PARAM_0));
 	}
 
 	@Test
