@@ -113,4 +113,8 @@ abstract public class DataAttribute implements Serializable
 					);
 		}
 	}
+	public boolean isNullable()
+	{
+		return nullable;
+	}
 }

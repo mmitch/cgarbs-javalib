@@ -1,13 +1,14 @@
 package de.cgarbs.lib.data.type;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import de.cgarbs.lib.data.DataAttribute;
 import de.cgarbs.lib.data.DataModel;
 import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.ValidationError;
@@ -16,15 +17,15 @@ import de.cgarbs.lib.i18n.Resource;
 public class StringAttributeTest
 {
 	DataModel model;
-	DataAttribute attribute_1_underTest;
-	DataAttribute attribute_2_underTest;
+	StringAttribute attribute_1_underTest;
+	StringAttribute attribute_2_underTest;
 
 	static final String GIVEN_STRING = "foo";
 	static final Integer GIVEN_INTEGER = 42;
 	static final Float GIVEN_FLOAT = 13.7f;
 
-	static final int GIVEN_MIN_LENGTH = 1;
-	static final int GIVEN_MAX_LENGTH = 5;
+	static final Integer GIVEN_MIN_LENGTH = 1;
+	static final Integer GIVEN_MAX_LENGTH = 5;
 	static final String GIVEN_STRING_TOO_SHORT = "";
 	static final String GIVEN_STRING_TOO_LONG  = "xxxxxxx";
 
@@ -32,8 +33,8 @@ public class StringAttributeTest
 	public void setUp() throws Exception
 	{
 		model = new StringAttributeTestDataModel(new Resource(BaseTestDataModel.class));
-		attribute_1_underTest = model.getAttribute(StringAttributeTestDataModel.TEST_ATTRIBUTE_1);
-		attribute_2_underTest = model.getAttribute(StringAttributeTestDataModel.TEST_ATTRIBUTE_2);
+		attribute_1_underTest = (StringAttribute) model.getAttribute(StringAttributeTestDataModel.TEST_ATTRIBUTE_1);
+		attribute_2_underTest = (StringAttribute) model.getAttribute(StringAttributeTestDataModel.TEST_ATTRIBUTE_2);
 	}
 
 	@Test
@@ -100,6 +101,18 @@ public class StringAttributeTest
 			assertEquals(ValidationError.ERROR.STRING_TOO_SHORT, e.getError());
 		}
 		attribute_2_underTest.validate(GIVEN_STRING_TOO_SHORT);
+	}
+
+	@Test
+	public void checkSetup()
+	{
+		assertEquals(GIVEN_MIN_LENGTH, attribute_1_underTest.getMinLength());
+		assertEquals(GIVEN_MAX_LENGTH, attribute_1_underTest.getMaxLength());
+		assertTrue(attribute_1_underTest.isNullable());
+
+		assertNull(attribute_2_underTest.getMinLength());
+		assertNull(attribute_2_underTest.getMaxLength());
+		assertFalse(attribute_2_underTest.isNullable());
 	}
 
 	class StringAttributeTestDataModel extends BaseTestDataModel

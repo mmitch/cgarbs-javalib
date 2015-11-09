@@ -1,6 +1,7 @@
 package de.cgarbs.lib.data.type;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
@@ -22,8 +23,8 @@ import de.cgarbs.lib.i18n.Resource;
 public class FloatAttributeTest
 {
 	DataModel model;
-	NumberAttribute attribute_1_underTest;
-	NumberAttribute attribute_2_underTest;
+	FloatAttribute attribute_1_underTest;
+	FloatAttribute attribute_2_underTest;
 
 	static final String GIVEN_STRING = "13";
 	static final Integer GIVEN_INTEGER = -42;
@@ -45,8 +46,8 @@ public class FloatAttributeTest
 	public void setUp() throws Exception
 	{
 		model = new FloatAttributeTestDataModel(new Resource(BaseTestDataModel.class));
-		attribute_1_underTest = (NumberAttribute) model.getAttribute(FloatAttributeTestDataModel.TEST_ATTRIBUTE_1);
-		attribute_2_underTest = (NumberAttribute) model.getAttribute(FloatAttributeTestDataModel.TEST_ATTRIBUTE_2);
+		attribute_1_underTest = (FloatAttribute) model.getAttribute(FloatAttributeTestDataModel.TEST_ATTRIBUTE_1);
+		attribute_2_underTest = (FloatAttribute) model.getAttribute(FloatAttributeTestDataModel.TEST_ATTRIBUTE_2);
 	}
 
 	@Test
@@ -54,6 +55,7 @@ public class FloatAttributeTest
 	{
 		attribute_1_underTest.setValue(null);
 		assertNull(attribute_1_underTest.getValue());
+		assertNull(attribute_1_underTest.getFormattedValue());
 	}
 
 	@Test
@@ -164,6 +166,22 @@ public class FloatAttributeTest
 			assertTrue(raw.length() > formatted.length());
 			assertTrue(raw.startsWith(formatted));
 		}
+	}
+
+	@Test
+	public void checkSetup()
+	{
+		assertEquals(GIVEN_MIN_VALUE, attribute_1_underTest.getMinValue());
+		assertEquals(GIVEN_MAX_VALUE, attribute_1_underTest.getMaxValue());
+		assertEquals(GIVEN_MIN_DECIMALS, attribute_1_underTest.getMinDecimals());
+		assertEquals(GIVEN_MAX_DECIMALS, attribute_1_underTest.getMaxDecimals());
+		assertTrue(attribute_1_underTest.isNullable());
+
+		assertNull(attribute_2_underTest.getMinValue());
+		assertNull(attribute_2_underTest.getMaxValue());
+		assertEquals(GIVEN_DECIMALS, attribute_2_underTest.getMinDecimals());
+		assertEquals(GIVEN_DECIMALS, attribute_2_underTest.getMaxDecimals());
+		assertFalse(attribute_2_underTest.isNullable());
 	}
 
 	class FloatAttributeTestDataModel extends BaseTestDataModel

@@ -1,13 +1,14 @@
 package de.cgarbs.lib.data.type;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import de.cgarbs.lib.data.DataAttribute;
 import de.cgarbs.lib.data.DataModel;
 import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.ValidationError;
@@ -16,8 +17,8 @@ import de.cgarbs.lib.i18n.Resource;
 public class BooleanAttributeTest
 {
 	DataModel model;
-	DataAttribute attribute_1_underTest;
-	DataAttribute attribute_2_underTest;
+	BooleanAttribute attribute_1_underTest;
+	BooleanAttribute attribute_2_underTest;
 
 	static final String GIVEN_STRING = "true";
 	static final Boolean GIVEN_BOOLEAN = false;
@@ -26,8 +27,8 @@ public class BooleanAttributeTest
 	public void setUp() throws Exception
 	{
 		model = new BooleanAttributeTestDataModel(new Resource(BaseTestDataModel.class));
-		attribute_1_underTest = model.getAttribute(BooleanAttributeTestDataModel.TEST_ATTRIBUTE_1);
-		attribute_2_underTest = model.getAttribute(BooleanAttributeTestDataModel.TEST_ATTRIBUTE_2);
+		attribute_1_underTest = (BooleanAttribute) model.getAttribute(BooleanAttributeTestDataModel.TEST_ATTRIBUTE_1);
+		attribute_2_underTest = (BooleanAttribute) model.getAttribute(BooleanAttributeTestDataModel.TEST_ATTRIBUTE_2);
 	}
 
 	@Test
@@ -77,6 +78,14 @@ public class BooleanAttributeTest
 		}
 	}
 
+	@Test
+	public void checkSetup()
+	{
+		assertTrue(attribute_1_underTest.isNullable());
+
+		assertFalse(attribute_2_underTest.isNullable());
+	}
+
 	class BooleanAttributeTestDataModel extends BaseTestDataModel
 	{
 		private static final long serialVersionUID = 1L;
@@ -94,7 +103,7 @@ public class BooleanAttributeTest
 
 			addAttribute(
 					TEST_ATTRIBUTE_2,
-					IntAttribute.builder()
+					BooleanAttribute.builder()
 						.setNullable(false)
 						.build()
 					);

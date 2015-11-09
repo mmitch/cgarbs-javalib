@@ -64,4 +64,14 @@ public class FloatAttribute extends NumberAttribute
 		}
 		return value.floatValue();
 	}
+
+	public int getMinDecimals()
+	{
+		return minDecimals;
+	}
+
+	public int getMaxDecimals()
+	{
+		return maxDecimals;
+	}
 }
