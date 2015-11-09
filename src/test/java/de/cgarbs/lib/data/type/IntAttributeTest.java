@@ -13,27 +13,27 @@ import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.ValidationError;
 import de.cgarbs.lib.i18n.Resource;
 
-public class StringAttributeTest
+public class IntAttributeTest
 {
 	DataModel model;
 	DataAttribute attribute_1_underTest;
 	DataAttribute attribute_2_underTest;
 
-	static final String GIVEN_STRING = "foo";
-	static final Integer GIVEN_INTEGER = 42;
+	static final String GIVEN_STRING = "13";
+	static final Integer GIVEN_INTEGER = -42;
 	static final Float GIVEN_FLOAT = 13.7f;
 
-	static final int GIVEN_MIN_LENGTH = 1;
-	static final int GIVEN_MAX_LENGTH = 5;
-	static final String GIVEN_STRING_TOO_SHORT = "";
-	static final String GIVEN_STRING_TOO_LONG  = "xxxxxxx";
+	static final int GIVEN_MIN_VALUE = 1;
+	static final int GIVEN_MAX_VALUE = 5;
+	static final int GIVEN_VALUE_TOO_SMALL = 0;
+	static final int GIVEN_VALUE_TOO_BIG   = 17;
 
 	@Before
 	public void setUp() throws Exception
 	{
-		model = new StringAttributeTestDataModel(new Resource(BaseTestDataModel.class));
-		attribute_1_underTest = model.getAttribute(StringAttributeTestDataModel.TEST_ATTRIBUTE_1);
-		attribute_2_underTest = model.getAttribute(StringAttributeTestDataModel.TEST_ATTRIBUTE_2);
+		model = new IntAttributeTestDataModel(new Resource(BaseTestDataModel.class));
+		attribute_1_underTest = model.getAttribute(IntAttributeTestDataModel.TEST_ATTRIBUTE_1);
+		attribute_2_underTest = model.getAttribute(IntAttributeTestDataModel.TEST_ATTRIBUTE_2);
 	}
 
 	@Test
@@ -47,21 +47,21 @@ public class StringAttributeTest
 	public void checkSetValues() throws Exception
 	{
 		attribute_1_underTest.setValue(GIVEN_STRING);
-		assertEquals(GIVEN_STRING, attribute_1_underTest.getValue());
+		assertEquals(Integer.valueOf(GIVEN_STRING), attribute_1_underTest.getValue());
 
 		attribute_1_underTest.setValue(GIVEN_INTEGER);
-		assertEquals(GIVEN_INTEGER.toString(), attribute_1_underTest.getValue());
+		assertEquals(GIVEN_INTEGER, attribute_1_underTest.getValue());
 
 		attribute_1_underTest.setValue(GIVEN_FLOAT);
-		assertEquals(GIVEN_FLOAT.toString(), attribute_1_underTest.getValue());
+		assertEquals(Integer.valueOf(GIVEN_FLOAT.intValue()), attribute_1_underTest.getValue());
 	}
 
 	@Test
 	public void checkSetInvalid() throws Exception
 	{
 		// these should throw no error unless validate() is called!
-		attribute_1_underTest.setValue(GIVEN_STRING_TOO_LONG);
-		attribute_1_underTest.setValue(GIVEN_STRING_TOO_SHORT);
+		attribute_1_underTest.setValue(GIVEN_VALUE_TOO_BIG);
+		attribute_1_underTest.setValue(GIVEN_VALUE_TOO_SMALL);
 		attribute_2_underTest.setValue(null);
 	}
 
@@ -81,47 +81,47 @@ public class StringAttributeTest
 
 		try
 		{
-			attribute_1_underTest.validate(GIVEN_STRING_TOO_LONG);
+			attribute_1_underTest.validate(GIVEN_VALUE_TOO_BIG);
 			fail("no exception thrown");
 		}
 		catch (ValidationError e)
 		{
-			assertEquals(ValidationError.ERROR.STRING_TOO_LONG, e.getError());
+			assertEquals(ValidationError.ERROR.NUMBER_TOO_LARGE, e.getError());
 		}
-		attribute_2_underTest.validate(GIVEN_STRING_TOO_LONG);
+		attribute_2_underTest.validate(GIVEN_VALUE_TOO_BIG);
 
 		try
 		{
-			attribute_1_underTest.validate(GIVEN_STRING_TOO_SHORT);
+			attribute_1_underTest.validate(GIVEN_VALUE_TOO_SMALL);
 			fail("no exception thrown");
 		}
 		catch (ValidationError e)
 		{
-			assertEquals(ValidationError.ERROR.STRING_TOO_SHORT, e.getError());
+			assertEquals(ValidationError.ERROR.NUMBER_TOO_SMALL, e.getError());
 		}
-		attribute_2_underTest.validate(GIVEN_STRING_TOO_SHORT);
+		attribute_2_underTest.validate(GIVEN_VALUE_TOO_SMALL);
 	}
 
-	class StringAttributeTestDataModel extends BaseTestDataModel
+	class IntAttributeTestDataModel extends BaseTestDataModel
 	{
 		private static final long serialVersionUID = 1L;
 
-		public StringAttributeTestDataModel(Resource resource) throws DataException
+		public IntAttributeTestDataModel(Resource resource) throws DataException
 		{
 			super(resource);
 
 			addAttribute(
 					TEST_ATTRIBUTE_1,
-					StringAttribute.builder()
-						.setMinLength(GIVEN_MIN_LENGTH)
-						.setMaxLength(GIVEN_MAX_LENGTH)
+					IntAttribute.builder()
+						.setMinValue(GIVEN_MIN_VALUE)
+						.setMaxValue(GIVEN_MAX_VALUE)
 						.setNullable(true)
 						.build()
 					);
 
 			addAttribute(
 					TEST_ATTRIBUTE_2,
-					StringAttribute.builder()
+					IntAttribute.builder()
 						.setNullable(false)
 						.build()
 					);
