@@ -26,6 +26,7 @@ my @keys = keys %{$allkeys};
 printf "total keys: %d\n", scalar @keys;
 
 print "missing keys:\n";
+my $missing = 0;
 foreach my $key (@keys)
 {
     my @files;
@@ -39,5 +40,8 @@ foreach my $key (@keys)
     if (@files)
     {
 	printf "%s = { %s }\n", $key, join(' ', @files);
+	$missing++;
     }
 }
+
+exit ($missing > 0);
