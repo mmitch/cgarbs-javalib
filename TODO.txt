@@ -2,8 +2,6 @@ TODO:
 
 === LIB ===
 
-- add README.md
-
 - document all library classes and methods
 
 - provide a simple and complete ProgressBarView
@@ -20,8 +18,6 @@ TODO:
 === BUILD ===
 
 - check-l10n: only call with path, detect and sort relevant files automatically
-
-- use paths relative to project, not to workspace in launch configurations
 
 === UI ===
 
