@@ -54,4 +54,12 @@ repositories {
 dependencies {
 	testCompile 'junit:junit:4.+'
 }
- 
+
+ /***
+ **** my own tasks
+ ***/
+
+task fixit(type:Exec) {
+	description 'Fixes line breaks and indentation on empty lines.'
+	commandLine 'tools/fixit.sh'
+}
