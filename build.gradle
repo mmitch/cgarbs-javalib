@@ -59,7 +59,17 @@ dependencies {
  **** my own tasks
  ***/
 
-task fixit(type:Exec) {
+task fixit(type: Exec) {
 	description 'Fixes line breaks and indentation on empty lines.'
 	commandLine 'tools/fixit.sh'
+}
+
+task publishDropbox(type: Copy, dependsOn: jar) {
+	description 'Deploy current JAR to Dropbox.'
+
+	from( jar.destinationDir ) {
+		include jar.archiveName
+		rename { jar.baseName + '.jar' }
+	}
+	into '/home/mitch/Dropbox/schnucki/knittr'
 }
