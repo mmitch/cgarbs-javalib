@@ -73,3 +73,26 @@ task publishDropbox(type: Copy, dependsOn: jar) {
 	}
 	into '/home/mitch/Dropbox/schnucki/knittr'
 }
+
+task checkl10n() {
+	description 'Check all localizations for missing property file keys.'
+
+	/* FIXME: all paths handcrafted, there should be a better way */
+	finalizedBy(
+		checkl10nSingle('src/main/resources/de/cgarbs/lib/exception'),
+		checkl10nSingle('src/main/resources/de/cgarbs/lib/glue'),
+		checkl10nSingle('src/demos/guesser')
+		)
+}
+
+def checkl10nSingle(path) {
+	description 'Check one localization for missing property file keys.'
+	return tasks.create("checkl10n /${path}", Exec) {
+		List args = [ 'tools/check-l10n.pl' ]
+		fileTree(dir: path).include('*.properties').each {
+			File file -> args.add(file as String)
+		}
+
+		commandLine args
+	}
+}
