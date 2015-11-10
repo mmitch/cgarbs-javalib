@@ -9,13 +9,17 @@ my own Java framework, mostly a Model-View-Binding for Swing
 features
 --------
 
-* define data models containing fields of different types (text, numerals etc.)
-* define simple validations for the fields (minimum/maximum text lengths, minimum/maximum values, null/notnull)
-* generate Swing widgets that are bound to the data model fields (mostly TextFields, but there is more like a Color picker)
+* define data models containing fields of different types (text,
+  numerals etc.)
+* define simple validations for the fields (minimum/maximum text
+  lengths, minimum/maximum values, null/notnull)
+* generate Swing widgets that are bound to the data model fields
+  (mostly TextFields, but there is more: a color picker, CheckBoxes)
 * grouping of widgets
 * different layouts for the widgets (single/dual columns, tabbed, ...)
 * move data between the GUI and the model via method call
-* validate the model showing errors directly in the GUI widgets (eg. "text too long")
+* validate the model showing errors directly in the GUI widgets
+  (eg. "text too long")
 * store/load the whole model to/from a file
 * i18n/l10n support for labels and error messages
 
