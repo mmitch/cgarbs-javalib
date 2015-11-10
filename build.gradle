@@ -30,8 +30,8 @@ apply plugin: 'maven-publish'
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
-			groupId 'de.cgarbs'
-			artifactId 'cgarbs-javalib'
+			groupId = 'de.cgarbs'
+			artifactId = 'cgarbs-javalib'
 
 			from components.java
 		}
@@ -61,6 +61,7 @@ dependencies {
 
 task fixit(type: Exec) {
 	description 'Fixes line breaks and indentation on empty lines.'
+
 	commandLine 'tools/fixit.sh'
 }
 
@@ -85,8 +86,15 @@ task checkl10n() {
 		)
 }
 
+task version() {
+     description 'Show version that would be published'
+
+     println 'version=' + version
+}
+
 def checkl10nSingle(path) {
 	description 'Check one localization for missing property file keys.'
+
 	return tasks.create("checkl10n /${path}", Exec) {
 		List args = [ 'tools/check-l10n.pl' ]
 		fileTree(dir: path).include('*.properties').each {
