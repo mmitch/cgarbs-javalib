@@ -27,12 +27,13 @@ abstract public class DataAttribute implements Serializable
 	{
 		public abstract DataAttribute build();
 
-		@SuppressWarnings("unchecked")
 		public T setNullable(Boolean nullable)
 		{
 			this.nullable = nullable;
-			return (T) this;
+			return getThis();
 		}
+
+		protected abstract T getThis();
 
 		private boolean nullable = true;
 	};

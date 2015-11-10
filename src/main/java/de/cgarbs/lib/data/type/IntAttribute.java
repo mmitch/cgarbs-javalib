@@ -18,6 +18,12 @@ public class IntAttribute extends NumberAttribute
 		{
 			return new IntAttribute(this);
 		}
+
+		@Override
+		protected Builder getThis()
+		{
+			return this;
+		}
 	}
 
 	public static Builder builder()

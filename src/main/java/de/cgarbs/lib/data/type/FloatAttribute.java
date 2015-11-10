@@ -15,16 +15,29 @@ public class FloatAttribute extends NumberAttribute
 	// Builder pattern start
 	public static class Builder extends NumberAttribute.Builder<Float>
 	{
+		@Override
+		protected Builder getThis()
+		{
+			return this;
+		}
+
+		public FloatAttribute build()
+		{
+			return new FloatAttribute(this);
+		}
+
 		public Builder setMinDecimals(int minDecimals)
 		{
 			this.minDecimals = minDecimals;
 			return this;
 		}
+
 		public Builder setMaxDecimals(int maxDecimals)
 		{
 			this.maxDecimals = maxDecimals;
 			return this;
 		}
+
 		public Builder setDecimals(int decimals)
 		{
 			return setMinDecimals(decimals).setMaxDecimals(decimals);
@@ -32,11 +45,6 @@ public class FloatAttribute extends NumberAttribute
 
 		private int minDecimals;
 		private int maxDecimals;
-
-		public FloatAttribute build()
-		{
-			return new FloatAttribute(this);
-		}
 	}
 
 	public static Builder builder()

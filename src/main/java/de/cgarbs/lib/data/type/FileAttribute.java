@@ -33,21 +33,31 @@ public class FileAttribute extends DataAttribute
 		{
 			return new FileAttribute(this);
 		}
+
+		@Override
+		protected Builder getThis()
+		{
+			return this;
+		}
+
 		public Builder setMustExist(boolean mustExist)
 		{
 			this.mustExist = mustExist;
 			return this;
 		}
+
 		public Builder setMustRead(boolean mustRead)
 		{
 			this.mustRead = mustRead;
 			return this;
 		}
+
 		public Builder setMustWrite(boolean mustWrite)
 		{
 			this.mustWrite = mustWrite;
 			return this;
 		}
+
 		public Builder addFileFilter(String name, String... extensions)
 		{
 			this.filefilters.add(

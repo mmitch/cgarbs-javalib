@@ -23,11 +23,19 @@ public class StringAttribute extends DataAttribute
 		{
 			return new StringAttribute(this);
 		}
+
+		@Override
+		protected Builder getThis()
+		{
+			return this;
+		}
+
 		public Builder setMinLength(Integer minLength)
 		{
 			this.minLength = minLength;
 			return this;
 		}
+
 		public Builder setMaxLength(Integer maxLength)
 		{
 			this.maxLength = maxLength;

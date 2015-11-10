@@ -20,6 +20,12 @@ public class BooleanAttribute extends DataAttribute
 		{
 			return new BooleanAttribute(this);
 		}
+
+		@Override
+		protected Builder getThis()
+		{
+			return this;
+		}
 	}
 
 	private BooleanAttribute(Builder builder)

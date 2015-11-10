@@ -22,6 +22,12 @@ public class ColorAttribute extends DataAttribute
 		{
 			return new ColorAttribute(this);
 		}
+
+		@Override
+		protected Builder getThis()
+		{
+			return this;
+		}
 	}
 
 	public static Builder builder()

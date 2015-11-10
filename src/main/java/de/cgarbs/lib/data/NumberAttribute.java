@@ -26,12 +26,12 @@ public abstract class NumberAttribute extends DataAttribute
 		public Builder<N> setMinValue(N minValue)
 		{
 			this.minValue = minValue;
-			return this;
+			return getThis();
 		}
 		public Builder<N> setMaxValue(N maxValue)
 		{
 			this.maxValue = maxValue;
-			return this;
+			return getThis();
 		}
 
 		private Number minValue;
