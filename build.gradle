@@ -8,6 +8,7 @@ apply plugin: 'jacoco'
 jacocoTestReport {
 	reports {
 		xml.enabled true
+		html.enabled true
 	}
 }
 
@@ -52,7 +53,7 @@ repositories {
 	jcenter()
 }
 dependencies {
-	testCompile 'junit:junit:4.+'
+	testCompile 'junit:junit:4.12', 'org.hamcrest:hamcrest-library:1.3'
 }
 
  /***
