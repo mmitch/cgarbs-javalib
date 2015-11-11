@@ -12,6 +12,14 @@ public class Resource
 	private ResourceBundle rb;
 	private Pattern pattern = Pattern.compile("(\\$?)\\$(\\d*+)");
 
+	/**
+	 * For usage without a class/property file: every key is mapped to itself
+	 */
+	public Resource()
+	{
+		this(Resource.class);
+	}
+
 	public Resource(Class<?> c)
 	{
 		this(c.getName());
@@ -26,11 +34,13 @@ public class Resource
 	 * parameter markers are $0, $1, $2...
 	 * $$ escapes a $
 	 *
+	 * missing key results in no exception, key is given back (with expanded parameters, where possible)
+	 *
 	 * @param key
 	 * @param values
 	 * @return
 	 */
-	public String _(String key, String... values)
+	public String _(final String key, final String... values)
 	{
 		if (key == null)
 		{
@@ -45,8 +55,7 @@ public class Resource
 		}
 		catch (MissingResourceException e)
 		{
-			return key;
-			// FIXME warn via stderr?
+			text = key;
 		}
 
 		StringBuffer sb = new StringBuffer();

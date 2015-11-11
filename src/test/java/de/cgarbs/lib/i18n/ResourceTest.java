@@ -28,6 +28,7 @@ public class ResourceTest
 	public static final String PARAM_1 = "don't anger";
 	public static final String PARAM_2 = "unused";
 	public static final String PARAM_UNEXPANDED = " $ $ ";
+	public static final String KEY_WITH_PARAMS = "$0 $1";
 
 	public static final String KEY_MISSING = "missing";
 
@@ -83,6 +84,7 @@ public class ResourceTest
 		}
 
 		/* too few parameters */
+		// FIXME also check for the text {PARAMETER n NOT SET}
 		{
 			final String msg = r._(KEY_PARAMS, PARAM_0);
 
@@ -142,16 +144,40 @@ public class ResourceTest
 	}
 
 	@Test
+	public void checkEmptyProperties()
+	{
+		/* empty properties -> all keys missing, returning the key instead of exploding */
+		final Resource r = new Resource();
+
+		{
+			final String msg = r._(KEY_MISSING);
+
+			assertEquals(KEY_MISSING, msg);
+		}
+
+		{
+			final String msg = r._(KEY_WITH_PARAMS, PARAM_0, PARAM_1);
+
+//			assertNotEquals(KEY_MISSING, msg); // FIXME reactivate
+			assertTrue(msg.startsWith(PARAM_0));
+			assertTrue(msg.endsWith(PARAM_1));
+		}
+	}
+
+	@Test
 	public void checkMissingBundle()
 	{
 		try
 		{
-			new Resource(Resource.class);
+			new Resource(NoPropertyFound.class);
 			fail("no exception thrown");
 		}
 		catch (MissingResourceException e)
 		{
 			/* OK, this is the exception we want */
 		}
+	}
+
+	private class NoPropertyFound {
 	}
 }
