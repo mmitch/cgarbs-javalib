@@ -136,8 +136,5 @@ abstract public class Binding
 	{
 		AutoLayout.showComponent(getJData());
 	}
-//	public DataAttribute getAttribute() // FIXME: why is the field attribute visible, it's protected?!
-//	{
-//		return attribute;
-//	}
+
 }
