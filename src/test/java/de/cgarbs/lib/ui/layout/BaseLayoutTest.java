@@ -15,7 +15,7 @@ public abstract class BaseLayoutTest
 	final static String GROUP_1 = "Group 1";
 	final static String GROUP_2 = "Group 2";
 	final static String GROUP_3 = "Group 3";
-	
+
 	final static int BINDING_COUNT = 6;
 
 	Container container;

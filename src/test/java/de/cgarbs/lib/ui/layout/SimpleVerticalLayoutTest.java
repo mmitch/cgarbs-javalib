@@ -36,7 +36,7 @@ public class SimpleVerticalLayoutTest extends BaseLayoutTest
 				.addAttribute(binding6)
 				.build();
 	}
-	
+
 	@Test
 	public void checkContainer()
 	{
@@ -48,7 +48,7 @@ public class SimpleVerticalLayoutTest extends BaseLayoutTest
 		assertThat(scrollpane.getComponents().length, is(equalTo(3)));
 		assertThat(scrollpane.getComponent(0), is(instanceOf(JViewport.class)));
 		JViewport viewport = (JViewport) scrollpane.getComponent(0);
-		
+
 		// ...the ViewPort containing one JPanel...
 		assertThat(viewport.getComponents().length, is(equalTo(1)));
 		assertThat(viewport.getComponent(0), is(instanceOf(JPanel.class)));
