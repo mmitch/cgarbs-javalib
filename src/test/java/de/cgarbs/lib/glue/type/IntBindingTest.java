@@ -56,17 +56,17 @@ public class IntBindingTest extends BaseBindingTest
 	{
 		binding.setViewValue(VIEW_GIVEN_VALUE_1);
 		assertThat(getAttributeValue(), is(not(equalTo(MODEL_GIVEN_VALUE_1))));
-		binding.syncToModel();
+		syncToModel();
 		assertThat(getAttributeValue(), is(equalTo(MODEL_GIVEN_VALUE_1)));
 
 		binding.setViewValue(VIEW_GIVEN_VALUE_2);
 		assertThat(getAttributeValue(), is(not(equalTo(MODEL_GIVEN_VALUE_2))));
-		binding.syncToModel();
+		syncToModel();
 		assertThat(getAttributeValue(), is(equalTo(MODEL_GIVEN_VALUE_2)));
 
 		binding.setViewValue(null);
 		assertThat(getAttributeValue(), is(not(equalTo(MODEL_NULL_VALUE))));
-		binding.syncToModel();
+		syncToModel();
 		assertThat(getAttributeValue(), is(equalTo(MODEL_NULL_VALUE)));
 	}
 
@@ -75,17 +75,17 @@ public class IntBindingTest extends BaseBindingTest
 	{
 		dataAttribute.setValue(MODEL_GIVEN_VALUE_1);
 		assertThat(getViewValue(), is(not(equalTo(VIEW_GIVEN_VALUE_1))));
-		binding.syncToView();
+		syncToView();
 		assertThat(getViewValue(), is(equalTo(VIEW_GIVEN_VALUE_1)));
 
 		dataAttribute.setValue(MODEL_GIVEN_VALUE_2);
 		assertThat(getViewValue(), is(not(equalTo(VIEW_GIVEN_VALUE_2))));
-		binding.syncToView();
+		syncToView();
 		assertThat(getViewValue(), is(equalTo(VIEW_GIVEN_VALUE_2)));
 
 		dataAttribute.setValue(null);
 		assertThat(getViewValue(), is(not(equalTo(VIEW_NULL_VALUE))));
-		binding.syncToView();
+		syncToView();
 		assertThat(getViewValue(), is(equalTo(VIEW_NULL_VALUE)));
 	}
 

@@ -8,7 +8,7 @@ import de.cgarbs.lib.glue.Glue;
 import de.cgarbs.lib.glue.GlueTestDataModel;
 import de.cgarbs.lib.i18n.Resource;
 
-public class BaseBindingTest
+public abstract class BaseBindingTest
 {
 	Glue<GlueTestDataModel> glue;
 	Binding binding;
@@ -27,5 +27,15 @@ public class BaseBindingTest
 	String getLabel()
 	{
 		return "LBL_" + binding.getAttribute().getAttributeName();
+	}
+
+	void syncToModel() throws DataException
+	{
+		glue.syncToModel();
+	}
+
+	void syncToView()
+	{
+		glue.syncToView();
 	}
 }

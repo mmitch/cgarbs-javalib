@@ -58,18 +58,18 @@ public class BooleanBindingTest extends BaseBindingTest
 	{
 		binding.setViewValue(VIEW_GIVEN_VALUE_1);
 		assertThat(getAttributeValue(), is(not(equalTo(MODEL_GIVEN_VALUE_1))));
-		binding.syncToModel();
+		syncToModel();
 		assertThat(getAttributeValue(), is(equalTo(MODEL_GIVEN_VALUE_1)));
 
 		binding.setViewValue(VIEW_GIVEN_VALUE_2);
 		assertThat(getAttributeValue(), is(not(equalTo(MODEL_GIVEN_VALUE_2))));
-		binding.syncToModel();
+		syncToModel();
 		assertThat(getAttributeValue(), is(equalTo(MODEL_GIVEN_VALUE_2)));
 
 		binding.setViewValue(VIEW_NULL_VALUE);
 		assertThat(getAttributeValue(), is(not(equalTo(MODEL_NULL_VALUE))));
 //		assertThat(getAttributeValue(), is(not(equalTo(MODEL_DEFAULT_VALUE)))); conflicts because a boolean only has two values
-		binding.syncToModel();
+		syncToModel();
 		assertThat(getAttributeValue(), is(not(equalTo(MODEL_NULL_VALUE))));
 //		assertThat(getAttributeValue(), is(equalTo(MODEL_DEFAULT_VALUE))); conflicts because a boolean only has two values
 	}
@@ -79,18 +79,18 @@ public class BooleanBindingTest extends BaseBindingTest
 	{
 		dataAttribute.setValue(MODEL_GIVEN_VALUE_1);
 		assertThat(getViewValue(), is(not(equalTo(VIEW_GIVEN_VALUE_1))));
-		binding.syncToView();
+		syncToView();
 		assertThat(getViewValue(), is(equalTo(VIEW_GIVEN_VALUE_1)));
 
 		dataAttribute.setValue(MODEL_GIVEN_VALUE_2);
 		assertThat(getViewValue(), is(not(equalTo(VIEW_GIVEN_VALUE_2))));
-		binding.syncToView();
+		syncToView();
 		assertThat(getViewValue(), is(equalTo(VIEW_GIVEN_VALUE_2)));
 
 		dataAttribute.setValue(MODEL_NULL_VALUE);
 //		assertThat(getViewValue(), is(not(equalTo(VIEW_NULL_VALUE)))); conflicts because a boolean only has two values
 //		assertThat(getViewValue(), is(not(equalTo(VIEW_DEFAULT_VALUE)))); conflicts because a boolean only has two values
-		binding.syncToView();
+		syncToView();
 		assertThat(getViewValue(), is(equalTo(VIEW_NULL_VALUE)));
 	}
 
