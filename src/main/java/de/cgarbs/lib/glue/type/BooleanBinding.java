@@ -33,6 +33,15 @@ public class BooleanBinding extends Binding
 	public void setViewValue(Object value)
 	{
 		super.setViewValue(value);
-		jCheckBox.setSelected((Boolean)attribute.getValue());
+
+		Boolean b = (Boolean) value;
+		if (b == null)
+		{
+			jCheckBox.setSelected(false);
+		}
+		else
+		{
+			jCheckBox.setSelected(b);
+		}
 	}
 }
