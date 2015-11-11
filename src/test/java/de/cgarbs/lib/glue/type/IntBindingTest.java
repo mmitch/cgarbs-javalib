@@ -13,16 +13,12 @@ import javax.swing.JTextField;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.cgarbs.lib.data.DataModel;
-import de.cgarbs.lib.data.type.IntAttribute;
 import de.cgarbs.lib.exception.DataException;
+import de.cgarbs.lib.exception.GlueException;
 import de.cgarbs.lib.glue.GlueTestDataModel;
-import de.cgarbs.lib.i18n.Resource;
 
-public class IntBindingTest
+public class IntBindingTest extends BaseBindingTest
 {
-	final String GIVEN_LABEL = "some label";
-
 	final Integer MODEL_GIVEN_VALUE_1 = 33;
 	final Integer MODEL_GIVEN_VALUE_2 = 4;
 	final Integer MODEL_NULL_VALUE    = null;
@@ -31,24 +27,10 @@ public class IntBindingTest
 	final String VIEW_GIVEN_VALUE_2 = "4";
 	final String VIEW_NULL_VALUE    = "";
 
-	DataModel dataModel;
-	IntAttribute dataAttribute;
-	Resource resource;
-	IntBinding binding;
-
 	@Before
-	public void setUp() throws DataException
+	public void setUp() throws DataException, GlueException
 	{
-		resource = new Resource();
-		dataModel = new GlueTestDataModel(resource);
-
-		dataAttribute = (IntAttribute) dataModel.getAttribute(GlueTestDataModel.INTEGER_ATTRIBUTE);
-
-		binding = new IntBinding(
-				dataAttribute,
-				resource,
-				GIVEN_LABEL
-				);
+		setUp(GlueTestDataModel.INTEGER_ATTRIBUTE);
 	}
 
 	@Test
@@ -57,12 +39,12 @@ public class IntBindingTest
 		assertThat(binding, is(not(nullValue())));
 		assertThat(getViewValue(), is(equalTo(VIEW_NULL_VALUE)));
 		assertThat(getAttributeValue(), is(equalTo(MODEL_NULL_VALUE)));
-		assertThat(binding.getTxtLabel(), is(equalTo(GIVEN_LABEL)));
+		assertThat(binding.getTxtLabel(), is(equalTo(getLabel())));
 
 
 		assertThat(binding.getJLabel(), is(instanceOf(JLabel.class)));
 		final JLabel jLabel = (JLabel) binding.getJLabel();
-		assertThat(jLabel.getText(), is(equalTo(GIVEN_LABEL)));
+		assertThat(jLabel.getText(), is(equalTo(getLabel())));
 
 		assertThat(binding.getJData(), is(instanceOf(JTextField.class)));
 		final JTextField jData  = (JTextField) binding.getJData();

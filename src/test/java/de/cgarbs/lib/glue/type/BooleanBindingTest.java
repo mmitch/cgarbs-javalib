@@ -13,16 +13,12 @@ import javax.swing.JLabel;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.cgarbs.lib.data.DataModel;
-import de.cgarbs.lib.data.type.BooleanAttribute;
 import de.cgarbs.lib.exception.DataException;
+import de.cgarbs.lib.exception.GlueException;
 import de.cgarbs.lib.glue.GlueTestDataModel;
-import de.cgarbs.lib.i18n.Resource;
 
-public class BooleanBindingTest
+public class BooleanBindingTest extends BaseBindingTest
 {
-	final String GIVEN_LABEL = "some label";
-
 	final Boolean MODEL_DEFAULT_VALUE = false;
 	final Boolean MODEL_GIVEN_VALUE_1 = true;
 	final Boolean MODEL_GIVEN_VALUE_2 = false;
@@ -33,24 +29,10 @@ public class BooleanBindingTest
 	final Boolean VIEW_GIVEN_VALUE_2 = false;
 	final Boolean VIEW_NULL_VALUE    = false;
 
-	DataModel dataModel;
-	BooleanAttribute dataAttribute;
-	Resource resource;
-	BooleanBinding binding;
-
 	@Before
-	public void setUp() throws DataException
+	public void setUp() throws DataException, GlueException
 	{
-		resource = new Resource();
-		dataModel = new GlueTestDataModel(resource);
-
-		dataAttribute = (BooleanAttribute) dataModel.getAttribute(GlueTestDataModel.BOOLEAN_ATTRIBUTE);
-
-		binding = new BooleanBinding(
-				dataAttribute,
-				resource,
-				GIVEN_LABEL
-				);
+		setUp(GlueTestDataModel.BOOLEAN_ATTRIBUTE);
 	}
 
 	@Test
@@ -59,12 +41,12 @@ public class BooleanBindingTest
 		assertThat(binding, is(not(nullValue())));
 		assertThat(getViewValue(), is(equalTo(VIEW_NULL_VALUE)));
 		assertThat(getAttributeValue(), is(equalTo(MODEL_NULL_VALUE)));
-		assertThat(binding.getTxtLabel(), is(equalTo(GIVEN_LABEL)));
+		assertThat(binding.getTxtLabel(), is(equalTo(getLabel())));
 
 
 		assertThat(binding.getJLabel(), is(instanceOf(JLabel.class)));
 		final JLabel jLabel = (JLabel) binding.getJLabel();
-		assertThat(jLabel.getText(), is(equalTo(GIVEN_LABEL)));
+		assertThat(jLabel.getText(), is(equalTo(getLabel())));
 
 		assertThat(binding.getJData(), is(instanceOf(JCheckBox.class)));
 		final JCheckBox jData  = (JCheckBox) binding.getJData();

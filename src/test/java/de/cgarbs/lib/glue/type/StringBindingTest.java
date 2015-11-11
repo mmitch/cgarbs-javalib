@@ -13,16 +13,12 @@ import javax.swing.JTextField;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.cgarbs.lib.data.DataModel;
-import de.cgarbs.lib.data.type.StringAttribute;
 import de.cgarbs.lib.exception.DataException;
+import de.cgarbs.lib.exception.GlueException;
 import de.cgarbs.lib.glue.GlueTestDataModel;
-import de.cgarbs.lib.i18n.Resource;
 
-public class StringBindingTest
+public class StringBindingTest extends BaseBindingTest
 {
-	final String GIVEN_LABEL = "some label";
-
 	final String MODEL_GIVEN_VALUE_1 = "tiguar";
 	final String MODEL_GIVEN_VALUE_2 = "cheYenne";
 	final String MODEL_NULL_VALUE    = null;
@@ -31,24 +27,10 @@ public class StringBindingTest
 	final String VIEW_GIVEN_VALUE_2 = "cheYenne";
 	final String VIEW_NULL_VALUE    = "";
 
-	DataModel dataModel;
-	StringAttribute dataAttribute;
-	Resource resource;
-	StringBinding binding;
-
 	@Before
-	public void setUp() throws DataException
+	public void setUp() throws DataException, GlueException
 	{
-		resource = new Resource();
-		dataModel = new GlueTestDataModel(resource);
-
-		dataAttribute = (StringAttribute) dataModel.getAttribute(GlueTestDataModel.STRING_ATTRIBUTE);
-
-		binding = new StringBinding(
-				dataAttribute,
-				resource,
-				GIVEN_LABEL
-				);
+		setUp(GlueTestDataModel.STRING_ATTRIBUTE);
 	}
 
 	@Test
@@ -57,12 +39,12 @@ public class StringBindingTest
 		assertThat(binding, is(not(nullValue())));
 		assertThat(getViewValue(), is(equalTo(VIEW_NULL_VALUE)));
 		assertThat(getAttributeValue(), is(equalTo(MODEL_NULL_VALUE)));
-		assertThat(binding.getTxtLabel(), is(equalTo(GIVEN_LABEL)));
+		assertThat(binding.getTxtLabel(), is(equalTo(getLabel())));
 
 
 		assertThat(binding.getJLabel(), is(instanceOf(JLabel.class)));
 		final JLabel jLabel = (JLabel) binding.getJLabel();
-		assertThat(jLabel.getText(), is(equalTo(GIVEN_LABEL)));
+		assertThat(jLabel.getText(), is(equalTo(getLabel())));
 
 		assertThat(binding.getJData(), is(instanceOf(JTextField.class)));
 		final JTextField jData  = (JTextField) binding.getJData();

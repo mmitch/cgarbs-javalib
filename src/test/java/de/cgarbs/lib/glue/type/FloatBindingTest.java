@@ -16,21 +16,17 @@ import javax.swing.JTextField;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.cgarbs.lib.data.DataModel;
-import de.cgarbs.lib.data.type.FloatAttribute;
 import de.cgarbs.lib.exception.DataException;
+import de.cgarbs.lib.exception.GlueException;
 import de.cgarbs.lib.glue.GlueTestDataModel;
-import de.cgarbs.lib.i18n.Resource;
 
-public class FloatBindingTest
+public class FloatBindingTest extends BaseBindingTest
 {
 	final NumberFormat nf = NumberFormat.getInstance();
 	{
 		nf.setMaximumFractionDigits(GlueTestDataModel.FLOAT_DECIMALS);
 		nf.setMinimumFractionDigits(GlueTestDataModel.FLOAT_DECIMALS);
 	}
-
-	final String GIVEN_LABEL = "some label";
 
 	final Float MODEL_GIVEN_VALUE_1 = 33.22f;
 	final Float MODEL_GIVEN_VALUE_2 = 4.3f;
@@ -42,24 +38,10 @@ public class FloatBindingTest
 	final String VIEW_NULL_VALUE    = "";
 	final String VIEW_ROUND_VALUE   = nf.format(MODEL_ROUND_VALUE);
 
-	DataModel dataModel;
-	FloatAttribute dataAttribute;
-	Resource resource;
-	FloatBinding binding;
-
 	@Before
-	public void setUp() throws DataException
+	public void setUp() throws DataException, GlueException
 	{
-		resource = new Resource();
-		dataModel = new GlueTestDataModel(resource);
-
-		dataAttribute = (FloatAttribute) dataModel.getAttribute(GlueTestDataModel.FLOAT_ATTRIBUTE);
-
-		binding = new FloatBinding(
-				dataAttribute,
-				resource,
-				GIVEN_LABEL
-				);
+		setUp(GlueTestDataModel.FLOAT_ATTRIBUTE);
 	}
 
 	@Test
@@ -68,12 +50,12 @@ public class FloatBindingTest
 		assertThat(binding, is(not(nullValue())));
 		assertThat(getViewValue(), is(equalTo(VIEW_NULL_VALUE)));
 		assertThat(getAttributeValue(), is(equalTo(MODEL_NULL_VALUE)));
-		assertThat(binding.getTxtLabel(), is(equalTo(GIVEN_LABEL)));
+		assertThat(binding.getTxtLabel(), is(equalTo(getLabel())));
 
 
 		assertThat(binding.getJLabel(), is(instanceOf(JLabel.class)));
 		final JLabel jLabel = (JLabel) binding.getJLabel();
-		assertThat(jLabel.getText(), is(equalTo(GIVEN_LABEL)));
+		assertThat(jLabel.getText(), is(equalTo(getLabel())));
 
 		assertThat(binding.getJData(), is(instanceOf(JTextField.class)));
 		final JTextField jData  = (JTextField) binding.getJData();

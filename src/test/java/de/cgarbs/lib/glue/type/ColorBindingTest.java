@@ -15,16 +15,12 @@ import javax.swing.JPanel;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.cgarbs.lib.data.DataModel;
-import de.cgarbs.lib.data.type.ColorAttribute;
 import de.cgarbs.lib.exception.DataException;
+import de.cgarbs.lib.exception.GlueException;
 import de.cgarbs.lib.glue.GlueTestDataModel;
-import de.cgarbs.lib.i18n.Resource;
 
-public class ColorBindingTest
+public class ColorBindingTest extends BaseBindingTest
 {
-	final String GIVEN_LABEL = "some label";
-
 	final Color DEFAULT_COLOR = new Color(238, 238, 238); // does this depent on the UI theme?!
 
 	final Color MODEL_GIVEN_VALUE_1 = Color.MAGENTA;
@@ -35,24 +31,10 @@ public class ColorBindingTest
 	final Color VIEW_GIVEN_VALUE_2 = new Color(.2f, .3f, .7f);
 	final Color VIEW_NULL_VALUE    = DEFAULT_COLOR;
 
-	DataModel dataModel;
-	ColorAttribute dataAttribute;
-	Resource resource;
-	ColorBinding binding;
-
 	@Before
-	public void setUp() throws DataException
+	public void setUp() throws DataException, GlueException
 	{
-		resource = new Resource();
-		dataModel = new GlueTestDataModel(resource);
-
-		dataAttribute = (ColorAttribute) dataModel.getAttribute(GlueTestDataModel.COLOR_ATTRIBUTE);
-
-		binding = new ColorBinding(
-				dataAttribute,
-				resource,
-				GIVEN_LABEL
-				);
+		setUp(GlueTestDataModel.COLOR_ATTRIBUTE);
 	}
 
 	@Test
@@ -61,12 +43,12 @@ public class ColorBindingTest
 		assertThat(binding, is(not(nullValue())));
 		assertThat(getViewValue(), is(equalTo(VIEW_NULL_VALUE)));
 		assertThat(getAttributeValue(), is(equalTo(MODEL_NULL_VALUE)));
-		assertThat(binding.getTxtLabel(), is(equalTo(GIVEN_LABEL)));
+		assertThat(binding.getTxtLabel(), is(equalTo(getLabel())));
 
 
 		assertThat(binding.getJLabel(), is(instanceOf(JLabel.class)));
 		final JLabel jLabel = (JLabel) binding.getJLabel();
-		assertThat(jLabel.getText(), is(equalTo(GIVEN_LABEL)));
+		assertThat(jLabel.getText(), is(equalTo(getLabel())));
 
 		assertThat(binding.getJData(), is(instanceOf(JPanel.class)));
 		final JPanel jData  = (JPanel) binding.getJData();
