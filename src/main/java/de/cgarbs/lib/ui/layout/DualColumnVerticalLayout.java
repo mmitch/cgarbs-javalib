@@ -4,7 +4,6 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,7 +35,7 @@ public class DualColumnVerticalLayout extends SimpleVerticalLayout
 			gbc_title.insets = new Insets(0, 32, 0, 0);
 
 			int line = 0;
-			for (Group group : (List<Group>) groups) // FIXME why cast here?!
+			for (Group group: groups)
 			{
 				gbc_title.gridy = line;
 				panel.add(new JLabel(group.getTitle()), gbc_title);

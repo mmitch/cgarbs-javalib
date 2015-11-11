@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JPanel;
@@ -26,7 +25,7 @@ public class SimpleTabbedLayout extends AutoLayout
 		{
 			JTabbedPane component = new JTabbedPane();
 
-			for (Group group : (List<Group>) groups) // FIXME why cast here?!
+			for (Group group: groups)
 			{
 				JPanel tab = new JPanel();
 				tab.setLayout(new GridBagLayout());

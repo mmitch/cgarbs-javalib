@@ -3,7 +3,6 @@ package de.cgarbs.lib.ui.layout;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -31,7 +30,7 @@ public class BorderedDoubleVerticalLayout extends BorderedVerticalLayout
 			gbc.weightx = 1;
 			gbc.weighty = 1;
 
-			for (Group group : (List<Group>) groups) // FIXME why cast here?!
+			for (Group group: groups)
 			{
 				JPanel groupPanel = new JPanel();
 				groupPanel.setLayout(new GridBagLayout());
