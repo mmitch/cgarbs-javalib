@@ -2,6 +2,8 @@ TODO:
 
 === LIB ===
 
+- rename IntAttribute/Binder/... to IntegerAttribute/Binder/...
+
 - document all library classes and methods
 
 - provide a simple and complete ProgressBarView
@@ -9,9 +11,11 @@ TODO:
 - add demo projects
   - simple calculator
 
+- add BigDecimalAttribute, Binding etc.
+
 ? simple logging framework
 
-? general utilities class (like safe String.setToMxLength())
+? general utilities class (like safe String.setToMaxLength())
 
 ? general methods for look&feel selection / AutoLayout selection
 
