@@ -21,7 +21,7 @@ import de.cgarbs.lib.glue.GlueTestDataModel;
 
 public class ColorBindingTest extends BaseBindingTest
 {
-	final Color DEFAULT_COLOR = new Color(238, 238, 238); // does this depent on the UI theme?!
+	final Color DEFAULT_COLOR = new JPanel().getBackground(); // depends on the UI theme
 
 	final Color MODEL_GIVEN_VALUE_1 = Color.MAGENTA;
 	final Color MODEL_GIVEN_VALUE_2 = new Color(.2f, .3f, .7f);
