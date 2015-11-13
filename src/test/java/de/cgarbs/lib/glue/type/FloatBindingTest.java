@@ -49,7 +49,7 @@ public class FloatBindingTest extends BaseBindingTest
 	{
 		assertThat(binding, is(not(nullValue())));
 		assertThat(getViewValue(), is(equalTo(VIEW_NULL_VALUE)));
-		assertThat(getAttributeValue(), is(equalTo(MODEL_NULL_VALUE)));
+		assertThat(getModelValue(), is(equalTo(MODEL_NULL_VALUE)));
 		assertThat(binding.getTxtLabel(), is(equalTo(getLabel())));
 
 
@@ -66,19 +66,19 @@ public class FloatBindingTest extends BaseBindingTest
 	public void checkSyncToModel() throws DataException
 	{
 		binding.setViewValue(VIEW_GIVEN_VALUE_1);
-		assertThat(getAttributeValue(), is(not(equalTo(MODEL_GIVEN_VALUE_1))));
+		assertThat(getModelValue(), is(not(equalTo(MODEL_GIVEN_VALUE_1))));
 		syncToModel();
-		assertThat(getAttributeValue(), is(equalTo(MODEL_GIVEN_VALUE_1)));
+		assertThat(getModelValue(), is(equalTo(MODEL_GIVEN_VALUE_1)));
 
 		binding.setViewValue(VIEW_GIVEN_VALUE_2);
-		assertThat(getAttributeValue(), is(not(equalTo(MODEL_GIVEN_VALUE_2))));
+		assertThat(getModelValue(), is(not(equalTo(MODEL_GIVEN_VALUE_2))));
 		syncToModel();
-		assertThat(getAttributeValue(), is(equalTo(MODEL_GIVEN_VALUE_2)));
+		assertThat(getModelValue(), is(equalTo(MODEL_GIVEN_VALUE_2)));
 
 		binding.setViewValue(VIEW_NULL_VALUE);
-		assertThat(getAttributeValue(), is(not(equalTo(MODEL_NULL_VALUE))));
+		assertThat(getModelValue(), is(not(equalTo(MODEL_NULL_VALUE))));
 		syncToModel();
-		assertThat(getAttributeValue(), is(equalTo(MODEL_NULL_VALUE)));
+		assertThat(getModelValue(), is(equalTo(MODEL_NULL_VALUE)));
 	}
 
 	@Test
@@ -110,20 +110,20 @@ public class FloatBindingTest extends BaseBindingTest
 		assertThat(getViewValue(), is(equalTo(VIEW_ROUND_VALUE)));
 		binding.syncToModel();
 
-		final Double afterRounding = Double.valueOf(getAttributeValue().doubleValue());
+		final Double afterRounding = Double.valueOf(getModelValue().doubleValue());
 
 		assertThat(afterRounding, is(not(equalTo(beforeRounding))));
 		assertThat(afterRounding, is(closeTo(beforeRounding, Math.pow(0.1, GlueTestDataModel.FLOAT_DECIMALS))));
 	}
 
+	private Float getModelValue()
+	{
+		return (Float) dataAttribute.getValue();
+	}
+
 	private String getViewValue()
 	{
 		return (String) binding.getViewValue();
-	}
-
-	private Float getAttributeValue()
-	{
-		return (Float) dataAttribute.getValue();
 	}
 
 }

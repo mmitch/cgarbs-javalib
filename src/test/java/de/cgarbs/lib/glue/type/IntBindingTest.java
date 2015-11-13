@@ -38,7 +38,7 @@ public class IntBindingTest extends BaseBindingTest
 	{
 		assertThat(binding, is(not(nullValue())));
 		assertThat(getViewValue(), is(equalTo(VIEW_NULL_VALUE)));
-		assertThat(getAttributeValue(), is(equalTo(MODEL_NULL_VALUE)));
+		assertThat(getModelValue(), is(equalTo(MODEL_NULL_VALUE)));
 		assertThat(binding.getTxtLabel(), is(equalTo(getLabel())));
 
 
@@ -55,19 +55,19 @@ public class IntBindingTest extends BaseBindingTest
 	public void checkSyncToModel() throws DataException
 	{
 		binding.setViewValue(VIEW_GIVEN_VALUE_1);
-		assertThat(getAttributeValue(), is(not(equalTo(MODEL_GIVEN_VALUE_1))));
+		assertThat(getModelValue(), is(not(equalTo(MODEL_GIVEN_VALUE_1))));
 		syncToModel();
-		assertThat(getAttributeValue(), is(equalTo(MODEL_GIVEN_VALUE_1)));
+		assertThat(getModelValue(), is(equalTo(MODEL_GIVEN_VALUE_1)));
 
 		binding.setViewValue(VIEW_GIVEN_VALUE_2);
-		assertThat(getAttributeValue(), is(not(equalTo(MODEL_GIVEN_VALUE_2))));
+		assertThat(getModelValue(), is(not(equalTo(MODEL_GIVEN_VALUE_2))));
 		syncToModel();
-		assertThat(getAttributeValue(), is(equalTo(MODEL_GIVEN_VALUE_2)));
+		assertThat(getModelValue(), is(equalTo(MODEL_GIVEN_VALUE_2)));
 
 		binding.setViewValue(null);
-		assertThat(getAttributeValue(), is(not(equalTo(MODEL_NULL_VALUE))));
+		assertThat(getModelValue(), is(not(equalTo(MODEL_NULL_VALUE))));
 		syncToModel();
-		assertThat(getAttributeValue(), is(equalTo(MODEL_NULL_VALUE)));
+		assertThat(getModelValue(), is(equalTo(MODEL_NULL_VALUE)));
 	}
 
 	@Test
@@ -89,14 +89,14 @@ public class IntBindingTest extends BaseBindingTest
 		assertThat(getViewValue(), is(equalTo(VIEW_NULL_VALUE)));
 	}
 
+	private Integer getModelValue()
+	{
+		return (Integer) dataAttribute.getValue();
+	}
+
 	private String getViewValue()
 	{
 		return (String) binding.getViewValue();
-	}
-
-	private Integer getAttributeValue()
-	{
-		return (Integer) dataAttribute.getValue();
 	}
 
 }

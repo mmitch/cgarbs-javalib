@@ -7,27 +7,35 @@ import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 
-import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import de.cgarbs.lib.TestImages;
 import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.GlueException;
 import de.cgarbs.lib.glue.GlueTestDataModel;
 
 public class ImageBindingTest extends BaseBindingTest
 {
-	final Icon MODEL_GIVEN_VALUE_1 = null;
-	final Icon MODEL_GIVEN_VALUE_2 = null;
-	final Icon MODEL_NULL_VALUE    = null;
+	final File MODEL_GIVEN_VALUE_1 = new File(TestImages.IMG_BLACK_PNG);
+	final File MODEL_GIVEN_VALUE_2 = new File(TestImages.IMG_WHITE_PNG);
+	final File MODEL_NULL_VALUE    = null;
 
-	final Icon VIEW_GIVEN_VALUE_1 = null;
-	final Icon VIEW_GIVEN_VALUE_2 = null;
+	final Icon VIEW_GIVEN_VALUE_1 = getIcon(TestImages.IMG_BLACK_PNG);
+	final Icon VIEW_GIVEN_VALUE_2 = getIcon(TestImages.IMG_BLACK_PNG);
 	final Icon VIEW_NULL_VALUE    = null;
+
+	public ImageBindingTest() throws IOException
+	{
+	}
 
 	@Before
 	public void setUp() throws DataException, GlueException
@@ -35,12 +43,17 @@ public class ImageBindingTest extends BaseBindingTest
 		setUp(GlueTestDataModel.IMAGE_ATTRIBUTE, ImageBinding.class);
 	}
 
+	private static Icon getIcon(String imgBlackPng) throws IOException
+	{
+		return new ImageIcon(ImageIO.read(new File(imgBlackPng)));
+	}
+
 	@Test
 	public void checkConstructor()
 	{
 		assertThat(binding, is(not(nullValue())));
 		assertThat(getViewValue(), is(equalTo(VIEW_NULL_VALUE)));
-		assertThat(getAttributeValue(), is(equalTo(MODEL_NULL_VALUE)));
+		assertThat(getModelValue(), is(equalTo(MODEL_NULL_VALUE)));
 		assertThat(binding.getTxtLabel(), is(equalTo(getLabel())));
 
 
@@ -57,19 +70,19 @@ public class ImageBindingTest extends BaseBindingTest
 	public void checkSyncToModel() throws DataException
 	{
 		binding.setViewValue(VIEW_GIVEN_VALUE_1);
-		assertThat(getAttributeValue(), is(not(equalTo(MODEL_GIVEN_VALUE_1))));
+		assertThat(getModelValue(), is(not(equalTo(MODEL_GIVEN_VALUE_1))));
 		syncToModel();
-		assertThat(getAttributeValue(), is(equalTo(MODEL_GIVEN_VALUE_1)));
+		assertThat(getModelValue(), is(equalTo(MODEL_GIVEN_VALUE_1)));
 
 		binding.setViewValue(VIEW_GIVEN_VALUE_2);
-		assertThat(getAttributeValue(), is(not(equalTo(MODEL_GIVEN_VALUE_2))));
+		assertThat(getModelValue(), is(not(equalTo(MODEL_GIVEN_VALUE_2))));
 		syncToModel();
-		assertThat(getAttributeValue(), is(equalTo(MODEL_GIVEN_VALUE_2)));
+		assertThat(getModelValue(), is(equalTo(MODEL_GIVEN_VALUE_2)));
 
 		binding.setViewValue(null);
-		assertThat(getAttributeValue(), is(not(equalTo(MODEL_NULL_VALUE))));
+		assertThat(getModelValue(), is(not(equalTo(MODEL_NULL_VALUE))));
 		syncToModel();
-		assertThat(getAttributeValue(), is(equalTo(MODEL_NULL_VALUE)));
+		assertThat(getModelValue(), is(equalTo(MODEL_NULL_VALUE)));
 	}
 
 	@Test
@@ -96,9 +109,9 @@ public class ImageBindingTest extends BaseBindingTest
 		return (Icon) binding.getViewValue();
 	}
 
-	private Icon getAttributeValue()
+	private File getModelValue()
 	{
-		return (Icon) dataAttribute.getValue();
+		return (File) dataAttribute.getValue();
 	}
 
 }

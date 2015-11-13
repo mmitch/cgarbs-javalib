@@ -40,7 +40,7 @@ public class BooleanBindingTest extends BaseBindingTest
 	{
 		assertThat(binding, is(not(nullValue())));
 		assertThat(getViewValue(), is(equalTo(VIEW_NULL_VALUE)));
-		assertThat(getAttributeValue(), is(equalTo(MODEL_NULL_VALUE)));
+		assertThat(getModelValue(), is(equalTo(MODEL_NULL_VALUE)));
 		assertThat(binding.getTxtLabel(), is(equalTo(getLabel())));
 
 
@@ -57,20 +57,20 @@ public class BooleanBindingTest extends BaseBindingTest
 	public void checkSyncToModel() throws DataException
 	{
 		binding.setViewValue(VIEW_GIVEN_VALUE_1);
-		assertThat(getAttributeValue(), is(not(equalTo(MODEL_GIVEN_VALUE_1))));
+		assertThat(getModelValue(), is(not(equalTo(MODEL_GIVEN_VALUE_1))));
 		syncToModel();
-		assertThat(getAttributeValue(), is(equalTo(MODEL_GIVEN_VALUE_1)));
+		assertThat(getModelValue(), is(equalTo(MODEL_GIVEN_VALUE_1)));
 
 		binding.setViewValue(VIEW_GIVEN_VALUE_2);
-		assertThat(getAttributeValue(), is(not(equalTo(MODEL_GIVEN_VALUE_2))));
+		assertThat(getModelValue(), is(not(equalTo(MODEL_GIVEN_VALUE_2))));
 		syncToModel();
-		assertThat(getAttributeValue(), is(equalTo(MODEL_GIVEN_VALUE_2)));
+		assertThat(getModelValue(), is(equalTo(MODEL_GIVEN_VALUE_2)));
 
 		binding.setViewValue(VIEW_NULL_VALUE);
-		assertThat(getAttributeValue(), is(not(equalTo(MODEL_NULL_VALUE))));
+		assertThat(getModelValue(), is(not(equalTo(MODEL_NULL_VALUE))));
 //		assertThat(getAttributeValue(), is(not(equalTo(MODEL_DEFAULT_VALUE)))); conflicts because a boolean only has two values
 		syncToModel();
-		assertThat(getAttributeValue(), is(not(equalTo(MODEL_NULL_VALUE))));
+		assertThat(getModelValue(), is(not(equalTo(MODEL_NULL_VALUE))));
 //		assertThat(getAttributeValue(), is(equalTo(MODEL_DEFAULT_VALUE))); conflicts because a boolean only has two values
 	}
 
@@ -94,7 +94,7 @@ public class BooleanBindingTest extends BaseBindingTest
 		assertThat(getViewValue(), is(equalTo(VIEW_NULL_VALUE)));
 	}
 
-	private Boolean getAttributeValue()
+	private Boolean getModelValue()
 	{
 		return (Boolean) dataAttribute.getValue();
 	}
