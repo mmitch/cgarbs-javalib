@@ -79,13 +79,13 @@ public class Glue<T extends DataModel>
 	}
 
 	// FIXME restrict clazz to subtype of Binding?
-	public Binding addBinding(String key, Class<?> clazz) throws GlueException, DataException
+	public Binding addBinding(String key, Class<? extends Binding> clazz) throws GlueException, DataException
 	{
 		return addBinding(key, clazz, null);
 	}
 
 	// FIXME restrict clazz to subtype of Binding?
-	public Binding addBinding(String key, Class<?> clazz, String label) throws GlueException, DataException
+	public Binding addBinding(String key, Class<? extends Binding> clazz, String label) throws GlueException, DataException
 	{
 		// FIXME catch duplicate bindings (same key)
 		Binding binding;
@@ -199,7 +199,7 @@ public class Glue<T extends DataModel>
 		}
 	}
 
-	public Binding addListener(Binding base_binding, Class<?> clazz, String label) throws GlueException, DataException
+	public Binding addListener(Binding base_binding, Class<? extends Binding> clazz, String label) throws GlueException, DataException
 	{
 		Binding new_binding = addBinding(base_binding.attribute.getKey(), clazz, label);
 		base_binding.addListeningBinding(new_binding);
