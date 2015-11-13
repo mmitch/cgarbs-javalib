@@ -1,4 +1,4 @@
-package de.cgarbs.lib.ui.layout;
+package de.cgarbs.lib.hamcrest;
 
 import static org.junit.Assert.fail;
 
@@ -18,7 +18,7 @@ import javax.swing.border.TitledBorder;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 
-public class UIMatchers
+public class Swing
 {
 	public static InnerElements elementInside(final JPanel jPanel)
 	{
@@ -57,7 +57,7 @@ public class UIMatchers
 
 	public static Matcher<Component> hasLabel(final Matcher<String> m)
 	{
-		return new FeatureMatcher<Component, String>(m, "string", "string") {
+		return new FeatureMatcher<Component, String>(m, "label", "label") {
 
 			@Override
 			protected String featureValueOf(Component actual)
@@ -73,7 +73,7 @@ public class UIMatchers
 
 	public static Matcher<Component> hasBorderTitle(final Matcher<String> m)
 	{
-		return new FeatureMatcher<Component, String>(m, "string", "string") {
+		return new FeatureMatcher<Component, String>(m, "title", "title") {
 
 			@Override
 			protected String featureValueOf(Component actual)
@@ -92,9 +92,9 @@ public class UIMatchers
 		};
 	}
 
-	protected static Matcher<Component> hasValue(final Matcher<String> m)
+	public static Matcher<Component> hasValue(final Matcher<String> m)
 	{
-		return new FeatureMatcher<Component, String>(m, "string", "string") {
+		return new FeatureMatcher<Component, String>(m, "value", "value") {
 
 			@Override
 			protected String featureValueOf(Component actual)

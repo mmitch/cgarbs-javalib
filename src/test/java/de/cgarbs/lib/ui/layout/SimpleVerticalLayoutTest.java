@@ -4,9 +4,9 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertThat;
-import static de.cgarbs.lib.ui.layout.UIMatchers.elementInside;
-import static de.cgarbs.lib.ui.layout.UIMatchers.hasLabel;
-import static de.cgarbs.lib.ui.layout.UIMatchers.hasValue;
+import static de.cgarbs.lib.hamcrest.Swing.elementInside;
+import static de.cgarbs.lib.hamcrest.Swing.hasLabel;
+import static de.cgarbs.lib.hamcrest.Swing.hasValue;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
