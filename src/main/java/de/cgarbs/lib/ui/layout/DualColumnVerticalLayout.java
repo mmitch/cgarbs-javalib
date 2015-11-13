@@ -51,6 +51,10 @@ public class DualColumnVerticalLayout extends SimpleVerticalLayout
 						line++;
 					}
 				}
+				if (col > 0)
+				{
+					line++;
+				}
 			}
 
 			return wrapInScrollPane(panel);
