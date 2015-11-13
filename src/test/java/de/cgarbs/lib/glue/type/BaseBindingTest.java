@@ -14,14 +14,24 @@ public abstract class BaseBindingTest
 	Binding binding;
 	DataAttribute dataAttribute;
 
-	void setUp(String attributeId) throws DataException, GlueException
+	private void setUpInternal(String attributeId) throws DataException, GlueException
 	{
 		Resource resource = new Resource();
 		GlueTestDataModel dataModel = new GlueTestDataModel(resource);
-
+		dataAttribute = dataModel.getAttribute(attributeId);
 		glue = new Glue<GlueTestDataModel>(dataModel);
+	}
+
+	void setUp(String attributeId) throws DataException, GlueException
+	{
+		setUpInternal(attributeId);
 		binding = glue.addBinding(attributeId);
-		dataAttribute = binding.getAttribute();
+	}
+
+	void setUp(String attributeId, Class<? extends Binding> bindingClass) throws DataException, GlueException
+	{
+		setUpInternal(attributeId);
+		binding = glue.addBinding(attributeId, bindingClass);
 	}
 
 	String getLabel()

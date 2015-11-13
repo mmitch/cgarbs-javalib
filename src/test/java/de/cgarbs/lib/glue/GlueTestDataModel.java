@@ -24,6 +24,8 @@ public class GlueTestDataModel extends DataModel
 
 	public static final String COLOR_ATTRIBUTE = "ColorAttribute";
 
+	public static final String IMAGE_ATTRIBUTE = "Image Attribute";
+
 	public GlueTestDataModel(Resource resource) throws DataException
 	{
 		super(resource);
@@ -56,6 +58,12 @@ public class GlueTestDataModel extends DataModel
 		addAttribute(
 				COLOR_ATTRIBUTE,
 				ColorAttribute.builder()
+					.build()
+				);
+
+		addAttribute(
+				IMAGE_ATTRIBUTE,
+				StringAttribute.builder()
 					.build()
 				);
 	}
