@@ -12,7 +12,7 @@ import de.cgarbs.lib.exception.GlueException;
 import de.cgarbs.lib.ui.Element;
 import de.cgarbs.lib.ui.Group;
 
-public class DualColumnVerticalLayout extends SimpleVerticalLayout
+public abstract class DualColumnVerticalLayout extends SimpleVerticalLayout
 {
 	// Builder pattern start
 	public static class Builder extends SimpleVerticalLayout.Builder
@@ -64,11 +64,6 @@ public class DualColumnVerticalLayout extends SimpleVerticalLayout
 	public static Builder builder()
 	{
 		return new Builder();
-	}
-
-	protected DualColumnVerticalLayout(Builder builder)
-	{
-		super(builder);
 	}
 
 	// Builder pattern end

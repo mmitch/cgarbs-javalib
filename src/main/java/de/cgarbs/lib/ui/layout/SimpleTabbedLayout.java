@@ -14,7 +14,7 @@ import de.cgarbs.lib.ui.AutoLayout;
 import de.cgarbs.lib.ui.Element;
 import de.cgarbs.lib.ui.Group;
 
-public class SimpleTabbedLayout extends AutoLayout
+public abstract class SimpleTabbedLayout extends AutoLayout
 {
 	// Builder pattern start
 	public static class Builder extends AutoLayout.Builder<Builder>
@@ -58,11 +58,6 @@ public class SimpleTabbedLayout extends AutoLayout
 	public static Builder builder()
 	{
 		return new Builder();
-	}
-
-	protected SimpleTabbedLayout(Builder builder)
-	{
-		super(builder);
 	}
 
 	// Builder pattern end

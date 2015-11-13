@@ -71,9 +71,6 @@ abstract public class AutoLayout
 		abstract public Container build() throws GlueException;
 	}
 
-	protected AutoLayout(Builder<?> builder)
-	{
-	}
 	// Builder pattern end
 
 	/**

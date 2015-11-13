@@ -13,7 +13,7 @@ import de.cgarbs.lib.ui.AutoLayout;
 import de.cgarbs.lib.ui.Element;
 import de.cgarbs.lib.ui.Group;
 
-public class SimpleVerticalLayout extends AutoLayout
+public abstract class SimpleVerticalLayout extends AutoLayout
 {
 	// Builder pattern start
 	public static class Builder extends AutoLayout.Builder<Builder>
@@ -55,11 +55,6 @@ public class SimpleVerticalLayout extends AutoLayout
 	public static Builder builder()
 	{
 		return new Builder();
-	}
-
-	protected SimpleVerticalLayout(Builder builder)
-	{
-		super(builder);
 	}
 
 	// Builder pattern end

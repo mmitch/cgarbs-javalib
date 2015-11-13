@@ -12,7 +12,7 @@ import de.cgarbs.lib.exception.GlueException;
 import de.cgarbs.lib.ui.Element;
 import de.cgarbs.lib.ui.Group;
 
-public class BorderedDoubleVerticalLayout extends BorderedVerticalLayout
+public abstract class BorderedDoubleVerticalLayout extends BorderedVerticalLayout
 {
 	// Builder pattern start
 	public static class Builder extends BorderedVerticalLayout.Builder
@@ -62,11 +62,6 @@ public class BorderedDoubleVerticalLayout extends BorderedVerticalLayout
 	public static Builder builder()
 	{
 		return new Builder();
-	}
-
-	protected BorderedDoubleVerticalLayout(Builder builder)
-	{
-		super(builder);
 	}
 
 	// Builder pattern end

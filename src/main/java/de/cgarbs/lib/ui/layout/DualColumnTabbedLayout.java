@@ -13,7 +13,7 @@ import de.cgarbs.lib.exception.GlueException;
 import de.cgarbs.lib.ui.Element;
 import de.cgarbs.lib.ui.Group;
 
-public class DualColumnTabbedLayout extends SimpleTabbedLayout
+public abstract class DualColumnTabbedLayout extends SimpleTabbedLayout
 {
 	// Builder pattern start
 	public static class Builder extends SimpleTabbedLayout.Builder
@@ -64,11 +64,6 @@ public class DualColumnTabbedLayout extends SimpleTabbedLayout
 	public static Builder builder()
 	{
 		return new Builder();
-	}
-
-	protected DualColumnTabbedLayout(Builder builder)
-	{
-		super(builder);
 	}
 
 	// Builder pattern end
