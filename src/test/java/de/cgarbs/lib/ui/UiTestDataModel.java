@@ -21,6 +21,8 @@ public class UiTestDataModel extends DataModel
 
 	public static final String STRING_6 = "StringAttribute6";
 
+	public static final String MODEL_NAME = "UiTestDataModelName";
+
 	public UiTestDataModel(Resource resource) throws DataException
 	{
 		super(resource);
@@ -65,7 +67,7 @@ public class UiTestDataModel extends DataModel
 	@Override
 	public String getModelName()
 	{
-		return "TestModel";
+		return MODEL_NAME;
 	}
 
 }
