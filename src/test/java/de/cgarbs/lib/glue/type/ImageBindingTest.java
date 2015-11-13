@@ -1,5 +1,7 @@
 package de.cgarbs.lib.glue.type;
 
+import static de.cgarbs.lib.hamcrest.File.sameFileAs;
+import static de.cgarbs.lib.hamcrest.Swing.sameImageAs;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
@@ -29,9 +31,14 @@ public class ImageBindingTest extends BaseBindingTest
 	final File MODEL_GIVEN_VALUE_2 = new File(TestImages.IMG_WHITE_PNG);
 	final File MODEL_NULL_VALUE    = null;
 
-	final Icon VIEW_GIVEN_VALUE_1 = getIcon(TestImages.IMG_BLACK_PNG);
-	final Icon VIEW_GIVEN_VALUE_2 = getIcon(TestImages.IMG_BLACK_PNG);
-	final Icon VIEW_NULL_VALUE    = null;
+	final File VIEW_GIVEN_VALUE_1 = new File(TestImages.IMG_BLACK_PNG);
+	final File VIEW_GIVEN_VALUE_2 = new File(TestImages.IMG_WHITE_PNG);
+	final File VIEW_NULL_VALUE    = null;
+
+	final Icon IMAGE_GIVEN_VALUE_1 = getImage(TestImages.IMG_BLACK_PNG);
+	final Icon IMAGE_GIVEN_VALUE_2 = getImage(TestImages.IMG_WHITE_PNG);
+	final Icon IMAGE_NULL_VALUE    = null;
+
 
 	public ImageBindingTest() throws IOException
 	{
@@ -41,11 +48,6 @@ public class ImageBindingTest extends BaseBindingTest
 	public void setUp() throws DataException, GlueException
 	{
 		setUp(GlueTestDataModel.IMAGE_ATTRIBUTE, ImageBinding.class);
-	}
-
-	private static Icon getIcon(String imgBlackPng) throws IOException
-	{
-		return new ImageIcon(ImageIO.read(new File(imgBlackPng)));
 	}
 
 	@Test
@@ -62,56 +64,90 @@ public class ImageBindingTest extends BaseBindingTest
 		assertThat(jLabel.getText(), is(equalTo(getLabel())));
 
 		assertThat(binding.getJData(), is(instanceOf(JLabel.class)));
-		final JLabel jData  = (JLabel) binding.getJData();
-		assertThat(jData.getIcon(), is(VIEW_NULL_VALUE));
+		assertThat(getViewImage(), is(sameImageAs(IMAGE_NULL_VALUE)));
 	}
 
 	@Test
 	public void checkSyncToModel() throws DataException
 	{
 		binding.setViewValue(VIEW_GIVEN_VALUE_1);
-		assertThat(getModelValue(), is(not(equalTo(MODEL_GIVEN_VALUE_1))));
+		assertThat(getModelValue(), is(not(sameFileAs(MODEL_GIVEN_VALUE_1))));
 		syncToModel();
-		assertThat(getModelValue(), is(equalTo(MODEL_GIVEN_VALUE_1)));
+		assertThat(getModelValue(), is(sameFileAs(MODEL_GIVEN_VALUE_1)));
 
 		binding.setViewValue(VIEW_GIVEN_VALUE_2);
-		assertThat(getModelValue(), is(not(equalTo(MODEL_GIVEN_VALUE_2))));
+		assertThat(getModelValue(), is(not(sameFileAs(MODEL_GIVEN_VALUE_2))));
 		syncToModel();
-		assertThat(getModelValue(), is(equalTo(MODEL_GIVEN_VALUE_2)));
+		assertThat(getModelValue(), is(sameFileAs(MODEL_GIVEN_VALUE_2)));
 
 		binding.setViewValue(null);
-		assertThat(getModelValue(), is(not(equalTo(MODEL_NULL_VALUE))));
+		assertThat(getModelValue(), is(not(sameFileAs(MODEL_NULL_VALUE))));
 		syncToModel();
-		assertThat(getModelValue(), is(equalTo(MODEL_NULL_VALUE)));
+		assertThat(getModelValue(), is(sameFileAs(MODEL_NULL_VALUE)));
 	}
 
 	@Test
 	public void checkSyncToView() throws DataException
 	{
 		dataAttribute.setValue(MODEL_GIVEN_VALUE_1);
-		assertThat(getViewValue(), is(not(equalTo(VIEW_GIVEN_VALUE_1))));
+		assertThat(getViewValue(), is(not(sameFileAs(VIEW_GIVEN_VALUE_1))));
 		syncToView();
-		assertThat(getViewValue(), is(equalTo(VIEW_GIVEN_VALUE_1)));
+		assertThat(getViewValue(), is(sameFileAs(VIEW_GIVEN_VALUE_1)));
 
 		dataAttribute.setValue(MODEL_GIVEN_VALUE_2);
-		assertThat(getViewValue(), is(not(equalTo(VIEW_GIVEN_VALUE_2))));
+		assertThat(getViewValue(), is(not(sameFileAs(VIEW_GIVEN_VALUE_2))));
 		syncToView();
-		assertThat(getViewValue(), is(equalTo(VIEW_GIVEN_VALUE_2)));
+		assertThat(getViewValue(), is(sameFileAs(VIEW_GIVEN_VALUE_2)));
 
 		dataAttribute.setValue(null);
-		assertThat(getViewValue(), is(not(equalTo(VIEW_NULL_VALUE))));
+		assertThat(getViewValue(), is(not(sameFileAs(VIEW_NULL_VALUE))));
 		syncToView();
-		assertThat(getViewValue(), is(equalTo(VIEW_NULL_VALUE)));
+		assertThat(getViewValue(), is(sameFileAs(VIEW_NULL_VALUE)));
 	}
 
-	private Icon getViewValue()
+	@Test
+	public void checkImageLoading() throws DataException, IOException
 	{
-		return (Icon) binding.getViewValue();
+		dataAttribute.setValue(MODEL_GIVEN_VALUE_1);
+		syncToView();
+		assertThat(getViewImage(), is(sameImageAs(IMAGE_GIVEN_VALUE_1)));
+
+		dataAttribute.setValue(MODEL_GIVEN_VALUE_2);
+		syncToView();
+		assertThat(getViewImage(), is(sameImageAs(IMAGE_GIVEN_VALUE_2)));
+
+		dataAttribute.setValue(MODEL_NULL_VALUE);
+		syncToView();
+		assertThat(getViewImage(), is(sameImageAs(IMAGE_NULL_VALUE)));
+
+		binding.setViewValue(VIEW_GIVEN_VALUE_1);
+		assertThat(getViewImage(), is(sameImageAs(IMAGE_GIVEN_VALUE_1)));
+
+		binding.setViewValue(VIEW_GIVEN_VALUE_2);
+		assertThat(getViewImage(), is(sameImageAs(IMAGE_GIVEN_VALUE_2)));
+
+		binding.setViewValue(VIEW_NULL_VALUE);
+		assertThat(getViewImage(), is(sameImageAs(IMAGE_NULL_VALUE)));
+	}
+
+	private File getViewValue()
+	{
+		return (File) binding.getViewValue();
+	}
+
+	private ImageIcon getViewImage()
+	{
+		return (ImageIcon) ((JLabel) binding.getJData()).getIcon();
 	}
 
 	private File getModelValue()
 	{
 		return (File) dataAttribute.getValue();
+	}
+
+	private static Icon getImage(String filename) throws IOException
+	{
+		return new ImageIcon(ImageIO.read(new File(filename)));
 	}
 
 }

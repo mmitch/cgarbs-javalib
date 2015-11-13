@@ -8,13 +8,15 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.LayoutManager;
 
+import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.Description;
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 
@@ -108,6 +110,39 @@ public class Swing
 					return ((JLabel) actual).getText();
 				}
 				return "CLASS" + actual.getClass() + " DOES NOT WORK HERE"; // fixme: stupid!
+			}
+		};
+	}
+
+	public static Matcher<Icon> sameImageAs(final Icon icon)
+	{
+		return new BaseMatcher<Icon>() {
+
+			@Override
+			public void describeTo(Description description)
+			{
+				description.appendText("absolute path is ").appendValue(icon);
+			}
+
+			@Override
+			public void describeMismatch(final Object item, Description mismatchDescription)
+			{
+				mismatchDescription.appendText(" was ").appendValue(item);
+			}
+
+			@Override
+			public boolean matches(Object item)
+			{
+				if (item == null)
+				{
+					return item == icon;
+				}
+				if (icon == null)
+				{
+					return false;
+				}
+				// FIXME: this is no very good test, but it is sufficient for our test data
+				return (icon.getIconHeight() == ((Icon) item).getIconHeight());
 			}
 		};
 	}

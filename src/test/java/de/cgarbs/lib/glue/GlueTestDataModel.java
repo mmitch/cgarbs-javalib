@@ -3,6 +3,7 @@ package de.cgarbs.lib.glue;
 import de.cgarbs.lib.data.DataModel;
 import de.cgarbs.lib.data.type.BooleanAttribute;
 import de.cgarbs.lib.data.type.ColorAttribute;
+import de.cgarbs.lib.data.type.FileAttribute;
 import de.cgarbs.lib.data.type.FloatAttribute;
 import de.cgarbs.lib.data.type.IntAttribute;
 import de.cgarbs.lib.data.type.StringAttribute;
@@ -63,7 +64,7 @@ public class GlueTestDataModel extends DataModel
 
 		addAttribute(
 				IMAGE_ATTRIBUTE,
-				StringAttribute.builder()
+				FileAttribute.builder()
 					.build()
 				);
 	}
