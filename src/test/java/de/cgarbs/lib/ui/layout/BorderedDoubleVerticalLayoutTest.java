@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JViewport;
 
@@ -22,14 +22,14 @@ import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.GlueException;
 import de.cgarbs.lib.ui.UiTestDataModel;
 
-public class SimpleTabbedLayoutTest extends BaseLayoutTest
+public class BorderedDoubleVerticalLayoutTest extends BaseLayoutTest
 {
 	@Before
 	public void setUp() throws DataException, GlueException
 	{
 		super.setUp();
 
-		container = SimpleTabbedLayout.builder()
+		container = BorderedDoubleVerticalLayout.builder()
 				.startNextGroup(GROUP_1)
 				.addAttribute(binding1)
 				.addAttribute(binding2)
@@ -45,32 +45,36 @@ public class SimpleTabbedLayoutTest extends BaseLayoutTest
 	@Test
 	public void checkContainer()
 	{
-		// The Container is a TabbedPane...
-		assertThat(container, is(instanceOf(JTabbedPane.class)));
-		JTabbedPane tabbedpane = (JTabbedPane) container;
+		// The Container is a ScrollPane...
+		assertThat(container, is(instanceOf(JScrollPane.class)));
+		JScrollPane scrollpane = (JScrollPane) container;
 
-		// ...containing a ScrollPane for every group...
-		assertThat(tabbedpane.getTabCount(), is(equalTo(GROUP_COUNT)));
+		// ...containing a ViewPort and to Scrollbars...
+		assertThat(scrollpane.getComponents().length, is(equalTo(3)));
+		assertThat(scrollpane.getComponent(0), is(instanceOf(JViewport.class)));
+		JViewport viewport = (JViewport) scrollpane.getComponent(0);
 
-		JViewport viewport1 = getViewportFromScrollpane(tabbedpane.getComponent(0));
-		JViewport viewport2 = getViewportFromScrollpane(tabbedpane.getComponent(1));
-		JViewport viewport3 = getViewportFromScrollpane(tabbedpane.getComponent(2));
+		// ...the ViewPort containing one JPanel...
+		assertThat(viewport.getComponents().length, is(equalTo(1)));
+		assertThat(viewport.getComponent(0), is(instanceOf(JPanel.class)));
+		JPanel jpanel = (JPanel) viewport.getComponent(0);
 
-		// check tab titles
-
-		assertThat(tabbedpane.getTitleAt(0), is(equalTo(GROUP_1)));
-		assertThat(tabbedpane.getTitleAt(1), is(equalTo(GROUP_2)));
-		assertThat(tabbedpane.getTitleAt(2), is(equalTo(GROUP_3)));
+		// ...containing a Panel for every group
+		assertThat(jpanel.getComponents().length, is(equalTo(GROUP_COUNT)));
 
 		// check groups
 
-		assertThat(viewport1.getComponent(0), is(instanceOf(JPanel.class)));
-		assertThat(viewport2.getComponent(0), is(instanceOf(JPanel.class)));
-		assertThat(viewport3.getComponent(0), is(instanceOf(JPanel.class)));
+		assertThat(elementInside(jpanel).at(0, 0), is(instanceOf(JPanel.class)));
+		assertThat(elementInside(jpanel).at(0, 1), is(instanceOf(JPanel.class)));
+		assertThat(elementInside(jpanel).at(0, 2), is(instanceOf(JPanel.class)));
 
-		JPanel groupPanel1 = (JPanel) viewport1.getComponent(0);
-		JPanel groupPanel2 = (JPanel) viewport2.getComponent(0);
-		JPanel groupPanel3 = (JPanel) viewport3.getComponent(0);
+		JPanel groupPanel1 = (JPanel) elementInside(jpanel).at(0, 0);
+		JPanel groupPanel2 = (JPanel) elementInside(jpanel).at(0, 1);
+		JPanel groupPanel3 = (JPanel) elementInside(jpanel).at(0, 2);
+
+		assertThat(groupPanel1, hasBorderTitle(equalTo(GROUP_1)));
+		assertThat(groupPanel2, hasBorderTitle(equalTo(GROUP_2)));
+		assertThat(groupPanel3, hasBorderTitle(equalTo(GROUP_3)));
 
 		// check group 1
 
@@ -79,10 +83,10 @@ public class SimpleTabbedLayoutTest extends BaseLayoutTest
 		assertThat(elementInside(groupPanel1).at(1, 0), is(instanceOf(JTextField.class)));
 		assertThat(elementInside(groupPanel1).at(1, 0), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_1)))));
 
-		assertThat(elementInside(groupPanel1).at(0, 1), is(instanceOf(JLabel.class)));
-		assertThat(elementInside(groupPanel1).at(0, 1), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_2)))));
-		assertThat(elementInside(groupPanel1).at(1, 1), is(instanceOf(JTextField.class)));
-		assertThat(elementInside(groupPanel1).at(1, 1), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_2)))));
+		assertThat(elementInside(groupPanel1).at(2, 0), is(instanceOf(JLabel.class)));
+		assertThat(elementInside(groupPanel1).at(2, 0), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_2)))));
+		assertThat(elementInside(groupPanel1).at(3, 0), is(instanceOf(JTextField.class)));
+		assertThat(elementInside(groupPanel1).at(3, 0), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_2)))));
 
 		// check group 2
 
@@ -91,15 +95,15 @@ public class SimpleTabbedLayoutTest extends BaseLayoutTest
 		assertThat(elementInside(groupPanel2).at(1, 0), is(instanceOf(JTextField.class)));
 		assertThat(elementInside(groupPanel2).at(1, 0), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_3)))));
 
-		assertThat(elementInside(groupPanel2).at(0, 1), is(instanceOf(JLabel.class)));
-		assertThat(elementInside(groupPanel2).at(0, 1), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_4)))));
-		assertThat(elementInside(groupPanel2).at(1, 1), is(instanceOf(JTextField.class)));
-		assertThat(elementInside(groupPanel2).at(1, 1), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_4)))));
+		assertThat(elementInside(groupPanel2).at(2, 0), is(instanceOf(JLabel.class)));
+		assertThat(elementInside(groupPanel2).at(2, 0), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_4)))));
+		assertThat(elementInside(groupPanel2).at(3, 0), is(instanceOf(JTextField.class)));
+		assertThat(elementInside(groupPanel2).at(3, 0), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_4)))));
 
-		assertThat(elementInside(groupPanel2).at(0, 2), is(instanceOf(JLabel.class)));
-		assertThat(elementInside(groupPanel2).at(0, 2), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_5)))));
-		assertThat(elementInside(groupPanel2).at(1, 2), is(instanceOf(JTextField.class)));
-		assertThat(elementInside(groupPanel2).at(1, 2), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_5)))));
+		assertThat(elementInside(groupPanel2).at(0, 1), is(instanceOf(JLabel.class)));
+		assertThat(elementInside(groupPanel2).at(0, 1), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_5)))));
+		assertThat(elementInside(groupPanel2).at(1, 1), is(instanceOf(JTextField.class)));
+		assertThat(elementInside(groupPanel2).at(1, 1), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_5)))));
 
 		// check group 3
 

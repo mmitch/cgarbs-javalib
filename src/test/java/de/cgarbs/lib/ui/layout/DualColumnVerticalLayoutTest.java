@@ -35,8 +35,8 @@ public class DualColumnVerticalLayoutTest extends BaseLayoutTest
 				.startNextGroup(GROUP_2)
 				.addAttribute(binding3)
 				.addAttribute(binding4)
-				.startNextGroup(GROUP_3)
 				.addAttribute(binding5)
+				.startNextGroup(GROUP_3)
 				.addAttribute(binding6)
 				.build();
 	}
@@ -88,16 +88,16 @@ public class DualColumnVerticalLayoutTest extends BaseLayoutTest
 		assertThat(elementInside(jpanel).at(3, 3), hasValue(equalTo(theValue(UiTestDataModel.STRING_4))));
 
 		assertThat(elementInside(jpanel).at(0, 4), is(instanceOf(JLabel.class)));
-		assertThat(elementInside(jpanel).at(0, 4), hasLabel(equalTo(GROUP_3)));
+		assertThat(elementInside(jpanel).at(0, 4), hasLabel(equalTo(theLabel(UiTestDataModel.STRING_5))));
+		assertThat(elementInside(jpanel).at(1, 4), is(instanceOf(JTextField.class)));
+		assertThat(elementInside(jpanel).at(1, 4), hasValue(equalTo(theValue(UiTestDataModel.STRING_5))));
 
 		assertThat(elementInside(jpanel).at(0, 5), is(instanceOf(JLabel.class)));
-		assertThat(elementInside(jpanel).at(0, 5), hasLabel(equalTo(theLabel(UiTestDataModel.STRING_5))));
-		assertThat(elementInside(jpanel).at(1, 5), is(instanceOf(JTextField.class)));
-		assertThat(elementInside(jpanel).at(1, 5), hasValue(equalTo(theValue(UiTestDataModel.STRING_5))));
+		assertThat(elementInside(jpanel).at(0, 5), hasLabel(equalTo(GROUP_3)));
 
-		assertThat(elementInside(jpanel).at(2, 5), is(instanceOf(JLabel.class)));
-		assertThat(elementInside(jpanel).at(2, 5), hasLabel(equalTo(theLabel(UiTestDataModel.STRING_6))));
-		assertThat(elementInside(jpanel).at(3, 5), is(instanceOf(JTextField.class)));
-		assertThat(elementInside(jpanel).at(3, 5), hasValue(equalTo(theValue(UiTestDataModel.STRING_6))));
+		assertThat(elementInside(jpanel).at(0, 6), is(instanceOf(JLabel.class)));
+		assertThat(elementInside(jpanel).at(0, 6), hasLabel(equalTo(theLabel(UiTestDataModel.STRING_6))));
+		assertThat(elementInside(jpanel).at(1, 6), is(instanceOf(JTextField.class)));
+		assertThat(elementInside(jpanel).at(1, 6), hasValue(equalTo(theValue(UiTestDataModel.STRING_6))));
 	}
 }

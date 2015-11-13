@@ -36,8 +36,8 @@ public class BorderedVerticalLayoutTest extends BaseLayoutTest
 				.startNextGroup(GROUP_2)
 				.addAttribute(binding3)
 				.addAttribute(binding4)
-				.startNextGroup(GROUP_3)
 				.addAttribute(binding5)
+				.startNextGroup(GROUP_3)
 				.addAttribute(binding6)
 				.build();
 	}
@@ -100,16 +100,16 @@ public class BorderedVerticalLayoutTest extends BaseLayoutTest
 		assertThat(elementInside(groupPanel2).at(1, 1), is(instanceOf(JTextField.class)));
 		assertThat(elementInside(groupPanel2).at(1, 1), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_4)))));
 
+		assertThat(elementInside(groupPanel2).at(0, 2), is(instanceOf(JLabel.class)));
+		assertThat(elementInside(groupPanel2).at(0, 2), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_5)))));
+		assertThat(elementInside(groupPanel2).at(1, 2), is(instanceOf(JTextField.class)));
+		assertThat(elementInside(groupPanel2).at(1, 2), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_5)))));
+
 		// check group 3
 
 		assertThat(elementInside(groupPanel3).at(0, 0), is(instanceOf(JLabel.class)));
-		assertThat(elementInside(groupPanel3).at(0, 0), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_5)))));
+		assertThat(elementInside(groupPanel3).at(0, 0), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_6)))));
 		assertThat(elementInside(groupPanel3).at(1, 0), is(instanceOf(JTextField.class)));
-		assertThat(elementInside(groupPanel3).at(1, 0), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_5)))));
-
-		assertThat(elementInside(groupPanel3).at(0, 1), is(instanceOf(JLabel.class)));
-		assertThat(elementInside(groupPanel3).at(0, 1), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_6)))));
-		assertThat(elementInside(groupPanel3).at(1, 1), is(instanceOf(JTextField.class)));
-		assertThat(elementInside(groupPanel3).at(1, 1), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_6)))));
+		assertThat(elementInside(groupPanel3).at(1, 0), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_6)))));
 	}
 }

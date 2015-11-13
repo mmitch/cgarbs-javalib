@@ -22,14 +22,14 @@ import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.GlueException;
 import de.cgarbs.lib.ui.UiTestDataModel;
 
-public class SimpleTabbedLayoutTest extends BaseLayoutTest
+public class DualColumnTabbedLayoutTest extends BaseLayoutTest
 {
 	@Before
 	public void setUp() throws DataException, GlueException
 	{
 		super.setUp();
 
-		container = SimpleTabbedLayout.builder()
+		container = DualColumnTabbedLayout.builder()
 				.startNextGroup(GROUP_1)
 				.addAttribute(binding1)
 				.addAttribute(binding2)
@@ -79,10 +79,10 @@ public class SimpleTabbedLayoutTest extends BaseLayoutTest
 		assertThat(elementInside(groupPanel1).at(1, 0), is(instanceOf(JTextField.class)));
 		assertThat(elementInside(groupPanel1).at(1, 0), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_1)))));
 
-		assertThat(elementInside(groupPanel1).at(0, 1), is(instanceOf(JLabel.class)));
-		assertThat(elementInside(groupPanel1).at(0, 1), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_2)))));
-		assertThat(elementInside(groupPanel1).at(1, 1), is(instanceOf(JTextField.class)));
-		assertThat(elementInside(groupPanel1).at(1, 1), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_2)))));
+		assertThat(elementInside(groupPanel1).at(2, 0), is(instanceOf(JLabel.class)));
+		assertThat(elementInside(groupPanel1).at(2, 0), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_2)))));
+		assertThat(elementInside(groupPanel1).at(3, 0), is(instanceOf(JTextField.class)));
+		assertThat(elementInside(groupPanel1).at(3, 0), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_2)))));
 
 		// check group 2
 
@@ -91,15 +91,15 @@ public class SimpleTabbedLayoutTest extends BaseLayoutTest
 		assertThat(elementInside(groupPanel2).at(1, 0), is(instanceOf(JTextField.class)));
 		assertThat(elementInside(groupPanel2).at(1, 0), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_3)))));
 
-		assertThat(elementInside(groupPanel2).at(0, 1), is(instanceOf(JLabel.class)));
-		assertThat(elementInside(groupPanel2).at(0, 1), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_4)))));
-		assertThat(elementInside(groupPanel2).at(1, 1), is(instanceOf(JTextField.class)));
-		assertThat(elementInside(groupPanel2).at(1, 1), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_4)))));
+		assertThat(elementInside(groupPanel2).at(2, 0), is(instanceOf(JLabel.class)));
+		assertThat(elementInside(groupPanel2).at(2, 0), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_4)))));
+		assertThat(elementInside(groupPanel2).at(3, 0), is(instanceOf(JTextField.class)));
+		assertThat(elementInside(groupPanel2).at(3, 0), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_4)))));
 
-		assertThat(elementInside(groupPanel2).at(0, 2), is(instanceOf(JLabel.class)));
-		assertThat(elementInside(groupPanel2).at(0, 2), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_5)))));
-		assertThat(elementInside(groupPanel2).at(1, 2), is(instanceOf(JTextField.class)));
-		assertThat(elementInside(groupPanel2).at(1, 2), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_5)))));
+		assertThat(elementInside(groupPanel2).at(0, 1), is(instanceOf(JLabel.class)));
+		assertThat(elementInside(groupPanel2).at(0, 1), hasLabel(is(equalTo(theLabel(UiTestDataModel.STRING_5)))));
+		assertThat(elementInside(groupPanel2).at(1, 1), is(instanceOf(JTextField.class)));
+		assertThat(elementInside(groupPanel2).at(1, 1), hasValue(is(equalTo(theValue(UiTestDataModel.STRING_5)))));
 
 		// check group 3
 

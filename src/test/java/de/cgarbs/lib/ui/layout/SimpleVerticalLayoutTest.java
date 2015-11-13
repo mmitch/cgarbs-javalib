@@ -35,8 +35,8 @@ public class SimpleVerticalLayoutTest extends BaseLayoutTest
 				.startNextGroup(GROUP_2)
 				.addAttribute(binding3)
 				.addAttribute(binding4)
-				.startNextGroup(GROUP_3)
 				.addAttribute(binding5)
+				.startNextGroup(GROUP_3)
 				.addAttribute(binding6)
 				.build();
 	}
@@ -82,12 +82,12 @@ public class SimpleVerticalLayoutTest extends BaseLayoutTest
 		assertThat(elementInside(jpanel).at(1, 5), hasValue(equalTo(theValue(UiTestDataModel.STRING_4))));
 
 		assertThat(elementInside(jpanel).at(0, 6), is(instanceOf(JLabel.class)));
-		assertThat(elementInside(jpanel).at(0, 6), hasLabel(equalTo(GROUP_3)));
+		assertThat(elementInside(jpanel).at(0, 6), hasLabel(equalTo(theLabel(UiTestDataModel.STRING_5))));
+		assertThat(elementInside(jpanel).at(1, 6), is(instanceOf(JTextField.class)));
+		assertThat(elementInside(jpanel).at(1, 6), hasValue(equalTo(theValue(UiTestDataModel.STRING_5))));
 
 		assertThat(elementInside(jpanel).at(0, 7), is(instanceOf(JLabel.class)));
-		assertThat(elementInside(jpanel).at(0, 7), hasLabel(equalTo(theLabel(UiTestDataModel.STRING_5))));
-		assertThat(elementInside(jpanel).at(1, 7), is(instanceOf(JTextField.class)));
-		assertThat(elementInside(jpanel).at(1, 7), hasValue(equalTo(theValue(UiTestDataModel.STRING_5))));
+		assertThat(elementInside(jpanel).at(0, 7), hasLabel(equalTo(GROUP_3)));
 
 		assertThat(elementInside(jpanel).at(0, 8), is(instanceOf(JLabel.class)));
 		assertThat(elementInside(jpanel).at(0, 8), hasLabel(equalTo(theLabel(UiTestDataModel.STRING_6))));
