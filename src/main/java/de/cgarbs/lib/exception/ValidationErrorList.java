@@ -9,9 +9,10 @@ import de.cgarbs.lib.glue.Binding;
 
 public class ValidationErrorList extends Exception
 {
-	/**
-	 *
-	 */
+	// FIXME keep more internal state than just a list of String?
+	// what about the original exceptions? convert to String only in getErrorList()?
+	// add other, more detailled getters?
+
 	private static final long serialVersionUID = 1L;
 
 	private List<String> validationErrors = new ArrayList<String>();
@@ -66,5 +67,10 @@ public class ValidationErrorList extends Exception
 		}
 
 		return sb.toString();
+	}
+
+	public List<String> getValidationErrors()
+	{
+		return validationErrors; // FIXME immetable? clone()?
 	}
 }
