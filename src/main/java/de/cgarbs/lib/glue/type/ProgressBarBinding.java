@@ -4,7 +4,7 @@ import javax.swing.JComponent;
 import javax.swing.JProgressBar;
 
 import de.cgarbs.lib.data.DataAttribute;
-import de.cgarbs.lib.data.type.IntAttribute;
+import de.cgarbs.lib.data.NumberAttribute;
 import de.cgarbs.lib.glue.Binding;
 import de.cgarbs.lib.i18n.Resource;
 
@@ -28,7 +28,7 @@ public class ProgressBarBinding extends Binding
 	@Override
 	protected JComponent createDataEntryComponent()
 	{
-		IntAttribute i = (IntAttribute)attribute;
+		NumberAttribute i = (NumberAttribute)attribute;
 		jProgressBar = new JProgressBar();
 		jProgressBar.setMinimum(i.getMinValue().intValue());
 		jProgressBar.setMaximum(i.getMaxValue().intValue());
@@ -40,7 +40,7 @@ public class ProgressBarBinding extends Binding
 	{
 		super.setViewValue(value);
 
-		Integer i = (Integer) value;
+		Number i = (Number) value;
 
 		if (i != null)
 		{
