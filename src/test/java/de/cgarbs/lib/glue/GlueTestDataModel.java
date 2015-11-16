@@ -25,7 +25,13 @@ public class GlueTestDataModel extends DataModel
 
 	public static final String COLOR_ATTRIBUTE = "ColorAttribute";
 
-	public static final String IMAGE_ATTRIBUTE = "Image Attribute";
+	public static final String IMAGE_ATTRIBUTE = "ImageAttribute";
+
+	public static final String PROGRESSBAR_INT_ATTRIBUTE = "ProgressBarIntAttribute";
+	public static final int PROGRESSBAR_MIN_VALUE = 5;
+	public static final int PROGRESSBAR_MAX_VALUE = 15;
+
+	public static final String PROGRESSBAR_FLOAT_ATTRIBUTE = "ProgressBarFloatAttribute";
 
 	public GlueTestDataModel(Resource resource) throws DataException
 	{
@@ -65,6 +71,22 @@ public class GlueTestDataModel extends DataModel
 		addAttribute(
 				IMAGE_ATTRIBUTE,
 				FileAttribute.builder()
+					.build()
+				);
+
+		addAttribute(
+				PROGRESSBAR_INT_ATTRIBUTE,
+				IntAttribute.builder()
+					.setMinValue(PROGRESSBAR_MIN_VALUE)
+					.setMaxValue(PROGRESSBAR_MAX_VALUE)
+					.build()
+				);
+
+		addAttribute(
+				PROGRESSBAR_FLOAT_ATTRIBUTE,
+				FloatAttribute.builder()
+					.setMinValue((float) PROGRESSBAR_MIN_VALUE)
+					.setMaxValue((float) PROGRESSBAR_MAX_VALUE)
 					.build()
 				);
 	}
