@@ -14,6 +14,8 @@ public class Resource
 
 	/**
 	 * For usage without a class/property file: every key is mapped to itself
+	 *
+	 * @since 0.2.0
 	 */
 	public Resource()
 	{

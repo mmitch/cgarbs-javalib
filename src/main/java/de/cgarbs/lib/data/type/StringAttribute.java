@@ -120,11 +120,17 @@ public class StringAttribute extends DataAttribute
 		}
 	}
 
+	/**
+	 * @since 0.2.0
+	 */
 	public Integer getMinLength()
 	{
 		return minLength;
 	}
 
+	/**
+	 * @since 0.2.0
+	 */
 	public Integer getMaxLength()
 	{
 		return maxLength;

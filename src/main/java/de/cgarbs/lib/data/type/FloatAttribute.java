@@ -73,11 +73,17 @@ public class FloatAttribute extends NumberAttribute
 		return value.floatValue();
 	}
 
+	/**
+	 * @since 0.2.0
+	 */
 	public int getMinDecimals()
 	{
 		return minDecimals;
 	}
 
+	/**
+	 * @since 0.2.0
+	 */
 	public int getMaxDecimals()
 	{
 		return maxDecimals;
