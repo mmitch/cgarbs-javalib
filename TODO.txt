@@ -2,6 +2,11 @@ TODO:
 
 === LIB ===
 
+- BUG: windows filenames get their backslashes erased when an IOException is passed
+  through a ValidationErrorList - find out what's de-escaping the backslashes
+
+- add copyright statements to every source class
+
 - remove @deprecated methods before next release
 
 - make all Attribute constructors protected instead of private (easier extension)
@@ -14,12 +19,14 @@ TODO:
   - simple calculator
 
 - add BigDecimalAttribute, Binding etc.
+  - same for Double
 
 ? simple logging framework
 
 ? general utilities class (like safe String.setToMaxLength())
 
 ? general methods for look&feel selection / AutoLayout selection
+  - automatic commandline parsing or such
 
 === BUILD ===
 
