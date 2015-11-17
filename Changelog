@@ -1,0 +1,44 @@
+0.2.0 - 2015-11-17
+------------------
+
+ DataAttributes:
+
+ - IntAttribute has been renamed to IntegerAttribute, old class
+   will vanish in a future release
+ - allow Builder calls in any order (up to now the calls had to
+   be sorted by class hierarchy, subclass first)
+ - add getters for attribute values (minLength, nullable etc.)
+
+ Bindings:
+
+ - IntBinding has been renamed to IntegerBinding, old class will
+   vanash in a future release
+ - fix BooleanBinding for null values (now deselects the JCheckBox)
+ - ProgressBarBinding now works with all NumberFormatAttributs, not
+   only with IntAttribute
+
+ Layouts:
+
+ - fix missing 'linebreak' in DualColumnVerticalLayout when last line
+   in a group was not empty
+
+ Exceptions:
+ 
+ - always initialize localized exception messages
+
+ Resources:
+
+ - Provide an empty Resource implementation that does not need a
+   .property file and returns the given key while still providing
+   parameter expansion.  Use the new default constructor for this.
+
+ Build:
+
+ - remove more Eclipse project stuff over to Gradle
+ - check-l10n.pl now exits with error when keys are missing
+
+
+0.1.0 - 2015-11-08
+------------------
+
+ - initial release
