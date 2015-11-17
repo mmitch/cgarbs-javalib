@@ -10,6 +10,7 @@ import de.cgarbs.lib.data.type.ColorAttribute;
 import de.cgarbs.lib.data.type.FileAttribute;
 import de.cgarbs.lib.data.type.FloatAttribute;
 import de.cgarbs.lib.data.type.IntAttribute;
+import de.cgarbs.lib.data.type.IntegerAttribute;
 import de.cgarbs.lib.data.type.StringAttribute;
 import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.GlueException;
@@ -21,6 +22,7 @@ import de.cgarbs.lib.glue.type.FileBinding;
 import de.cgarbs.lib.glue.type.FloatBinding;
 import de.cgarbs.lib.glue.type.ImageBinding;
 import de.cgarbs.lib.glue.type.IntBinding;
+import de.cgarbs.lib.glue.type.IntegerBinding;
 import de.cgarbs.lib.glue.type.ProgressBarBinding;
 import de.cgarbs.lib.glue.type.StringBinding;
 import de.cgarbs.lib.i18n.Resource;
@@ -52,6 +54,10 @@ public class Glue<T extends DataModel>
 		else if (attribute instanceof IntAttribute)
 		{
 			return addBinding(key, IntBinding.class, label);
+		}
+		else if (attribute instanceof IntegerAttribute)
+		{
+			return addBinding(key, IntegerBinding.class, label);
 		}
 		else if (attribute instanceof FloatAttribute)
 		{
@@ -99,6 +105,10 @@ public class Glue<T extends DataModel>
 		else if (IntBinding.class.equals(clazz))
 		{
 			binding = new IntBinding(attribute, resource, label);
+		}
+		else if (IntegerBinding.class.equals(clazz))
+		{
+			binding = new IntegerBinding(attribute, resource, label);
 		}
 		else if (FloatBinding.class.equals(clazz))
 		{

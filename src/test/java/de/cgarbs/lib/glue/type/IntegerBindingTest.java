@@ -17,7 +17,7 @@ import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.GlueException;
 import de.cgarbs.lib.glue.GlueTestDataModel;
 
-public class IntBindingTest extends BaseBindingTest
+public class IntegerBindingTest extends BaseBindingTest
 {
 	final Integer MODEL_GIVEN_VALUE_1 = 33;
 	final Integer MODEL_GIVEN_VALUE_2 = 4;
@@ -30,7 +30,7 @@ public class IntBindingTest extends BaseBindingTest
 	@Before
 	public void setUp() throws DataException, GlueException
 	{
-		setUp(GlueTestDataModel.INT_ATTRIBUTE);
+		setUp(GlueTestDataModel.INTEGER_ATTRIBUTE);
 	}
 
 	@Test

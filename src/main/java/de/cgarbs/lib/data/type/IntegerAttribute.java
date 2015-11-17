@@ -2,14 +2,14 @@ package de.cgarbs.lib.data.type;
 
 import java.text.NumberFormat;
 
+import de.cgarbs.lib.data.NumberAttribute;
+
 /**
  * 
  * @author Christian Garbs <mitch@cgarbs.de>
- * @since 0.1.0
- * @deprecated use {@link IntegerAttribute} instead
- * 
+ * @since 0.2.0
  */
-public class IntAttribute extends IntegerAttribute
+public class IntegerAttribute extends NumberAttribute
 {
 	/**
 	 *
@@ -17,11 +17,11 @@ public class IntAttribute extends IntegerAttribute
 	private static final long serialVersionUID = 1L;
 
 	// Builder pattern start
-	public static class Builder extends IntegerAttribute.Builder
+	public static class Builder extends NumberAttribute.Builder<Integer>
 	{
-		public IntAttribute build()
+		public IntegerAttribute build()
 		{
-			return new IntAttribute(this);
+			return new IntegerAttribute(this);
 		}
 
 		@Override
@@ -36,11 +36,20 @@ public class IntAttribute extends IntegerAttribute
 		return new Builder();
 	}
 
-	protected IntAttribute(Builder builder)
+	protected IntegerAttribute(Builder builder)
 	{
 		super(builder);
 		numberFormat = NumberFormat.getIntegerInstance();
 	}
 	// Builder pattern end
 
+	@Override
+	public Object getValue()
+	{
+		if (value == null)
+		{
+			return null;
+		}
+		return value.intValue();
+	}
 }

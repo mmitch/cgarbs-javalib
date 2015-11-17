@@ -1,20 +1,18 @@
 package de.cgarbs.lib.glue.type;
 
 import de.cgarbs.lib.data.DataAttribute;
-import de.cgarbs.lib.data.type.IntAttribute;
 import de.cgarbs.lib.data.type.IntegerAttribute;
+import de.cgarbs.lib.glue.TextFieldBinding;
 import de.cgarbs.lib.i18n.Resource;
 
 /**
  * 
  * @author Christian Garbs <mitch@cgarbs.de>
- * @since 0.1.0
- * @deprecated use {@link IntegerBinding} instead
- * 
+ * @since 0.2.0
  */
-public class IntBinding extends IntegerBinding
+public class IntegerBinding extends TextFieldBinding
 {
-	public IntBinding(DataAttribute attribute, Resource resource, String label)
+	public IntegerBinding(DataAttribute attribute, Resource resource, String label)
 	{
 		super(attribute, resource, label);
 	}
@@ -22,6 +20,6 @@ public class IntBinding extends IntegerBinding
 	@Override
 	public void syncToView()
 	{
-		setViewValue(((IntAttribute)attribute).getFormattedValue());
+		setViewValue(((IntegerAttribute)attribute).getFormattedValue());
 	}
 }

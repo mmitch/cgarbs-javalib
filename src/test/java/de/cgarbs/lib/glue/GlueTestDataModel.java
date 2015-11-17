@@ -6,6 +6,7 @@ import de.cgarbs.lib.data.type.ColorAttribute;
 import de.cgarbs.lib.data.type.FileAttribute;
 import de.cgarbs.lib.data.type.FloatAttribute;
 import de.cgarbs.lib.data.type.IntAttribute;
+import de.cgarbs.lib.data.type.IntegerAttribute;
 import de.cgarbs.lib.data.type.StringAttribute;
 import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.i18n.Resource;
@@ -19,6 +20,9 @@ public class GlueTestDataModel extends DataModel
 	public static final String BOOLEAN_ATTRIBUTE = "BooleanAttribute";
 
 	public static final String INTEGER_ATTRIBUTE = "IntegerAttribute";
+
+	/** @deprecated {@link IntAttribute} is to be deleted, {@link IntegerAttribute} will stay */
+	public static final String INT_ATTRIBUTE = "IntAttribute";
 
 	public static final String FLOAT_ATTRIBUTE = "FloatAttribute";
 	public static final int FLOAT_DECIMALS = 2;
@@ -51,6 +55,12 @@ public class GlueTestDataModel extends DataModel
 
 		addAttribute(
 				INTEGER_ATTRIBUTE,
+				IntegerAttribute.builder()
+					.build()
+				);
+
+		addAttribute(
+				INT_ATTRIBUTE,
 				IntAttribute.builder()
 					.build()
 				);
@@ -76,7 +86,7 @@ public class GlueTestDataModel extends DataModel
 
 		addAttribute(
 				PROGRESSBAR_INT_ATTRIBUTE,
-				IntAttribute.builder()
+				IntegerAttribute.builder()
 					.setMinValue(PROGRESSBAR_MIN_VALUE)
 					.setMaxValue(PROGRESSBAR_MAX_VALUE)
 					.build()

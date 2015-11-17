@@ -2,7 +2,9 @@ TODO:
 
 === LIB ===
 
-- rename IntAttribute/Binder/... to IntegerAttribute/Binder/...
+- remove @deprecated methods before next release
+
+- make all Attribute constructors protected instead of private (easier extension)
 
 - document all library classes and methods
 
