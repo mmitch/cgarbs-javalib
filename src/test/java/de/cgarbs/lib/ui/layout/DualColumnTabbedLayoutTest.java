@@ -1,7 +1,6 @@
 package de.cgarbs.lib.ui.layout;
 
 import static de.cgarbs.lib.hamcrest.Swing.elementInside;
-import static de.cgarbs.lib.hamcrest.Swing.hasBorderTitle;
 import static de.cgarbs.lib.hamcrest.Swing.hasLabel;
 import static de.cgarbs.lib.hamcrest.Swing.hasValue;
 import static org.hamcrest.core.Is.is;
