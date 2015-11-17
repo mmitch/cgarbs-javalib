@@ -15,8 +15,8 @@ public abstract class NumberAttribute extends DataAttribute
 
 	protected Number value;
 
-	transient final Number minValue;
-	transient final Number maxValue;
+	private transient final Number minValue;
+	private transient final Number maxValue;
 
 	protected transient NumberFormat numberFormat;
 
