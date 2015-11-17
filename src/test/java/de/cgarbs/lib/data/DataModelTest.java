@@ -10,7 +10,7 @@ import java.io.File;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.cgarbs.lib.data.type.IntAttribute;
+import de.cgarbs.lib.data.type.IntegerAttribute;
 import de.cgarbs.lib.data.type.StringAttribute;
 import de.cgarbs.lib.exception.ValidationErrorList;
 import de.cgarbs.lib.i18n.Resource;
@@ -18,8 +18,8 @@ import de.cgarbs.lib.i18n.Resource;
 public class DataModelTest
 {
 	DataModel model;
-	StringAttribute stringAttribute_underTest;
-	IntAttribute    intAttribute_underTest;
+	StringAttribute  stringAttribute_underTest;
+	IntegerAttribute integerAttribute_underTest;
 
 	static final File TEMPFILE = new File("model.tmp");
 
@@ -35,15 +35,15 @@ public class DataModelTest
 	public void setUp() throws Exception
 	{
 		model = new TestDataModel(new Resource());
-		stringAttribute_underTest = (StringAttribute) model.getAttribute(TestDataModel.STRING_ATTRIBUTE);
-		intAttribute_underTest = (IntAttribute) model.getAttribute(TestDataModel.INT_ATTRIBUTE);
+		stringAttribute_underTest  = (StringAttribute)  model.getAttribute(TestDataModel.STRING_ATTRIBUTE);
+		integerAttribute_underTest = (IntegerAttribute) model.getAttribute(TestDataModel.INTEGER_ATTRIBUTE);
 	}
 
 	@Test
 	public void checkValidateValid() throws Exception
 	{
 		stringAttribute_underTest.setValue(GIVEN_STRING_VALID);
-		intAttribute_underTest.setValue(GIVEN_INTEGER_VALID);
+		integerAttribute_underTest.setValue(GIVEN_INTEGER_VALID);
 		model.validate();
 	}
 
@@ -51,7 +51,7 @@ public class DataModelTest
 	public void checkValidateInvalid() throws Exception
 	{
 		stringAttribute_underTest.setValue(GIVEN_STRING_INVALID);
-		intAttribute_underTest.setValue(GIVEN_INTEGER_INVALID);
+		integerAttribute_underTest.setValue(GIVEN_INTEGER_INVALID);
 		try
 		{
 			model.validate();
@@ -67,20 +67,20 @@ public class DataModelTest
 	public void checkPersistenceValid() throws Exception
 	{
 		stringAttribute_underTest.setValue(GIVEN_STRING_VALID);
-		intAttribute_underTest.setValue(GIVEN_INTEGER_VALID);
+		integerAttribute_underTest.setValue(GIVEN_INTEGER_VALID);
 
 		model.writeToFile(TEMPFILE);
 
 		assertThat((String) stringAttribute_underTest.getValue(), is(equalTo(GIVEN_STRING_VALID)));
-		assertThat((Integer) intAttribute_underTest.getValue(), is(equalTo(GIVEN_INTEGER_VALID)));
+		assertThat((Integer) integerAttribute_underTest.getValue(), is(equalTo(GIVEN_INTEGER_VALID)));
 
 		stringAttribute_underTest.setValue(GIVEN_STRING_INVALID);
-		intAttribute_underTest.setValue(GIVEN_INTEGER_INVALID);
+		integerAttribute_underTest.setValue(GIVEN_INTEGER_INVALID);
 
 		model.readFromFile(TEMPFILE);
 
 		assertThat((String) stringAttribute_underTest.getValue(), is(equalTo(GIVEN_STRING_VALID)));
-		assertThat((Integer) intAttribute_underTest.getValue(), is(equalTo(GIVEN_INTEGER_VALID)));
+		assertThat((Integer) integerAttribute_underTest.getValue(), is(equalTo(GIVEN_INTEGER_VALID)));
 
 		TEMPFILE.delete();
 	}
@@ -89,20 +89,20 @@ public class DataModelTest
 	public void checkPersistenceInvalid() throws Exception
 	{
 		stringAttribute_underTest.setValue(GIVEN_STRING_INVALID);
-		intAttribute_underTest.setValue(GIVEN_INTEGER_INVALID);
+		integerAttribute_underTest.setValue(GIVEN_INTEGER_INVALID);
 
 		model.writeToFile(TEMPFILE);
 
 		assertThat((String) stringAttribute_underTest.getValue(), is(equalTo(GIVEN_STRING_INVALID)));
-		assertThat((Integer) intAttribute_underTest.getValue(), is(equalTo(GIVEN_INTEGER_INVALID)));
+		assertThat((Integer) integerAttribute_underTest.getValue(), is(equalTo(GIVEN_INTEGER_INVALID)));
 
 		stringAttribute_underTest.setValue(GIVEN_STRING_VALID);
-		intAttribute_underTest.setValue(GIVEN_INTEGER_VALID);
+		integerAttribute_underTest.setValue(GIVEN_INTEGER_VALID);
 
 		model.readFromFile(TEMPFILE);
 
 		assertThat((String) stringAttribute_underTest.getValue(), is(equalTo(GIVEN_STRING_INVALID)));
-		assertThat((Integer) intAttribute_underTest.getValue(), is(equalTo(GIVEN_INTEGER_INVALID)));
+		assertThat((Integer) integerAttribute_underTest.getValue(), is(equalTo(GIVEN_INTEGER_INVALID)));
 
 		TEMPFILE.delete();
 	}
@@ -113,7 +113,7 @@ public class DataModelTest
 		assertThat(model.isDirty(), is(false));
 
 		stringAttribute_underTest.setValue(GIVEN_STRING_VALID);
-		intAttribute_underTest.setValue(GIVEN_INTEGER_VALID);
+		integerAttribute_underTest.setValue(GIVEN_INTEGER_VALID);
 
 		assertThat(model.isDirty(), is(true));
 
@@ -127,7 +127,7 @@ public class DataModelTest
 		assertThat(model.isDirty(), is(false));
 
 		stringAttribute_underTest.setValue(GIVEN_STRING_INVALID);
-		intAttribute_underTest.setValue(GIVEN_INTEGER_INVALID);
+		integerAttribute_underTest.setValue(GIVEN_INTEGER_INVALID);
 
 		assertThat(model.isDirty(), is(true));
 

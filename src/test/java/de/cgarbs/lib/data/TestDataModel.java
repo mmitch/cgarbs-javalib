@@ -1,6 +1,6 @@
 package de.cgarbs.lib.data;
 
-import de.cgarbs.lib.data.type.IntAttribute;
+import de.cgarbs.lib.data.type.IntegerAttribute;
 import de.cgarbs.lib.data.type.StringAttribute;
 import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.i18n.Resource;
@@ -13,8 +13,8 @@ import de.cgarbs.lib.i18n.Resource;
 class TestDataModel extends DataModel
 {
 	private static final long serialVersionUID = 1L;
-	static final String STRING_ATTRIBUTE = "StringAttribute";
-	static final String INT_ATTRIBUTE = "IntAttribute";
+	static final String STRING_ATTRIBUTE  = "StringAttribute";
+	static final String INTEGER_ATTRIBUTE = "IntegerAttribute";
 
 	public TestDataModel(Resource resource) throws DataException
 	{
@@ -29,8 +29,8 @@ class TestDataModel extends DataModel
 				);
 
 		addAttribute(
-				INT_ATTRIBUTE,
-				IntAttribute.builder()
+				INTEGER_ATTRIBUTE,
+				IntegerAttribute.builder()
 					.setNullable(false)
 					.build()
 				);
