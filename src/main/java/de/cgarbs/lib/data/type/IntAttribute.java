@@ -3,11 +3,11 @@ package de.cgarbs.lib.data.type;
 import java.text.NumberFormat;
 
 /**
- * 
+ *
  * @author Christian Garbs <mitch@cgarbs.de>
  * @since 0.1.0
  * @deprecated use {@link IntegerAttribute} instead
- * 
+ *
  */
 public class IntAttribute extends IntegerAttribute
 {

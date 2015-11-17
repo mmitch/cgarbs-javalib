@@ -6,7 +6,7 @@ import de.cgarbs.lib.glue.TextFieldBinding;
 import de.cgarbs.lib.i18n.Resource;
 
 /**
- * 
+ *
  * @author Christian Garbs <mitch@cgarbs.de>
  * @since 0.2.0
  */

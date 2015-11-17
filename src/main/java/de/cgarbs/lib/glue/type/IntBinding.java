@@ -6,11 +6,11 @@ import de.cgarbs.lib.data.type.IntegerAttribute;
 import de.cgarbs.lib.i18n.Resource;
 
 /**
- * 
+ *
  * @author Christian Garbs <mitch@cgarbs.de>
  * @since 0.1.0
  * @deprecated use {@link IntegerBinding} instead
- * 
+ *
  */
 public class IntBinding extends IntegerBinding
 {

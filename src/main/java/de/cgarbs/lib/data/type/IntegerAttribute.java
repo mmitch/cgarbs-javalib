@@ -5,7 +5,7 @@ import java.text.NumberFormat;
 import de.cgarbs.lib.data.NumberAttribute;
 
 /**
- * 
+ *
  * @author Christian Garbs <mitch@cgarbs.de>
  * @since 0.2.0
  */
