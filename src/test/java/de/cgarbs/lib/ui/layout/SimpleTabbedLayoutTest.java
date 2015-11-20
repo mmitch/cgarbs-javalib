@@ -1,3 +1,7 @@
+/*
+ * Copyright 2015 (C)  Christian Garbs <mitch@cgarbs.de>
+ * Licensed under GNU GPL 3 (or later)
+ */
 package de.cgarbs.lib.ui.layout;
 
 import static de.cgarbs.lib.hamcrest.Swing.elementInside;
