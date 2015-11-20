@@ -5,13 +5,6 @@
 package de.cgarbs.lib.data;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -20,16 +13,11 @@ import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.ValidationError;
 import de.cgarbs.lib.exception.ValidationErrorList;
 import de.cgarbs.lib.i18n.Resource;
+import de.cgarbs.lib.json.JSONDataModel;
 
 // FIXME: user Builder pattern, not abstract getModelName() and Resource constructor...
-abstract public class DataModel implements Serializable
+abstract public class DataModel
 {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
-
-
 	private Map<String, DataAttribute> attributes = new LinkedHashMap<String, DataAttribute>();
 
 	private transient final Resource resource;
@@ -119,23 +107,23 @@ abstract public class DataModel implements Serializable
 
 	// FIXME -> toString() bauen!
 
-	public void writeToFile(File file) throws FileNotFoundException, IOException // FIXME wrap exceptions or not?!
+	/**
+	 * Writes a JSON representation of the current model state to a file.
+	 * The file is overwritten if it already exists.
+	 *
+	 * @since 0.3.0
+	 *
+	 * @param file the file to write to
+	 * @throws DataException either IO errors or errors during the JSON conversion
+	 */
+	public void writeToFile(File file) throws DataException
 	{
-		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
-		out.writeObject(this);
-		out.close();
+		JSONDataModel.writeToFile(this, file);
 	}
 
-	public void readFromFile(File file) throws FileNotFoundException, IOException, ClassNotFoundException, DataException
+	public void readFromFile(File file) throws DataException
 	{
-		ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
-		DataModel d = (DataModel) in.readObject();
-		in.close();
-
-		for (String key: d.attributes.keySet())
-		{
-			this.setValue(key, d.getValue(key));
-		}
+		JSONDataModel.readFromFile(this, file);
 	}
 
 	public void validate() throws ValidationErrorList // FIXME: unneeded? remove?

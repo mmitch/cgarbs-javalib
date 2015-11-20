@@ -68,6 +68,23 @@ public class DataModelTest
 	}
 
 	@Test
+	public void checkPersistenceOtherInstance() throws Exception
+	{
+		stringAttribute_underTest.setValue(GIVEN_STRING_VALID);
+		integerAttribute_underTest.setValue(GIVEN_INTEGER_VALID);
+
+		model.writeToFile(TEMPFILE);
+
+		TestDataModel otherModel = new TestDataModel();
+		otherModel.readFromFile(TEMPFILE);
+
+		assertThat(otherModel.getValue(TestDataModel.STRING_ATTRIBUTE),  is(equalTo(model.getValue(TestDataModel.STRING_ATTRIBUTE))));
+		assertThat(otherModel.getValue(TestDataModel.INTEGER_ATTRIBUTE), is(equalTo(model.getValue(TestDataModel.INTEGER_ATTRIBUTE))));
+
+		TEMPFILE.delete();
+	}
+
+	@Test
 	public void checkPersistenceValid() throws Exception
 	{
 		stringAttribute_underTest.setValue(GIVEN_STRING_VALID);

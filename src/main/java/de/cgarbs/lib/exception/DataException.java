@@ -23,7 +23,9 @@ public class DataException extends LocalizedException
 		DUPLICATE_ATTRIBUTE,
 		DUPLICATE_USAGE,
 		UNKNOWN_ATTRIBUTE,
-		INVALID_VALUE
+		INVALID_VALUE,
+		JSON_CONVERSION_ERROR,
+		IO_ERROR,
 	}
 
 	static
@@ -33,6 +35,9 @@ public class DataException extends LocalizedException
 		ERRORTEXT.put(ERROR.DUPLICATE_USAGE, "attribute used in multiple models");
 		ERRORTEXT.put(ERROR.UNKNOWN_ATTRIBUTE, "unknown attribute");
 		ERRORTEXT.put(ERROR.INVALID_VALUE, "invalid value");
+		ERRORTEXT.put(ERROR.INVALID_VALUE, "invalid value");
+		ERRORTEXT.put(ERROR.JSON_CONVERSION_ERROR, "error during JSON conversion");
+		ERRORTEXT.put(ERROR.IO_ERROR, "error during file access");
 	};
 
 	public DataException(ERROR error, String message)

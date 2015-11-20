@@ -75,7 +75,7 @@ public class ValidationErrorList extends Exception
 
 	/**
 	 * @since 0.2.0
-	 * @deprecated FIXME: interface still unfinished - beware, this method might change or vanish 
+	 * @deprecated FIXME: interface still unfinished - beware, this method might change or vanish
 	 */
 	public List<String> getValidationErrors()
 	{

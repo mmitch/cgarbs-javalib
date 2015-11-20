@@ -114,36 +114,17 @@ public abstract class NumberAttribute extends DataAttribute
 	@Override
 	protected Object convertType(Object newValue) throws ValidationError
 	{
-		if (newValue == null)
+		try
 		{
-			return null;
+			return TypeConverter.parseNumber(newValue);
 		}
-		else if (newValue instanceof Number)
+		catch (ParseException e)
 		{
-			return (Number) newValue;
-		}
-		else
-		{
-			try
-			{
-				String s = String.valueOf(newValue);
-				if (s.length() == 0)
-				{
-					return null;
-				}
-				else
-				{
-					return numberFormat.parse(s);
-				}
-			}
-			catch (ParseException e)
-			{
-				throw new ValidationError(
-						this,
-						"can't parse " + newValue.getClass() + " as number: " + newValue.toString(),
-						ValidationError.ERROR.NUMBER_FORMAT
-						);
-			}
+			throw new ValidationError(
+					this,
+					"can't parse " + newValue.getClass() + " as number: " + newValue.toString(),
+					ValidationError.ERROR.NUMBER_FORMAT
+					);
 		}
 	}
 }

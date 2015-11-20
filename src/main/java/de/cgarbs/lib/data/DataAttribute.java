@@ -4,19 +4,11 @@
  */
 package de.cgarbs.lib.data;
 
-import java.io.Serializable;
-
 import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.ValidationError;
 
-abstract public class DataAttribute implements Serializable
+abstract public class DataAttribute
 {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
-
-
 	private transient final boolean nullable;
 	private String key;
 	private DataModel model;
