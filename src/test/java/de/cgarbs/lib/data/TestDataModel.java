@@ -20,9 +20,9 @@ class TestDataModel extends DataModel
 	static final String STRING_ATTRIBUTE  = "StringAttribute";
 	static final String INTEGER_ATTRIBUTE = "IntegerAttribute";
 
-	public TestDataModel(Resource resource) throws DataException
+	public TestDataModel() throws DataException
 	{
-		super(resource);
+		super();
 
 		addAttribute(
 				STRING_ATTRIBUTE,

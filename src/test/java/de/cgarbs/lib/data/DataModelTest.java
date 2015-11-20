@@ -38,7 +38,7 @@ public class DataModelTest
 	@Before
 	public void setUp() throws Exception
 	{
-		model = new TestDataModel(new Resource());
+		model = new TestDataModel();
 		stringAttribute_underTest  = (StringAttribute)  model.getAttribute(TestDataModel.STRING_ATTRIBUTE);
 		integerAttribute_underTest = (IntegerAttribute) model.getAttribute(TestDataModel.INTEGER_ATTRIBUTE);
 	}

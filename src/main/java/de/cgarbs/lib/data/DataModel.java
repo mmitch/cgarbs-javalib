@@ -39,6 +39,17 @@ abstract public class DataModel implements Serializable
 		this.resource = resource;
 	}
 
+	/**
+	 * Creates a DataModel without a {@link Resource} file.
+	 * Every key is mapped to itself, see {@link Resource#Resource()}.
+	 *
+	 * @since 0.3.0
+	 */
+	public DataModel()
+	{
+		this.resource = new Resource();
+	}
+
 	public Resource getResource()
 	{
 		return this.resource;
