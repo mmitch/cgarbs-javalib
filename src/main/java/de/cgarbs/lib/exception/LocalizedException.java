@@ -92,9 +92,9 @@ public abstract class LocalizedException extends Exception
 	}
 
 	/**
-	 * returns only the message belonging to the exception's error code
-	 * without the 'real' message text appended
-	 * @return the error text of the error code without anything else
+	 * returns only the message given to the exception constructor
+	 * without the prefix added by the error code
+	 * @return the exception message without the error code text
 	 */
 	public String getMessageOnly()
 	{
