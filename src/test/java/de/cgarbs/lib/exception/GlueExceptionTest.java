@@ -26,6 +26,7 @@ public class GlueExceptionTest
 			assertEquals(error, exception.getError());
 			assertNotNull(exception.getMessage());
 			assertTrue(exception.getMessage().length() > 0);
+			assertEquals(exception.ERRORTEXT.get(error), exception.getMessage());
 		}
 	}
 
