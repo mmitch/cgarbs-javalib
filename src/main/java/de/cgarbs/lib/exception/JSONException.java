@@ -4,9 +4,6 @@
  */
 package de.cgarbs.lib.exception;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * An exception during JSON conversion.
  *
@@ -20,32 +17,31 @@ public class JSONException extends LocalizedException
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final Map<ERROR, String> ERRORTEXT = new HashMap<ERROR, String>();
-	private ERROR error = ERROR.UNDEFINED;
-
-	public enum ERROR
+	/**
+	 * Error codes for this exception.
+	 *
+	 * @author Christian Garbs <mitch@cgarbs.de>
+	 *
+	 */
+	public enum ERROR implements ERRORIF
 	{
-		UNDEFINED,
+		/** error during Java to JSON conversion */
 		JAVA_TO_JSON,
+
+		/** error during JSON to Java conversion */
 		JSON_TO_JAVA
 	}
 
+	// FIXME add localization
 	static
 	{
-		ERRORTEXT.put(ERROR.UNDEFINED, "undefined");
 		ERRORTEXT.put(ERROR.JAVA_TO_JSON, "error converting from Java object to JSON notation");
 		ERRORTEXT.put(ERROR.JSON_TO_JAVA, "error converting from JSON notation to Java object");
 	};
 
-	public JSONException(ERROR error, String message)
-	{
-		super(message);
-		this.error = error;
-	}
-
 	public JSONException(ERROR error, Throwable t)
 	{
-		this(error, t.getMessage(), t);
+		super(error, t.getMessage(), t);
 	}
 
 	public JSONException(ERROR error, String message, Throwable t)
@@ -54,24 +50,20 @@ public class JSONException extends LocalizedException
 		this.error = error;
 	}
 
-	@Override
-	public String getMessage()
+	public JSONException(ERROR error, String message)
 	{
-		String message = ERRORTEXT.get(error);
-		if (super.getMessage() != null)
-		{
-			message += "::" + super.getMessage();
-		}
-		return message;
+		super(message);
+		this.error = error;
 	}
 
-	public String getMessageOnly()
-	{
-		return super.getMessage();
-	}
-
+	/**
+	 * returns the error code of this exception
+	 * @return the error code
+	 *
+	 * FIXME rename to getErrorCode() ?
+	 */
 	public ERROR getError()
 	{
-		return error;
+		return (ERROR) error;
 	}
 }

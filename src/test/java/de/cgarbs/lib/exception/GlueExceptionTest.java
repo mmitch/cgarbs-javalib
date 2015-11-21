@@ -33,13 +33,6 @@ public class GlueExceptionTest
 	public void checkConstructors()
 	{
 		{
-			final GlueException exception = new GlueException(GIVEN_ERROR);
-
-			assertEquals(GIVEN_ERROR, exception.getError());
-			assertNotNull(exception.getMessage());
-		}
-
-		{
 			final GlueException exception = new GlueException(GIVEN_ERROR, GIVEN_MESSAGE);
 
 			assertEquals(GIVEN_ERROR, exception.getError());

@@ -4,9 +4,6 @@
  */
 package de.cgarbs.lib.exception;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class DataException extends LocalizedException
 {
 	/**
@@ -14,12 +11,14 @@ public class DataException extends LocalizedException
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final Map<ERROR, String> ERRORTEXT = new HashMap<ERROR, String>();
-	private ERROR error = ERROR.UNDEFINED;
-
-	public enum ERROR
+	/**
+	 * Error codes for this exception.
+	 *
+	 * @author Christian Garbs <mitch@cgarbs.de>
+	 *
+	 */
+	public enum ERROR implements ERRORIF
 	{
-		UNDEFINED,
 		DUPLICATE_ATTRIBUTE,
 		DUPLICATE_USAGE,
 		UNKNOWN_ATTRIBUTE,
@@ -28,9 +27,9 @@ public class DataException extends LocalizedException
 		IO_ERROR,
 	}
 
+	// FIXME add localization
 	static
 	{
-		ERRORTEXT.put(ERROR.UNDEFINED, "undefined");
 		ERRORTEXT.put(ERROR.DUPLICATE_ATTRIBUTE, "duplicate attribute name");
 		ERRORTEXT.put(ERROR.DUPLICATE_USAGE, "attribute used in multiple models");
 		ERRORTEXT.put(ERROR.UNKNOWN_ATTRIBUTE, "unknown attribute");
@@ -42,46 +41,34 @@ public class DataException extends LocalizedException
 
 	public DataException(ERROR error, String message)
 	{
-		super(message);
-		this.error = error;
+		super(error, message);
 	}
 
 	public DataException(ERROR error, Throwable t)
 	{
-		this(error, t.getMessage(), t);
+		super(error, t);
 	}
 
 	public DataException(ERROR error, String message, Throwable t)
 	{
-		super(message, t);
-		this.error = error;
+		super(error, message, t);
 	}
 
-	@Override
-	public String getMessage()
-	{
-		String message = ERRORTEXT.get(error);
-		if (super.getMessage() != null)
-		{
-			message += "::" + super.getMessage();
-		}
-		return message;
-	}
-
-	public String getMessageOnly()
-	{
-		return super.getMessage();
-	}
-
+	/**
+	 * returns the error code of this exception
+	 * @return the error code
+	 *
+	 * FIXME rename to getErrorCode() ?
+	 */
 	public ERROR getError()
 	{
-		return error;
+		return (ERROR) error;
 	}
 
 	public DataException prependMessage(String prefix)
 	{
 		return new DataException(
-				this.error,
+				getError(),
 				prefix + "::" + super.getMessage(),
 				this.getCause()
 				);

@@ -4,9 +4,6 @@
  */
 package de.cgarbs.lib.exception;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import de.cgarbs.lib.data.DataAttribute;
 import de.cgarbs.lib.i18n.Resource;
 
@@ -17,13 +14,13 @@ public class ValidationError extends LocalizedException
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// FIXME: use enum + HashMap with String keys like this?
-	// alternative: use subclass for "free" ValidationError texts
-	// and only use public string constants here?
-
-	private static final Map<ERROR, String> MESSAGEKEY = new HashMap<ERROR, String>();
-
-	public enum ERROR
+	/**
+	 * Error codes for this exception.
+	 *
+	 * @author Christian Garbs <mitch@cgarbs.de>
+	 *
+	 */
+	public enum ERROR implements ERRORIF
 	{
 		STRING_TOO_SHORT,
 		STRING_TOO_LONG,
@@ -38,26 +35,23 @@ public class ValidationError extends LocalizedException
 
 	static
 	{
-		MESSAGEKEY.put(ERROR.STRING_TOO_SHORT,  "STRING_TOO_SHORT");
-		MESSAGEKEY.put(ERROR.STRING_TOO_LONG,   "STRING_TOO_LONG");
-		MESSAGEKEY.put(ERROR.FILE_NOT_EXISTING, "FILE_NOT_EXISTING");
-		MESSAGEKEY.put(ERROR.FILE_NOT_READABLE, "FILE_NOT_READABLE");
-		MESSAGEKEY.put(ERROR.FILE_NOT_WRITABLE, "FILE_NOT_WRITABLE");
-		MESSAGEKEY.put(ERROR.NUMBER_TOO_SMALL,  "NUMBER_TOO_SMALL");
-		MESSAGEKEY.put(ERROR.NUMBER_TOO_LARGE,  "NUMBER_TOO_LARGE");
-		MESSAGEKEY.put(ERROR.NUMBER_FORMAT,     "NUMBER_FORMAT");
-		MESSAGEKEY.put(ERROR.NULL_NOT_ALLOWED,  "NULL_NOT_ALLOWED");
+		ERRORTEXT.put(ERROR.STRING_TOO_LONG,   "STRING_TOO_LONG");
+		ERRORTEXT.put(ERROR.FILE_NOT_EXISTING, "FILE_NOT_EXISTING");
+		ERRORTEXT.put(ERROR.FILE_NOT_READABLE, "FILE_NOT_READABLE");
+		ERRORTEXT.put(ERROR.FILE_NOT_WRITABLE, "FILE_NOT_WRITABLE");
+		ERRORTEXT.put(ERROR.NUMBER_TOO_SMALL,  "NUMBER_TOO_SMALL");
+		ERRORTEXT.put(ERROR.NUMBER_TOO_LARGE,  "NUMBER_TOO_LARGE");
+		ERRORTEXT.put(ERROR.NUMBER_FORMAT,     "NUMBER_FORMAT");
+		ERRORTEXT.put(ERROR.NULL_NOT_ALLOWED,  "NULL_NOT_ALLOWED");
 	}
 
 	protected static Resource R = new Resource(ValidationError.class);
 
 	protected DataAttribute attribute;
 
-	protected ERROR error;
-
 	public ValidationError(DataAttribute attribute, String message, ERROR error, String... params)
 	{
-		super(message, R._(MESSAGEKEY.get(error), params));
+		super(message, R._(ERRORTEXT.get(error), params));
 		this.attribute = attribute;
 		this.error = error;
 	}
@@ -79,8 +73,14 @@ public class ValidationError extends LocalizedException
 		return attribute.getAttributeName() + ": " + super.getMessage();
 	}
 
+	/**
+	 * returns the error code of this exception
+	 * @return the error code
+	 *
+	 * FIXME rename to getErrorCode() ?
+	 */
 	public ERROR getError()
 	{
-		return error;
+		return (ERROR) error;
 	}
 }

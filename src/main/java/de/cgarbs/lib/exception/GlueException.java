@@ -7,60 +7,51 @@ package de.cgarbs.lib.exception;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GlueException extends Exception
+public class GlueException extends LocalizedException
 {
 	private static final long serialVersionUID = -2514745080334864317L;
 
-	private static final Map<ERROR, String> ERRORTEXT = new HashMap<ERROR, String>();
-	private ERROR error = ERROR.UNDEFINED;
-
-	public enum ERROR {
-		UNDEFINED,
+	/**
+	 * Error codes for this exception.
+	 *
+	 * @author Christian Garbs <mitch@cgarbs.de>
+	 *
+	 */
+	public enum ERROR implements ERRORIF
+	{
 		BINDING_NOT_IMPLEMENTED,
 	}
 
+	// FIXME add localization
 	static {
-		ERRORTEXT.put(ERROR.UNDEFINED, "undefined");
 		ERRORTEXT.put(ERROR.BINDING_NOT_IMPLEMENTED, "binding not implemented");
 	};
 
-	public GlueException(ERROR error)
-	{
-		this.error = error;
-	}
-
 	public GlueException(ERROR error, String message)
 	{
-		super(message);
-		this.error = error;
+		super(error, message);
 	}
 
 	public GlueException(ERROR error, String message, Throwable t)
 	{
-		super(message, t);
-		this.error = error;
+		super(error, message, t);
 	}
 
-	@Override
-	public String getMessage()
-	{
-		String message = ERRORTEXT.get(error);
-		if (super.getMessage() != null)
-		{
-			message += "::" + super.getMessage();
-		}
-		return message;
-	}
-
+	/**
+	 * returns the error code of this exception
+	 * @return the error code
+	 *
+	 * FIXME rename to getErrorCode() ?
+	 */
 	public ERROR getError()
 	{
-		return error;
+		return (ERROR) error;
 	}
 
 	public GlueException prependMessage(String prefix)
 	{
 		return new GlueException(
-				this.error,
+				getError(),
 				prefix + "::" + super.getMessage(),
 				this.getCause()
 				);
