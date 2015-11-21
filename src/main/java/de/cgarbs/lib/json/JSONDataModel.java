@@ -214,7 +214,7 @@ public abstract class JSONDataModel extends JSONAdapter
 	{
 		throw new JSONException(
 				JSONException.ERROR.JSON_TO_JAVA,
-				"error during JSON conversion: " + errorText
+				errorText
 				);
 	}
 
