@@ -194,4 +194,18 @@ public class FileAttribute extends DataAttribute
 		}
 	}
 
+	public boolean getMustWrite()
+	{
+		return mustWrite;
+	}
+
+	public boolean getMustRead()
+	{
+		return mustRead;
+	}
+
+	public boolean getMustExist()
+	{
+		return mustExist;
+	}
 }
