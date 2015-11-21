@@ -51,7 +51,7 @@ public abstract class JSONTypeFactory
 	{
 		if (! (map instanceof Map))
 		{
-			throwJSONToJavaError("root element is no map");
+			throw newJSONToJavaError("root element is no map");
 		}
 		Map<String, Object> jsonMap = (Map<String, Object>) map;
 
@@ -62,19 +62,19 @@ public abstract class JSONTypeFactory
 		// check null
 		if (identifier == null)
 		{
-			throwJSONToJavaError("class ["+JSONType.CLASS_FIELD+"] is missing");
+			throw newJSONToJavaError("class ["+JSONType.CLASS_FIELD+"] is missing");
 		}
 		if (version == null)
 		{
-			throwJSONToJavaError("version ["+JSONType.VERSION_FIELD+"] is missing");
+			throw newJSONToJavaError("version ["+JSONType.VERSION_FIELD+"] is missing");
 		}
 		if (attributes == null)
 		{
-			throwJSONToJavaError("attributes ["+JSONType.ATTRIBUTE_FIELD+"] are missing");
+			throw newJSONToJavaError("attributes ["+JSONType.ATTRIBUTE_FIELD+"] are missing");
 		}
 		if (! (attributes instanceof Map))
 		{
-			throwJSONToJavaError("wrong attributes ["+JSONType.ATTRIBUTE_FIELD+"] for "+identifier+"#"+version+": expected a <Map> but got a <"+attributes.getClass().toString()+">");
+			throw newJSONToJavaError("wrong attributes ["+JSONType.ATTRIBUTE_FIELD+"] for "+identifier+"#"+version+": expected a <Map> but got a <"+attributes.getClass().toString()+">");
 		}
 
 		Map<String, Object> attributesMap = (Map<String, Object>) attributes;
@@ -86,21 +86,18 @@ public abstract class JSONTypeFactory
 		}
 
 		// not yet supported
-		throwJSONToJavaError("unknown class <" + identifier + "> version <" + version + "> in JSONTypeFactory");
-
-		// unreachable code, compiler too stupid to see this!
-		return null;
+		throw newJSONToJavaError("unknown class <" + identifier + "> version <" + version + "> in JSONTypeFactory");
 	}
 
 	/**
-	 * Throws a JSONException with {@link JSONException.ERROR#JSON_TO_JAVA}
+	 * Generate a new JSONException with {@link JSONException.ERROR#JSON_TO_JAVA}
 	 * and a given error text.
 	 * @param errorText the error text
-	 * @throws JSONException the freshly constructed JSONException
+	 * @return the freshly constructed JSONException
 	 */
-	private static void throwJSONToJavaError(String errorText) throws JSONException
+	private static JSONException newJSONToJavaError(String errorText)
 	{
-		throw new JSONException(
+		return new JSONException(
 				JSONException.ERROR.JSON_TO_JAVA,
 				errorText
 				);

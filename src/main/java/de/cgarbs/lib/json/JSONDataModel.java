@@ -55,11 +55,11 @@ public abstract class JSONDataModel extends JSONAdapter
 		}
 		catch (FileNotFoundException e)
 		{
-			wrapInDataException(DataException.ERROR.IO_ERROR, e);
+			throw wrappedAsDataException(DataException.ERROR.IO_ERROR, e);
 		}
 		catch (JSONException e)
 		{
-			wrapInDataException(DataException.ERROR.JSON_CONVERSION_ERROR, e);
+			throw wrappedAsDataException(DataException.ERROR.JSON_CONVERSION_ERROR, e);
 		}
 		finally
 		{
@@ -99,7 +99,7 @@ public abstract class JSONDataModel extends JSONAdapter
 		}
 		catch (FileNotFoundException e)
 		{
-			wrapInDataException(DataException.ERROR.IO_ERROR, e);
+			throw wrappedAsDataException(DataException.ERROR.IO_ERROR, e);
 		}
 
 		try
@@ -115,11 +115,11 @@ public abstract class JSONDataModel extends JSONAdapter
 		}
 		catch (ParseException e)
 		{
-			wrapInDataException(DataException.ERROR.JSON_CONVERSION_ERROR, e);
+			throw wrappedAsDataException(DataException.ERROR.JSON_CONVERSION_ERROR, e);
 		}
 		catch (JSONException e)
 		{
-			wrapInDataException(DataException.ERROR.JSON_CONVERSION_ERROR, e);
+			throw wrappedAsDataException(DataException.ERROR.JSON_CONVERSION_ERROR, e);
 		}
 	}
 
@@ -157,7 +157,7 @@ public abstract class JSONDataModel extends JSONAdapter
 	{
 		if (! (json instanceof Map))
 		{
-			throwJSONToJavaError("root element is no map");
+			throw newJSONToJavaError("root element is no map");
 		}
 		Map<String, Object> jsonMap = (Map<String, Object>) json;
 
@@ -168,29 +168,29 @@ public abstract class JSONDataModel extends JSONAdapter
 		// check null
 		if (identifier == null)
 		{
-			throwJSONToJavaError("identifier ["+IDENTIFIER_FIELD+"] is missing");
+			throw newJSONToJavaError("identifier ["+IDENTIFIER_FIELD+"] is missing");
 		}
 		if (version == null)
 		{
-			throwJSONToJavaError("version ["+VERSION_FIELD+"] is missing");
+			throw newJSONToJavaError("version ["+VERSION_FIELD+"] is missing");
 		}
 		if (attributes == null)
 		{
-			throwJSONToJavaError("attributes ["+ATTRIBUTE_FIELD+"] are missing");
+			throw newJSONToJavaError("attributes ["+ATTRIBUTE_FIELD+"] are missing");
 		}
 
 		// check values
 		if (! IDENTIFIER.equals(identifier))
 		{
-			throwJSONToJavaError("wrong identifier ["+IDENTIFIER_FIELD+"]: expected <"+IDENTIFIER+">, but got <"+identifier.toString()+">");
+			throw newJSONToJavaError("wrong identifier ["+IDENTIFIER_FIELD+"]: expected <"+IDENTIFIER+">, but got <"+identifier.toString()+">");
 		}
 		if (! VERSION.equals(version))
 		{
-			throwJSONToJavaError("wrong version ["+VERSION_FIELD+"]: expected <"+VERSION+">, but got <"+version.toString()+">");
+			throw newJSONToJavaError("wrong version ["+VERSION_FIELD+"]: expected <"+VERSION+">, but got <"+version.toString()+">");
 		}
 		if (! (attributes instanceof Map))
 		{
-			throwJSONToJavaError("wrong attributes ["+ATTRIBUTE_FIELD+"]: expected a <Map> but got a <"+attributes.getClass().toString()+">");
+			throw newJSONToJavaError("wrong attributes ["+ATTRIBUTE_FIELD+"]: expected a <Map> but got a <"+attributes.getClass().toString()+">");
 		}
 
 		Map<String, Object> attributeMap = (Map<String, Object>) attributes;
@@ -205,14 +205,14 @@ public abstract class JSONDataModel extends JSONAdapter
 	}
 
 	/**
-	 * Throws a JSONException with {@link JSONException.ERROR#JSON_TO_JAVA}
+	 * Generates a JSONException with {@link JSONException.ERROR#JSON_TO_JAVA}
 	 * and a given error text.
 	 * @param errorText the error text
-	 * @throws JSONException the freshly constructed JSONException
+	 * @return the freshly constructed JSONException
 	 */
-	private static void throwJSONToJavaError(String errorText) throws JSONException
+	private static JSONException newJSONToJavaError(String errorText)
 	{
-		throw new JSONException(
+		return new JSONException(
 				JSONException.ERROR.JSON_TO_JAVA,
 				errorText
 				);
@@ -223,11 +223,11 @@ public abstract class JSONDataModel extends JSONAdapter
 	 *
 	 * @param error the DataException error code to use
 	 * @param t the original exception
-	 * @throws DataException the freshly constructed DataException
+	 * @return the freshly constructed DataException
 	 */
-	private static void wrapInDataException(DataException.ERROR error, Throwable t) throws DataException
+	private static DataException wrappedAsDataException(DataException.ERROR error, Throwable t)
 	{
-		throw new DataException(
+		return new DataException(
 				error,
 				t
 				);
