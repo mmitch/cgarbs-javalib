@@ -7,7 +7,7 @@ package de.cgarbs.lib.json.type;
 import java.awt.Color;
 import java.util.Map;
 
-import de.cgarbs.lib.exception.DataException;
+import de.cgarbs.lib.exception.JSONException;
 
 /**
  * A factory that creates {@link JSONType}s based on either
@@ -24,9 +24,9 @@ public abstract class JSONTypeFactory
 	 * Java object.
 	 * @param o the Object to be converted to JSON
 	 * @return the Object wrapped in a {@link JSONType}
-	 * @throws DataException when no conversion exists for the given Object
+	 * @throws JSONException when no conversion exists for the given Object
 	 */
-	public static JSONType wrapJavaObject(Object o) throws DataException
+	public static JSONType wrapJavaObject(Object o) throws JSONException
 	{
 		if (o instanceof Color)
 		{
@@ -34,8 +34,8 @@ public abstract class JSONTypeFactory
 		}
 
 		// not yet supported
-		throw new DataException(
-				DataException.ERROR.JSON_CONVERSION_ERROR,
+		throw new JSONException(
+				JSONException.ERROR.JAVA_TO_JSON,
 				"unknown class " + o.getClass() + " in JSONTypeFactory"
 				);
 	}
@@ -45,13 +45,13 @@ public abstract class JSONTypeFactory
 	 * decoded JSON object {@link Map}
 	 * @param map the Map to be converted to a {@link JSONType}
 	 * @return the JSON object wrapped as a {@link JSONType}
-	 * @throws DataException when no conversion exists for the given Object
+	 * @throws JSONException when no conversion exists for the given Object
 	 */
-	public static Object unwrapJSONObject(Object map) throws DataException
+	public static Object unwrapJSONObject(Object map) throws JSONException
 	{
 		if (! (map instanceof Map))
 		{
-			throwJSONError("root element is no map");
+			throwJSONToJavaError("root element is no map");
 		}
 		Map<String, Object> jsonMap = (Map<String, Object>) map;
 
@@ -62,19 +62,19 @@ public abstract class JSONTypeFactory
 		// check null
 		if (identifier == null)
 		{
-			throwJSONError("class ["+JSONType.CLASS_FIELD+"] is missing");
+			throwJSONToJavaError("class ["+JSONType.CLASS_FIELD+"] is missing");
 		}
 		if (version == null)
 		{
-			throwJSONError("version ["+JSONType.VERSION_FIELD+"] is missing");
+			throwJSONToJavaError("version ["+JSONType.VERSION_FIELD+"] is missing");
 		}
 		if (attributes == null)
 		{
-			throwJSONError("attributes ["+JSONType.ATTRIBUTE_FIELD+"] are missing");
+			throwJSONToJavaError("attributes ["+JSONType.ATTRIBUTE_FIELD+"] are missing");
 		}
 		if (! (attributes instanceof Map))
 		{
-			throwJSONError("wrong attributes ["+JSONType.ATTRIBUTE_FIELD+"] for "+identifier+"#"+version+": expected a <Map> but got a <"+attributes.getClass().toString()+">");
+			throwJSONToJavaError("wrong attributes ["+JSONType.ATTRIBUTE_FIELD+"] for "+identifier+"#"+version+": expected a <Map> but got a <"+attributes.getClass().toString()+">");
 		}
 
 		Map<String, Object> attributesMap = (Map<String, Object>) attributes;
@@ -86,22 +86,22 @@ public abstract class JSONTypeFactory
 		}
 
 		// not yet supported
-		throw new DataException(
-				DataException.ERROR.JSON_CONVERSION_ERROR,
-				"unknown class <" + identifier + "> version <" + version + "> in JSONTypeFactory"
-				);
+		throwJSONToJavaError("unknown class <" + identifier + "> version <" + version + "> in JSONTypeFactory");
+
+		// unreachable code, compiler too stupid to see this!
+		return null;
 	}
 
 	/**
-	 * Throws a DataException with {@link DataException.ERROR#JSON_CONVERSION_ERROR}
+	 * Throws a JSONException with {@link JSONException.ERROR#JSON_TO_JAVA}
 	 * and a given error text.
 	 * @param errorText the error text
-	 * @throws DataException the freshly constructed DataException
+	 * @throws JSONException the freshly constructed JSONException
 	 */
-	private static void throwJSONError(String errorText) throws DataException
+	private static void throwJSONToJavaError(String errorText) throws JSONException
 	{
-		throw new DataException(
-				DataException.ERROR.JSON_CONVERSION_ERROR,
+		throw new JSONException(
+				JSONException.ERROR.JSON_TO_JAVA,
 				"error during JSON conversion: " + errorText
 				);
 	}

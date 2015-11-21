@@ -17,6 +17,7 @@ import org.json.simple.parser.ParseException;
 
 import de.cgarbs.lib.data.DataModel;
 import de.cgarbs.lib.exception.DataException;
+import de.cgarbs.lib.exception.JSONException;
 
 /**
  * This adapter maps a DataModel to a JSON representation by
@@ -54,11 +55,11 @@ public abstract class JSONDataModel extends JSONAdapter
 		}
 		catch (FileNotFoundException e)
 		{
-			throw new DataException(
-					DataException.ERROR.IO_ERROR,
-					"error writing to file: " + e.getMessage(),
-					e
-					);
+			wrapInDataException(DataException.ERROR.IO_ERROR, e);
+		}
+		catch (JSONException e)
+		{
+			wrapInDataException(DataException.ERROR.JSON_CONVERSION_ERROR, e);
 		}
 		finally
 		{
@@ -98,11 +99,7 @@ public abstract class JSONDataModel extends JSONAdapter
 		}
 		catch (FileNotFoundException e)
 		{
-			throw new DataException(
-					DataException.ERROR.IO_ERROR,
-					"error reading from file: " + e.getMessage(),
-					e
-					);
+			wrapInDataException(DataException.ERROR.IO_ERROR, e);
 		}
 
 		try
@@ -118,11 +115,11 @@ public abstract class JSONDataModel extends JSONAdapter
 		}
 		catch (ParseException e)
 		{
-			throw new DataException(
-					DataException.ERROR.JSON_CONVERSION_ERROR,
-					"error during JSON conversion: " + e.getMessage(),
-					e
-					);
+			wrapInDataException(DataException.ERROR.JSON_CONVERSION_ERROR, e);
+		}
+		catch (JSONException e)
+		{
+			wrapInDataException(DataException.ERROR.JSON_CONVERSION_ERROR, e);
 		}
 	}
 
@@ -130,9 +127,10 @@ public abstract class JSONDataModel extends JSONAdapter
 	 * Converts the DataModel to JSON
 	 * @param model the DataModel to convert
 	 * @return JSON representation of the DataModel
-	 * @throws DataException when there is an error during the JSON conversion
+	 * @throws JSONException when there is an error during the JSON conversion
+	 * @throws DataException when there is an error during value retrieval from the DataModel
 	 */
-	static String convertToJSON(DataModel model) throws DataException
+	static String convertToJSON(DataModel model) throws JSONException, DataException
 	{
 		Map<String, Object> attributes = new LinkedHashMap<String, Object>();
 		for (String key: model.getAttributeKeys())
@@ -152,13 +150,14 @@ public abstract class JSONDataModel extends JSONAdapter
 	 * Copies the JSON data to the DataModel's attributs.
 	 * @param model the DataModel to write to
 	 * @param json the parsed JSON data to read
-	 * @throws DataException when there is an error during the JSON conversion
+	 * @throws JSONException when there is an error during the JSON conversion
+	 * @throws DataException when there is an error setting a value in die DataModel
 	 */
-	static void readFromJSON(DataModel model, Object json) throws DataException
+	static void readFromJSON(DataModel model, Object json) throws JSONException, DataException
 	{
 		if (! (json instanceof Map))
 		{
-			throwJSONError("root element is no map");
+			throwJSONToJavaError("root element is no map");
 		}
 		Map<String, Object> jsonMap = (Map<String, Object>) json;
 
@@ -169,29 +168,29 @@ public abstract class JSONDataModel extends JSONAdapter
 		// check null
 		if (identifier == null)
 		{
-			throwJSONError("identifier ["+IDENTIFIER_FIELD+"] is missing");
+			throwJSONToJavaError("identifier ["+IDENTIFIER_FIELD+"] is missing");
 		}
 		if (version == null)
 		{
-			throwJSONError("version ["+VERSION_FIELD+"] is missing");
+			throwJSONToJavaError("version ["+VERSION_FIELD+"] is missing");
 		}
 		if (attributes == null)
 		{
-			throwJSONError("attributes ["+ATTRIBUTE_FIELD+"] are missing");
+			throwJSONToJavaError("attributes ["+ATTRIBUTE_FIELD+"] are missing");
 		}
 
 		// check values
 		if (! IDENTIFIER.equals(identifier))
 		{
-			throwJSONError("wrong identifier ["+IDENTIFIER_FIELD+"]: expected <"+IDENTIFIER+">, but got <"+identifier.toString()+">");
+			throwJSONToJavaError("wrong identifier ["+IDENTIFIER_FIELD+"]: expected <"+IDENTIFIER+">, but got <"+identifier.toString()+">");
 		}
 		if (! VERSION.equals(version))
 		{
-			throwJSONError("wrong version ["+VERSION_FIELD+"]: expected <"+VERSION+">, but got <"+version.toString()+">");
+			throwJSONToJavaError("wrong version ["+VERSION_FIELD+"]: expected <"+VERSION+">, but got <"+version.toString()+">");
 		}
 		if (! (attributes instanceof Map))
 		{
-			throwJSONError("wrong attributes ["+ATTRIBUTE_FIELD+"]: expected a <Map> but got a <"+attributes.getClass().toString()+">");
+			throwJSONToJavaError("wrong attributes ["+ATTRIBUTE_FIELD+"]: expected a <Map> but got a <"+attributes.getClass().toString()+">");
 		}
 
 		Map<String, Object> attributeMap = (Map<String, Object>) attributes;
@@ -206,16 +205,31 @@ public abstract class JSONDataModel extends JSONAdapter
 	}
 
 	/**
-	 * Throws a DataException with {@link DataException.ERROR#JSON_CONVERSION_ERROR}
+	 * Throws a JSONException with {@link JSONException.ERROR#JSON_TO_JAVA}
 	 * and a given error text.
 	 * @param errorText the error text
+	 * @throws JSONException the freshly constructed JSONException
+	 */
+	private static void throwJSONToJavaError(String errorText) throws JSONException
+	{
+		throw new JSONException(
+				JSONException.ERROR.JSON_TO_JAVA,
+				"error during JSON conversion: " + errorText
+				);
+	}
+
+	/**
+	 * Wraps another exception in a DataException.
+	 *
+	 * @param error the DataException error code to use
+	 * @param t the original exception
 	 * @throws DataException the freshly constructed DataException
 	 */
-	private static void throwJSONError(String errorText) throws DataException
+	private static void wrapInDataException(DataException.ERROR error, Throwable t) throws DataException
 	{
 		throw new DataException(
-				DataException.ERROR.JSON_CONVERSION_ERROR,
-				"error during JSON conversion: " + errorText
+				error,
+				t
 				);
 	}
 }

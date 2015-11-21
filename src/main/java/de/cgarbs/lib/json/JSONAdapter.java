@@ -13,7 +13,7 @@ import org.json.simple.JSONAware;
 import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
 
-import de.cgarbs.lib.exception.DataException;
+import de.cgarbs.lib.exception.JSONException;
 import de.cgarbs.lib.json.type.JSONType;
 import de.cgarbs.lib.json.type.JSONTypeFactory;
 
@@ -42,9 +42,9 @@ public abstract class JSONAdapter
 	 *
 	 * @param o the Object to be converted
 	 * @return either the unchanged Object or a wrapped version ready for JSON conversion
-	 * @throws DataException when no conversion exists for the given Object
+	 * @throws JSONException when no conversion exists for the given Object
 	 */
-	protected static Object prepareForJSON(Object o) throws DataException
+	protected static Object prepareForJSON(Object o) throws JSONException
 	{
 		// no wrapping needed
 		if (o instanceof String
@@ -71,9 +71,9 @@ public abstract class JSONAdapter
 	 *
 	 * @param o the Object to be converted
 	 * @return either the unchanged Object or a wrapped Java type
-	 * @throws DataException when no conversion exists for the given Object
+	 * @throws JSONException when no conversion exists for the given Object
 	 */
-	protected static Object prepareForJava(Object o) throws DataException
+	protected static Object prepareForJava(Object o) throws JSONException
 	{
 		// no wrapping needed
 		if (o instanceof String
