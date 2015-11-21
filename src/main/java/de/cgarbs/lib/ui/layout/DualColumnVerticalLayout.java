@@ -25,10 +25,10 @@ public abstract class DualColumnVerticalLayout extends SimpleVerticalLayout
 		@Override
 		public Container build() throws GlueException
 		{
-			JPanel panel = new JPanel();
+			final JPanel panel = new JPanel();
 			panel.setLayout(new GridBagLayout());
 
-			GridBagConstraints gbc_title = new GridBagConstraints();
+			final GridBagConstraints gbc_title = new GridBagConstraints();
 			gbc_title.gridx = 0;
 			gbc_title.gridwidth = 4;
 			gbc_title.gridheight = 1;
@@ -39,13 +39,13 @@ public abstract class DualColumnVerticalLayout extends SimpleVerticalLayout
 			gbc_title.insets = new Insets(0, 32, 0, 0);
 
 			int line = 0;
-			for (Group group: groups)
+			for (final Group group: groups)
 			{
 				gbc_title.gridy = line;
 				panel.add(new JLabel(group.getTitle()), gbc_title);
 				line++;
 				int col = 0;
-				for (Element element: group.getElements())
+				for (final Element element: group.getElements())
 				{
 					element.addToComponent(panel, col, line);
 					col+=2;

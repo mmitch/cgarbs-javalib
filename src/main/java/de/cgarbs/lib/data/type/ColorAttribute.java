@@ -34,7 +34,7 @@ public class ColorAttribute extends DataAttribute
 		return new Builder();
 	}
 
-	private ColorAttribute(Builder builder)
+	private ColorAttribute(final Builder builder)
 	{
 		super(builder);
 	}
@@ -47,13 +47,13 @@ public class ColorAttribute extends DataAttribute
 	}
 
 	@Override
-	protected void setValueInternal(Object newValue) throws DataException
+	protected void setValueInternal(final Object newValue) throws DataException
 	{
 		value = (Color) newValue;
 	}
 
 	@Override
-	protected Object convertType(Object newValue) throws ValidationError
+	protected Object convertType(final Object newValue) throws ValidationError
 	{
 		if (newValue == null)
 		{
@@ -61,7 +61,7 @@ public class ColorAttribute extends DataAttribute
 		}
 		else if (newValue instanceof Color)
 		{
-			Color color = (Color)newValue;
+			final Color color = (Color)newValue;
 			return new Color(
 					color.getRed(),
 					color.getGreen(),

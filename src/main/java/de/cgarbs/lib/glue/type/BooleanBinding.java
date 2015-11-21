@@ -15,7 +15,7 @@ public class BooleanBinding extends Binding
 {
 	protected JCheckBox jCheckBox;
 
-	public BooleanBinding(DataAttribute attribute, Resource resource, String label)
+	public BooleanBinding(final DataAttribute attribute, final Resource resource, final String label)
 	{
 		super(attribute, resource, label);
 	}
@@ -34,11 +34,11 @@ public class BooleanBinding extends Binding
 	}
 
 	@Override
-	public void setViewValue(Object value)
+	public void setViewValue(final Object value)
 	{
 		super.setViewValue(value);
 
-		Boolean b = (Boolean) value;
+		final Boolean b = (Boolean) value;
 		if (b == null)
 		{
 			jCheckBox.setSelected(false);

@@ -29,7 +29,7 @@ public class JSONColor extends JSONType
 	 * Creates a JSONColor object based on the given Color.
 	 * @param color the color to wrap for JSON conversion
 	 */
-	public JSONColor(Color color)
+	public JSONColor(final Color color)
 	{
 		this.color = color;
 	}
@@ -38,7 +38,7 @@ public class JSONColor extends JSONType
 	 * Creates a JSONColor object based on the given decoded JSON Map.
 	 * @param attributesMap the decoded JSON Map
 	 */
-	public JSONColor(Map<String, Object> attributesMap)
+	public JSONColor(final Map<String, Object> attributesMap)
 	{
 		this.color = new Color(
 				TypeConverter.parseAsInt(attributesMap.get("R")),
@@ -51,7 +51,7 @@ public class JSONColor extends JSONType
 	@Override
 	String getJSONAttributes()
 	{
-		Map<String, Integer> data = new LinkedHashMap<String, Integer>();
+		final Map<String, Integer> data = new LinkedHashMap<String, Integer>();
 		data.put("R", color.getRed());
 		data.put("G", color.getGreen());
 		data.put("B", color.getBlue());

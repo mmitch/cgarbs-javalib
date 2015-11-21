@@ -34,18 +34,18 @@ public class JSONException extends LocalizedException
 		ERRORTEXT.put(ERROR.JSON_TO_JAVA, "error converting from JSON notation to Java object");
 	};
 
-	public JSONException(ERROR error, Throwable t)
+	public JSONException(final ERROR error, final Throwable t)
 	{
 		super(error, t.getMessage(), t);
 	}
 
-	public JSONException(ERROR error, String message, Throwable t)
+	public JSONException(final ERROR error, final String message, final Throwable t)
 	{
 		super(message, t);
 		this.error = error;
 	}
 
-	public JSONException(ERROR error, String message)
+	public JSONException(final ERROR error, final String message)
 	{
 		super(message);
 		this.error = error;

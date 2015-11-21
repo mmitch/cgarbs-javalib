@@ -57,7 +57,7 @@ public class FileAttribute extends DataAttribute
 			return this;
 		}
 
-		public Builder addFileFilter(String name, String... extensions)
+		public Builder addFileFilter(final String name, final String... extensions)
 		{
 			this.filefilters.add(
 					new FileNameExtensionFilter(name, extensions)
@@ -68,7 +68,7 @@ public class FileAttribute extends DataAttribute
 		private boolean mustExist = false;
 		private boolean mustRead  = false;
 		private boolean mustWrite = false;
-		private List<FileFilter> filefilters = new ArrayList<FileFilter>();
+		private final List<FileFilter> filefilters = new ArrayList<FileFilter>();
 	}
 
 	public static Builder builder()
@@ -76,7 +76,7 @@ public class FileAttribute extends DataAttribute
 		return new Builder();
 	}
 
-	private FileAttribute(Builder builder)
+	private FileAttribute(final Builder builder)
 	{
 		super(builder);
 		this.mustExist   = builder.mustExist;
@@ -92,18 +92,18 @@ public class FileAttribute extends DataAttribute
 		return value;
 	}
 
-	public void validate(Object value) throws ValidationError
+	public void validate(final Object value) throws ValidationError
 	{
-		File file = (File) convertType(value);
+		final File file = (File) convertType(value);
 
 		super.validate(file);
 
 		if (file != null)
 		{
-			boolean exists   = file.exists();
-			boolean writable = file.canWrite();
-			boolean readable = file.canRead();
-			String name    	 = file.getAbsolutePath();
+			boolean exists    = file.exists();
+			boolean writable  = file.canWrite();
+			boolean readable  = file.canRead();
+			final String name = file.getAbsolutePath();
 
 			if (mustExist && ! exists)
 			{
@@ -155,13 +155,13 @@ public class FileAttribute extends DataAttribute
 	}
 
 	@Override
-	protected void setValueInternal(Object newValue) throws DataException
+	protected void setValueInternal(final Object newValue) throws DataException
 	{
 		value = (File) newValue;
 	}
 
 	@Override
-	protected Object convertType(Object newValue) throws ValidationError
+	protected Object convertType(final Object newValue) throws ValidationError
 	{
 		if (newValue == null)
 		{

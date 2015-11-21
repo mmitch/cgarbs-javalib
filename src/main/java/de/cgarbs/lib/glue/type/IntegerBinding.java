@@ -16,7 +16,7 @@ import de.cgarbs.lib.i18n.Resource;
  */
 public class IntegerBinding extends TextFieldBinding
 {
-	public IntegerBinding(DataAttribute attribute, Resource resource, String label)
+	public IntegerBinding(final DataAttribute attribute, final Resource resource, final String label)
 	{
 		super(attribute, resource, label);
 	}

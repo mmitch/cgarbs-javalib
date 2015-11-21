@@ -25,7 +25,7 @@ public class LookAndFeelChanger
 		WINDOWS,
 	};
 
-	private static Map<LookAndFeel,String> lookAndFeels = new LinkedHashMap<LookAndFeel,String>();
+	private final static Map<LookAndFeel,String> lookAndFeels = new LinkedHashMap<LookAndFeel,String>();
 	static {
 		lookAndFeels.put(LookAndFeel.WINDOWS, 	"com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		lookAndFeels.put(LookAndFeel.NIMBUS, 	"com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -39,7 +39,7 @@ public class LookAndFeelChanger
 	 * @param lf the Look and Feel that should be used
 	 * @return true: success; false: Look and Feel not available or other error
 	 */
-	public static boolean setLookAndFeel(LookAndFeel lf)
+	public static boolean setLookAndFeel(final LookAndFeel lf)
 	{
 		try
 		{
@@ -60,7 +60,7 @@ public class LookAndFeelChanger
 	 */
 	public static void setNiceLookAndFeel()
 	{
-		for (LookAndFeel lf: lookAndFeels.keySet())
+		for (final LookAndFeel lf: lookAndFeels.keySet())
 		{
 			if (setLookAndFeel(lf))
 			{

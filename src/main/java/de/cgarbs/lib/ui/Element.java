@@ -20,11 +20,11 @@ public abstract class Element
 		super();
 	}
 
-	public abstract void addToComponent(JComponent component, int x, int y);
+	public abstract void addToComponent(final JComponent component, int x, int y);
 
 	protected GridBagConstraints pos_label(int x, int y, int w, int h)
 	{
-		GridBagConstraints gbc = new GridBagConstraints();
+		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = x;
 		gbc.gridy = y;
 		gbc.gridwidth = w;
@@ -39,7 +39,7 @@ public abstract class Element
 
 	protected GridBagConstraints pos_value(int x, int y, int w, int h)
 	{
-		GridBagConstraints gbc = new GridBagConstraints();
+		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = x;
 		gbc.gridy = y;
 		gbc.gridwidth = w;

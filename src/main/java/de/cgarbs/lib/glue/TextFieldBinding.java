@@ -15,7 +15,7 @@ public abstract class TextFieldBinding extends Binding
 
 	protected JTextField jTextField;
 
-	public TextFieldBinding(DataAttribute attribute, Resource resource, String label)
+	public TextFieldBinding(final DataAttribute attribute, final Resource resource, final String label)
 	{
 		super(attribute, resource, label);
 	}
@@ -27,11 +27,11 @@ public abstract class TextFieldBinding extends Binding
 	}
 
 	@Override
-	public void setViewValue(Object value)
+	public void setViewValue(final Object value)
 	{
 		super.setViewValue(value);
 
-		String s = (String) value;
+		final String s = (String) value;
 
 		if (s == null)
 		{

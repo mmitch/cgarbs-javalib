@@ -10,15 +10,15 @@ import de.cgarbs.lib.glue.Binding;
 
 public class BindingElement extends Element
 {
-	protected Binding binding;
+	protected final Binding binding;
 
-	public BindingElement(Binding binding)
+	public BindingElement(final Binding binding)
 	{
 		this.binding = binding;
 	}
 
 	@Override
-	public void addToComponent(JComponent component, int x, int y)
+	public void addToComponent(final JComponent component, int x, int y)
 	{
 		component.add(binding.getJLabel(), pos_label(x,   y, 1, 1));
 		component.add(binding.getJData(),  pos_value(x+1, y, 1, 1));

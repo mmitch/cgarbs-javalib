@@ -10,7 +10,7 @@ import de.cgarbs.lib.i18n.Resource;
 
 public class StringBinding extends TextFieldBinding
 {
-	public StringBinding(DataAttribute attribute, Resource resource, String label)
+	public StringBinding(final DataAttribute attribute, final Resource resource, final String label)
 	{
 		super(attribute, resource, label);
 	}

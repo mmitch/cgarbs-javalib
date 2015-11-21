@@ -11,7 +11,7 @@ import de.cgarbs.lib.i18n.Resource;
 
 public class FloatBinding extends TextFieldBinding
 {
-	public FloatBinding(DataAttribute attribute, Resource resource, String label)
+	public FloatBinding(final DataAttribute attribute, final Resource resource, final String label)
 	{
 		super(attribute, resource, label);
 	}

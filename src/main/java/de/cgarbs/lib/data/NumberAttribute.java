@@ -22,12 +22,12 @@ public abstract class NumberAttribute extends DataAttribute
 	// Builder pattern start
 	public abstract static class Builder<N extends Number> extends DataAttribute.Builder<Builder<N>>
 	{
-		public Builder<N> setMinValue(N minValue)
+		public Builder<N> setMinValue(final N minValue)
 		{
 			this.minValue = minValue;
 			return getThis();
 		}
-		public Builder<N> setMaxValue(N maxValue)
+		public Builder<N> setMaxValue(final N maxValue)
 		{
 			this.maxValue = maxValue;
 			return getThis();
@@ -37,7 +37,7 @@ public abstract class NumberAttribute extends DataAttribute
 		private Number maxValue;
 	}
 
-	protected NumberAttribute(Builder<?> builder)
+	protected NumberAttribute(final Builder<?> builder)
 	{
 		super(builder);
 		minValue = builder.minValue;
@@ -46,9 +46,9 @@ public abstract class NumberAttribute extends DataAttribute
 	}
 	// Builder pattern end
 
-	public void validate(Object value) throws ValidationError
+	public void validate(final Object value) throws ValidationError
 	{
-		Number n = (Number) convertType(value);
+		final Number n = (Number) convertType(value);
 
 		super.validate(n);
 
@@ -101,13 +101,13 @@ public abstract class NumberAttribute extends DataAttribute
 	}
 
 	@Override
-	protected void setValueInternal(Object newValue) throws DataException
+	protected void setValueInternal(final Object newValue) throws DataException
 	{
 		value = (Number) newValue;
 	}
 
 	@Override
-	protected Object convertType(Object newValue) throws ValidationError
+	protected Object convertType(final Object newValue) throws ValidationError
 	{
 		try
 		{

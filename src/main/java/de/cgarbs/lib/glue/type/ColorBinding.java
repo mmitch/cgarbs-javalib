@@ -25,7 +25,7 @@ public class ColorBinding extends Binding
 	protected JPanel jPanel;
 	protected JButton jButton;
 
-	public ColorBinding(DataAttribute attribute, Resource resource, String label)
+	public ColorBinding(final DataAttribute attribute, final Resource resource, final String label)
 	{
 		super(attribute, resource, label);
 	}
@@ -47,7 +47,7 @@ public class ColorBinding extends Binding
 		jButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
-				Color newColor = JColorChooser.showDialog(
+				final Color newColor = JColorChooser.showDialog(
 						jButton,
 						R._("TIT_COLORCHOOSER", txtLabel),
 						jPanel.getBackground());
@@ -58,10 +58,10 @@ public class ColorBinding extends Binding
 			}
 		});
 
-		JPanel combiPanel = new JPanel();
+		final JPanel combiPanel = new JPanel();
 		combiPanel.setLayout(new GridBagLayout());
 
-		GridBagConstraints gbc = new GridBagConstraints();
+		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.fill = GridBagConstraints.BOTH;
@@ -83,7 +83,7 @@ public class ColorBinding extends Binding
 	{
 		super.setViewValue(value);
 
-		Color c = (Color) value;
+		final Color c = (Color) value;
 		jPanel.setBackground(c);
 	}
 }

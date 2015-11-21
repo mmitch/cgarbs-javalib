@@ -23,7 +23,7 @@ abstract public class DataAttribute
 	{
 		public abstract DataAttribute build();
 
-		public T setNullable(Boolean nullable)
+		public T setNullable(final Boolean nullable)
 		{
 			this.nullable = nullable;
 			return getThis();
@@ -34,7 +34,7 @@ abstract public class DataAttribute
 		private boolean nullable = true;
 	};
 
-	protected DataAttribute(Builder<?> builder)
+	protected DataAttribute(final Builder<?> builder)
 	{
 		this.nullable = builder.nullable;
 	}
@@ -45,7 +45,7 @@ abstract public class DataAttribute
 		validate(getValue());
 	}
 
-	public void validate(Object value) throws ValidationError // FIXME rename parameter!
+	public void validate(final Object value) throws ValidationError // FIXME rename parameter!
 	{
 		if (! nullable && value == null)
 		{
@@ -72,7 +72,7 @@ abstract public class DataAttribute
 		return key;
 	}
 
-	void setModel(DataModel model)
+	void setModel(final DataModel model)
 	{
 		this.model = model;
 	}
@@ -96,7 +96,7 @@ abstract public class DataAttribute
 		return ! getValue().equals(cleanValue);
 	}
 
-	public final void setValue(Object newValue) throws DataException
+	public final void setValue(final Object newValue) throws DataException
 	{
 		try
 		{

@@ -51,7 +51,7 @@ public class FloatAttribute extends NumberAttribute
 		return new Builder();
 	}
 
-	private FloatAttribute(Builder builder)
+	private FloatAttribute(final Builder builder)
 	{
 		super(builder);
 		minDecimals = builder.minDecimals;

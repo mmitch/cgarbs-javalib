@@ -26,10 +26,10 @@ public abstract class SimpleVerticalLayout extends AutoLayout
 		@Override
 		public Container build() throws GlueException
 		{
-			JPanel panel = new JPanel();
+			final JPanel panel = new JPanel();
 			panel.setLayout(new GridBagLayout());
 
-			GridBagConstraints gbc_title = new GridBagConstraints();
+			final GridBagConstraints gbc_title = new GridBagConstraints();
 			gbc_title.gridx = 0;
 			gbc_title.gridwidth = 2;
 			gbc_title.gridheight = 1;
@@ -40,12 +40,12 @@ public abstract class SimpleVerticalLayout extends AutoLayout
 			gbc_title.insets = new Insets(0, 32, 0, 0);
 
 			int line = 0;
-			for (Group group: groups)
+			for (final Group group: groups)
 			{
 				gbc_title.gridy = line;
 				panel.add(new JLabel(group.getTitle()), gbc_title);
 				line++;
-				for (Element element: group.getElements())
+				for (final Element element: group.getElements())
 				{
 					element.addToComponent(panel, 0, line);
 					line++;

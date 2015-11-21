@@ -34,17 +34,17 @@ public class DataException extends LocalizedException
 		ERRORTEXT.put(ERROR.IO_ERROR, "error during file access");
 	};
 
-	public DataException(ERROR error, String message)
+	public DataException(final ERROR error, final String message)
 	{
 		super(error, message);
 	}
 
-	public DataException(ERROR error, Throwable t)
+	public DataException(final ERROR error, final Throwable t)
 	{
 		super(error, t);
 	}
 
-	public DataException(ERROR error, String message, Throwable t)
+	public DataException(final ERROR error, final String message, final Throwable t)
 	{
 		super(error, message, t);
 	}
@@ -60,7 +60,7 @@ public class DataException extends LocalizedException
 		return (ERROR) error;
 	}
 
-	public DataException prependMessage(String prefix)
+	public DataException prependMessage(final String prefix)
 	{
 		return new DataException(
 				getError(),

@@ -18,7 +18,7 @@ public class ProgressBarBinding extends Binding
 
 //	protected final static Border border = BorderFactory.createEmptyBorder(2, 2, 2, 2);
 
-	public ProgressBarBinding(DataAttribute attribute, Resource resource, String label)
+	public ProgressBarBinding(final DataAttribute attribute, final Resource resource, final String label)
 	{
 		super(attribute, resource, label);
 	}
@@ -32,7 +32,7 @@ public class ProgressBarBinding extends Binding
 	@Override
 	protected JComponent createDataEntryComponent()
 	{
-		NumberAttribute i = (NumberAttribute)attribute;
+		final NumberAttribute i = (NumberAttribute)attribute;
 		jProgressBar = new JProgressBar();
 		jProgressBar.setMinimum(i.getMinValue().intValue());
 		jProgressBar.setMaximum(i.getMaxValue().intValue());
@@ -40,11 +40,11 @@ public class ProgressBarBinding extends Binding
 	}
 
 	@Override
-	public void setViewValue(Object value)
+	public void setViewValue(final Object value)
 	{
 		super.setViewValue(value);
 
-		Number i = (Number) value;
+		final Number i = (Number) value;
 
 		if (i != null)
 		{

@@ -23,12 +23,12 @@ public class GlueException extends LocalizedException
 		ERRORTEXT.put(ERROR.BINDING_NOT_IMPLEMENTED, "binding not implemented");
 	};
 
-	public GlueException(ERROR error, String message)
+	public GlueException(final ERROR error, final String message)
 	{
 		super(error, message);
 	}
 
-	public GlueException(ERROR error, String message, Throwable t)
+	public GlueException(final ERROR error, final String message, final Throwable t)
 	{
 		super(error, message, t);
 	}
@@ -44,7 +44,7 @@ public class GlueException extends LocalizedException
 		return (ERROR) error;
 	}
 
-	public GlueException prependMessage(String prefix)
+	public GlueException prependMessage(final String prefix)
 	{
 		return new GlueException(
 				getError(),

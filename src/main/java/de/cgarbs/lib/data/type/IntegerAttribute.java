@@ -35,7 +35,7 @@ public class IntegerAttribute extends NumberAttribute
 		return new Builder();
 	}
 
-	protected IntegerAttribute(Builder builder)
+	protected IntegerAttribute(final Builder builder)
 	{
 		super(builder);
 		numberFormat = NumberFormat.getIntegerInstance();

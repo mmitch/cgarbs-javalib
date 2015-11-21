@@ -44,7 +44,7 @@ public abstract class JSONAdapter
 	 * @return either the unchanged Object or a wrapped version ready for JSON conversion
 	 * @throws JSONException when no conversion exists for the given Object
 	 */
-	protected static Object prepareForJSON(Object o) throws JSONException
+	protected static Object prepareForJSON(final Object o) throws JSONException
 	{
 		// no wrapping needed
 		if (o instanceof String
@@ -73,7 +73,7 @@ public abstract class JSONAdapter
 	 * @return either the unchanged Object or a wrapped Java type
 	 * @throws JSONException when no conversion exists for the given Object
 	 */
-	protected static Object prepareForJava(Object o) throws JSONException
+	protected static Object prepareForJava(final Object o) throws JSONException
 	{
 		// no wrapping needed
 		if (o instanceof String

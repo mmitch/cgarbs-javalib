@@ -26,7 +26,7 @@ public abstract class JSONTypeFactory
 	 * @return the Object wrapped in a {@link JSONType}
 	 * @throws JSONException when no conversion exists for the given Object
 	 */
-	public static JSONType wrapJavaObject(Object o) throws JSONException
+	public static JSONType wrapJavaObject(final Object o) throws JSONException
 	{
 		if (o instanceof Color)
 		{
@@ -47,17 +47,17 @@ public abstract class JSONTypeFactory
 	 * @return the JSON object wrapped as a {@link JSONType}
 	 * @throws JSONException when no conversion exists for the given Object
 	 */
-	public static Object unwrapJSONObject(Object map) throws JSONException
+	public static Object unwrapJSONObject(final Object map) throws JSONException
 	{
 		if (! (map instanceof Map))
 		{
 			throw newJSONToJavaError("root element is no map");
 		}
-		Map<String, Object> jsonMap = (Map<String, Object>) map;
+		final Map<String, Object> jsonMap = (Map<String, Object>) map;
 
-		Object identifier = jsonMap.get(JSONType.CLASS_FIELD);
-		Object version    = jsonMap.get(JSONType.VERSION_FIELD);
-		Object attributes = jsonMap.get(JSONType.ATTRIBUTE_FIELD);
+		final Object identifier = jsonMap.get(JSONType.CLASS_FIELD);
+		final Object version    = jsonMap.get(JSONType.VERSION_FIELD);
+		final Object attributes = jsonMap.get(JSONType.ATTRIBUTE_FIELD);
 
 		// check null
 		if (identifier == null)
@@ -77,7 +77,7 @@ public abstract class JSONTypeFactory
 			throw newJSONToJavaError("wrong attributes ["+JSONType.ATTRIBUTE_FIELD+"] for "+identifier+"#"+version+": expected a <Map> but got a <"+attributes.getClass().toString()+">");
 		}
 
-		Map<String, Object> attributesMap = (Map<String, Object>) attributes;
+		final Map<String, Object> attributesMap = (Map<String, Object>) attributes;
 
 		// ignore version for now
 		if (JSONColor.CLASS_NAME.equals(identifier))
@@ -95,7 +95,7 @@ public abstract class JSONTypeFactory
 	 * @param errorText the error text
 	 * @return the freshly constructed JSONException
 	 */
-	private static JSONException newJSONToJavaError(String errorText)
+	private static JSONException newJSONToJavaError(final String errorText)
 	{
 		return new JSONException(
 				JSONException.ERROR.JSON_TO_JAVA,

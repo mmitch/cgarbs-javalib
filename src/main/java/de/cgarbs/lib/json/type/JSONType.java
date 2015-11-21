@@ -27,7 +27,7 @@ public abstract class JSONType implements JSONAware
 	@Override
 	public String toJSONString()
 	{
-		Map<String, String> json = new LinkedHashMap<String, String>();
+		final Map<String, String> json = new LinkedHashMap<String, String>();
 		json.put(CLASS_FIELD, getJSONClassName());
 		json.put(VERSION_FIELD, getJSONClassVersion());
 		json.put(ATTRIBUTE_FIELD, getJSONAttributes());

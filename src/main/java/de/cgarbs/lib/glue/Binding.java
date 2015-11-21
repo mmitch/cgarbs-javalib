@@ -27,9 +27,9 @@ abstract public class Binding
 	protected String     txtLabel;
 
 	private Set<Binding> listeningBindings = new HashSet<Binding>(); // FIXME or List? -> check!
-	private Color originalColor;
+	private final Color originalColor;
 
-	protected static Resource R = new Resource(Binding.class);
+	protected final static Resource R = new Resource(Binding.class);
 
 	public abstract Object getViewValue();
 
@@ -43,7 +43,7 @@ abstract public class Binding
 		return jData;
 	}
 
-	public Binding(DataAttribute attribute, Resource resource, String label)
+	public Binding(final DataAttribute attribute, final Resource resource, final String label)
 	{
 		this.attribute = attribute;
 		if (label == null)
@@ -64,19 +64,19 @@ abstract public class Binding
 	abstract protected JComponent createDataEntryComponent(); // FIXME NAME cdec <-> JData
 
 
-	private JLabel createJLabel(String label)
+	private JLabel createJLabel(final String label)
 	{
 		return new JLabel(label);
 	}
 
-	public void addListeningBinding(Binding binding)
+	public void addListeningBinding(final Binding binding)
 	{
 		listeningBindings.add(binding);
 	}
 
-	public void setViewValue(Object newValue)
+	public void setViewValue(final Object newValue)
 	{
-		for (Binding listeningBinding: listeningBindings)
+		for (final Binding listeningBinding: listeningBindings)
 		{
 			listeningBinding.setViewValue(newValue);
 		}
@@ -92,7 +92,7 @@ abstract public class Binding
 		attribute.setValue(getViewValue());
 	}
 
-	protected void setValidationError(String text)
+	protected void setValidationError(final String text)
 	{
 		jData.setToolTipText(text);
 		if (text == null)

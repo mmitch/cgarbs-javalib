@@ -22,7 +22,7 @@ abstract public class DataModel
 
 	private final Resource resource;
 
-	public DataModel(Resource resource)
+	public DataModel(final Resource resource)
 	{
 		this.resource = resource;
 	}
@@ -43,7 +43,7 @@ abstract public class DataModel
 		return this.resource;
 	}
 
-	public void addAttribute(String key, DataAttribute attribute) throws DataException
+	public void addAttribute(final String key, final DataAttribute attribute) throws DataException
 	{
 		if (attributes.containsKey(key))
 		{
@@ -65,7 +65,7 @@ abstract public class DataModel
 		attributes.put(key, attribute);
 	}
 
-	public void setValue(String key, Object value) throws DataException
+	public void setValue(final String key, final Object value) throws DataException
 	{
 		checkForAttribute(key);
 		try
@@ -81,18 +81,18 @@ abstract public class DataModel
 	/**
 	 * FIXME return Object -> not type safe!
 	 */
-	public Object getValue(String key) throws DataException
+	public Object getValue(final String key) throws DataException
 	{
 		return getAttribute(key).getValue();
 	}
 
-	public DataAttribute getAttribute(String key) throws DataException
+	public DataAttribute getAttribute(final String key) throws DataException
 	{
 		checkForAttribute(key);
 		return attributes.get(key);
 	}
 
-	private void checkForAttribute(String key) throws DataException
+	private void checkForAttribute(final String key) throws DataException
 	{
 		if (!attributes.containsKey(key))
 		{
@@ -116,19 +116,19 @@ abstract public class DataModel
 	 * @param file the file to write to
 	 * @throws DataException either IO errors or errors during the JSON conversion
 	 */
-	public void writeToFile(File file) throws DataException
+	public void writeToFile(final File file) throws DataException
 	{
 		JSONDataModel.writeToFile(this, file);
 	}
 
-	public void readFromFile(File file) throws DataException
+	public void readFromFile(final File file) throws DataException
 	{
 		JSONDataModel.readFromFile(this, file);
 	}
 
 	public void validate() throws ValidationErrorList // FIXME: unneeded? remove?
 	{
-		ValidationErrorList ex = new ValidationErrorList();
+		final ValidationErrorList ex = new ValidationErrorList();
 		for (DataAttribute attribute: attributes.values())
 		{
 			try
@@ -171,7 +171,7 @@ abstract public class DataModel
 	// in view is more flexible - but is it worth the extra effort?
 	public void resetDirty()
 	{
-		for (DataAttribute a: attributes.values())
+		for (final DataAttribute a: attributes.values())
 		{
 			a.resetDirty();
 		}
@@ -179,7 +179,7 @@ abstract public class DataModel
 
 	public boolean isDirty()
 	{
-		for (DataAttribute a: attributes.values())
+		for (final DataAttribute a: attributes.values())
 		{
 			if (a.isDirty())
 			{

@@ -29,13 +29,13 @@ public class StringAttribute extends DataAttribute
 			return this;
 		}
 
-		public Builder setMinLength(Integer minLength)
+		public Builder setMinLength(final Integer minLength)
 		{
 			this.minLength = minLength;
 			return this;
 		}
 
-		public Builder setMaxLength(Integer maxLength)
+		public Builder setMaxLength(final Integer maxLength)
 		{
 			this.maxLength = maxLength;
 			return this;
@@ -50,7 +50,7 @@ public class StringAttribute extends DataAttribute
 		return new Builder();
 	}
 
-	private StringAttribute(Builder builder)
+	private StringAttribute(final Builder builder)
 	{
 		super(builder);
 		minLength = builder.minLength;
@@ -64,9 +64,9 @@ public class StringAttribute extends DataAttribute
 		return value;
 	}
 
-	public void validate(Object value) throws ValidationError
+	public void validate(final Object value) throws ValidationError
 	{
-		String s = (String) convertType(value);
+		final String s = (String) convertType(value);
 
 		super.validate(s);
 
@@ -97,13 +97,13 @@ public class StringAttribute extends DataAttribute
 	}
 
 	@Override
-	protected void setValueInternal(Object newValue) throws DataException
+	protected void setValueInternal(final Object newValue) throws DataException
 	{
 		value = (String) newValue;
 	}
 
 	@Override
-	protected Object convertType(Object newValue) throws ValidationError
+	protected Object convertType(final Object newValue) throws ValidationError
 	{
 		if (newValue == null)
 		{

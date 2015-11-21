@@ -26,12 +26,12 @@ public class Resource
 		this(Resource.class);
 	}
 
-	public Resource(Class<?> c)
+	public Resource(final Class<?> c)
 	{
 		this(c.getName());
 	}
 
-	public Resource(String baseName)
+	public Resource(final String baseName)
 	{
 		rb = ResourceBundle.getBundle(baseName);
 	}
@@ -64,8 +64,8 @@ public class Resource
 			text = key;
 		}
 
-		StringBuffer sb = new StringBuffer();
-		Matcher matcher = pattern.matcher(text);
+		final StringBuffer sb = new StringBuffer();
+		final Matcher matcher = pattern.matcher(text);
 		while (matcher.find())
 		{
 			String repl;

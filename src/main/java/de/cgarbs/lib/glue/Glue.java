@@ -32,23 +32,23 @@ import de.cgarbs.lib.ui.AutoLayout;
 
 public class Glue<T extends DataModel>
 {
-	List<Binding> bindings = new ArrayList<Binding>();
-	T model;
+	final List<Binding> bindings = new ArrayList<Binding>();
+	final T model;
 
-	public Glue(T model)
+	public Glue(final T model)
 	{
 		this.model = model;
 	}
 
-	public Binding addBinding(String key) throws GlueException, DataException
+	public Binding addBinding(final String key) throws GlueException, DataException
 	{
 		return addBinding(key, (String)null);
 	}
 
-	public Binding addBinding(String key, String label) throws GlueException, DataException
+	public Binding addBinding(final String key, final String label) throws GlueException, DataException
 	{
 		// FIXME catch duplicate bindings (same key)
-		DataAttribute attribute = model.getAttribute(key);
+		final DataAttribute attribute = model.getAttribute(key);
 		if (attribute instanceof StringAttribute)
 		{
 			return addBinding(key, StringBinding.class, label);
@@ -83,18 +83,18 @@ public class Glue<T extends DataModel>
 	}
 
 	// FIXME restrict clazz to subtype of Binding?
-	public Binding addBinding(String key, Class<? extends Binding> clazz) throws GlueException, DataException
+	public Binding addBinding(final String key, final Class<? extends Binding> clazz) throws GlueException, DataException
 	{
 		return addBinding(key, clazz, null);
 	}
 
 	// FIXME restrict clazz to subtype of Binding?
-	public Binding addBinding(String key, Class<? extends Binding> clazz, String label) throws GlueException, DataException
+	public Binding addBinding(final String key, final Class<? extends Binding> clazz, final String label) throws GlueException, DataException
 	{
 		// FIXME catch duplicate bindings (same key)
-		Binding binding;
-		DataAttribute attribute = model.getAttribute(key);
-		Resource resource = model.getResource();
+		final Binding binding;
+		final DataAttribute attribute = model.getAttribute(key);
+		final Resource resource = model.getResource();
 		// FIXME catch incompatible attribute classes!
 		if (StringBinding.class.equals(clazz))
 		{
@@ -141,7 +141,7 @@ public class Glue<T extends DataModel>
 
 	public void syncToView()
 	{
-		for (Binding binding: bindings)
+		for (final Binding binding: bindings)
 		{
 			binding.syncToView();
 		}
@@ -149,7 +149,7 @@ public class Glue<T extends DataModel>
 
 	public void syncToModel() throws DataException
 	{
-		for (Binding binding: bindings)
+		for (final Binding binding: bindings)
 		{
 			binding.syncToModel();
 		}
@@ -169,8 +169,8 @@ public class Glue<T extends DataModel>
 		// only scroll to first error
 		boolean scrolled = false;
 
-		ValidationErrorList ex = new ValidationErrorList();
-		for (Binding binding: bindings)
+		final ValidationErrorList ex = new ValidationErrorList();
+		for (final Binding binding: bindings)
 		{
 			try
 			{
@@ -203,9 +203,9 @@ public class Glue<T extends DataModel>
 		}
 	}
 
-	public Binding addListener(Binding base_binding, Class<? extends Binding> clazz, String label) throws GlueException, DataException
+	public Binding addListener(final Binding base_binding, final Class<? extends Binding> clazz, final String label) throws GlueException, DataException
 	{
-		Binding new_binding = addBinding(base_binding.attribute.getKey(), clazz, label);
+		final Binding new_binding = addBinding(base_binding.attribute.getKey(), clazz, label);
 		base_binding.addListeningBinding(new_binding);
 		return new_binding;
 	}

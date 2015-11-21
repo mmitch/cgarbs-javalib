@@ -28,7 +28,7 @@ public class FileBinding extends Binding
 	protected JTextField jTextField;
 	protected File file;
 
-	public FileBinding(DataAttribute attribute, Resource resource, String label)
+	public FileBinding(final DataAttribute attribute, final Resource resource, final String label)
 	{
 		super(attribute, resource, label);
 	}
@@ -45,7 +45,7 @@ public class FileBinding extends Binding
 		jButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
-				JFileChooser fc = new JFileChooser();
+				final JFileChooser fc = new JFileChooser();
 				boolean first = true;
 				for (FileFilter fileFilter: ((FileAttribute)attribute).getFileFilters())
 				{
@@ -71,10 +71,10 @@ public class FileBinding extends Binding
 			}
 		});
 
-		JPanel combiPanel = new JPanel();
+		final JPanel combiPanel = new JPanel();
 		combiPanel.setLayout(new GridBagLayout());
 
-		GridBagConstraints gbc = new GridBagConstraints();
+		final GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -118,7 +118,7 @@ public class FileBinding extends Binding
 	@Override
 	public Object getViewValue()
 	{
-		String value = jTextField.getText();
+		final String value = jTextField.getText();
 		if (value == null || value.length() == 0)
 		{
 			return null;

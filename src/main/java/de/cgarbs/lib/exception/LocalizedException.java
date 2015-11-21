@@ -35,40 +35,40 @@ public abstract class LocalizedException extends Exception
 
 	protected String localizedMessage = null;
 
-	protected LocalizedException(ERRORIF error, Throwable t)
+	protected LocalizedException(final ERRORIF error, final Throwable t)
 	{
 		this(error, t.getMessage(), t);
 	}
 
-	protected LocalizedException(ERRORIF error, String message, Throwable t)
+	protected LocalizedException(final ERRORIF error, final String message, final Throwable t)
 	{
 		this(message, t);
 		this.error = error;
 	}
 
-	protected LocalizedException(ERRORIF error, String message)
+	protected LocalizedException(final ERRORIF error, final String message)
 	{
 		this(message);
 		this.error = error;
 	}
 
-	protected LocalizedException(String message)
+	protected LocalizedException(final String message)
 	{
 		this(message, message);
 	}
 
-	protected LocalizedException(String message, String localizedMessage)
+	protected LocalizedException(final String message, final String localizedMessage)
 	{
 		super(message);
 		this.localizedMessage = localizedMessage;
 	}
 
-	protected LocalizedException(String message, Throwable t)
+	protected LocalizedException(final String message, final Throwable t)
 	{
 		this(message, message, t);
 	}
 
-	protected LocalizedException(String message, String localizedMessage, Throwable t)
+	protected LocalizedException(final String message, final String localizedMessage, final Throwable t)
 	{
 		super(message, t);
 		this.localizedMessage = localizedMessage;
@@ -77,12 +77,12 @@ public abstract class LocalizedException extends Exception
 	@Override
 	public String getMessage()
 	{
-		String message = ERRORTEXT.get(error);
+		final StringBuilder message = new StringBuilder(ERRORTEXT.get(error));
 		if (super.getMessage() != null)
 		{
-			message += "::" + super.getMessage();
+			message.append("::").append(super.getMessage());
 		}
-		return message;
+		return message.toString();
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public abstract class TypeConverter
 	 * @return the parsed Number
 	 * @throws ParseException when a String can't be parsed
 	 */
-	public static Number parseNumber(Object value) throws ParseException
+	public static Number parseNumber(final Object value) throws ParseException
 	{
 		if (value == null)
 		{
@@ -34,7 +34,7 @@ public abstract class TypeConverter
 		}
 		else
 		{
-			String s = String.valueOf(value);
+			final String s = String.valueOf(value);
 			if (s.length() == 0)
 			{
 				return null;
@@ -51,11 +51,11 @@ public abstract class TypeConverter
 	 * @param value the value to parse
 	 * @return the Integer or <code>null</code> if the conversion fails
 	 */
-	public static Integer parseAsInteger(Object value)
+	public static Integer parseAsInteger(final Object value)
 	{
 		try
 		{
-			Number n = TypeConverter.parseNumber(value);
+			final Number n = TypeConverter.parseNumber(value);
 			if (n == null)
 			{
 				return null;
@@ -73,9 +73,9 @@ public abstract class TypeConverter
 	 * @param value the value to parse
 	 * @return the int value or 0 if the conversion fails or a null value is given
 	 */
-	public static int parseAsInt(Object value)
+	public static int parseAsInt(final Object value)
 	{
-		Integer i = parseAsInteger(value);
+		final Integer i = parseAsInteger(value);
 		if (i == null)
 		{
 			return 0;

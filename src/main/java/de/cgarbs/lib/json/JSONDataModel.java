@@ -44,7 +44,7 @@ public abstract class JSONDataModel extends JSONAdapter
 	 * @param file the File to be written to
 	 * @throws DataException either IO errors or errors during the JSON conversion
 	 */
-	public static void writeToFile(DataModel model, File file) throws DataException
+	public static void writeToFile(final DataModel model, final File file) throws DataException
 	{
 		PrintWriter out = null;
 		try
@@ -87,12 +87,12 @@ public abstract class JSONDataModel extends JSONAdapter
 	 * @param file the File containing the JSON data to be read
 	 * @throws DataException either IO errors or errors during the JSON conversion
 	 */
-	public static void readFromFile(DataModel model, File file) throws DataException
+	public static void readFromFile(final DataModel model, final File file) throws DataException
 	{
 		StringBuilder json = new StringBuilder();
 		try
 		{
-			for(Scanner sc = new Scanner(file); sc.hasNext(); )
+			for(final Scanner sc = new Scanner(file); sc.hasNext(); )
 			{
 				json.append(sc.nextLine());
 			}
@@ -130,15 +130,15 @@ public abstract class JSONDataModel extends JSONAdapter
 	 * @throws JSONException when there is an error during the JSON conversion
 	 * @throws DataException when there is an error during value retrieval from the DataModel
 	 */
-	static String convertToJSON(DataModel model) throws JSONException, DataException
+	static String convertToJSON(final DataModel model) throws JSONException, DataException
 	{
-		Map<String, Object> attributes = new LinkedHashMap<String, Object>();
-		for (String key: model.getAttributeKeys())
+		final Map<String, Object> attributes = new LinkedHashMap<String, Object>();
+		for (final String key: model.getAttributeKeys())
 		{
 			attributes.put(key, prepareForJSON(model.getValue(key)));
 		}
 
-		Map<String, Object> json = new LinkedHashMap<String, Object>();
+		final Map<String, Object> json = new LinkedHashMap<String, Object>();
 		json.put(IDENTIFIER_FIELD, IDENTIFIER);
 		json.put(VERSION_FIELD, VERSION);
 		json.put(ATTRIBUTE_FIELD, attributes);
@@ -153,17 +153,17 @@ public abstract class JSONDataModel extends JSONAdapter
 	 * @throws JSONException when there is an error during the JSON conversion
 	 * @throws DataException when there is an error setting a value in die DataModel
 	 */
-	static void readFromJSON(DataModel model, Object json) throws JSONException, DataException
+	static void readFromJSON(final DataModel model, final Object json) throws JSONException, DataException
 	{
 		if (! (json instanceof Map))
 		{
 			throw newJSONToJavaError("root element is no map");
 		}
-		Map<String, Object> jsonMap = (Map<String, Object>) json;
+		final Map<String, Object> jsonMap = (Map<String, Object>) json;
 
-		Object identifier = jsonMap.get(IDENTIFIER_FIELD);
-		Object version    = jsonMap.get(VERSION_FIELD);
-		Object attributes = jsonMap.get(ATTRIBUTE_FIELD);
+		final Object identifier = jsonMap.get(IDENTIFIER_FIELD);
+		final Object version    = jsonMap.get(VERSION_FIELD);
+		final Object attributes = jsonMap.get(ATTRIBUTE_FIELD);
 
 		// check null
 		if (identifier == null)
@@ -193,9 +193,9 @@ public abstract class JSONDataModel extends JSONAdapter
 			throw newJSONToJavaError("wrong attributes ["+ATTRIBUTE_FIELD+"]: expected a <Map> but got a <"+attributes.getClass().toString()+">");
 		}
 
-		Map<String, Object> attributeMap = (Map<String, Object>) attributes;
-		Set<String> validAttributes = model.getAttributeKeys();
-		for (String key: attributeMap.keySet())
+		final Map<String, Object> attributeMap = (Map<String, Object>) attributes;
+		final Set<String> validAttributes = model.getAttributeKeys();
+		for (final String key: attributeMap.keySet())
 		{
 			if (validAttributes.contains(key))
 			{
@@ -210,7 +210,7 @@ public abstract class JSONDataModel extends JSONAdapter
 	 * @param errorText the error text
 	 * @return the freshly constructed JSONException
 	 */
-	private static JSONException newJSONToJavaError(String errorText)
+	private static JSONException newJSONToJavaError(final String errorText)
 	{
 		return new JSONException(
 				JSONException.ERROR.JSON_TO_JAVA,
@@ -225,7 +225,7 @@ public abstract class JSONDataModel extends JSONAdapter
 	 * @param t the original exception
 	 * @return the freshly constructed DataException
 	 */
-	private static DataException wrappedAsDataException(DataException.ERROR error, Throwable t)
+	private static DataException wrappedAsDataException(final DataException.ERROR error, final Throwable t)
 	{
 		return new DataException(
 				error,

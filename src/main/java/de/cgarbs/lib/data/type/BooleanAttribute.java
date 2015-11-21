@@ -27,7 +27,7 @@ public class BooleanAttribute extends DataAttribute
 		}
 	}
 
-	private BooleanAttribute(Builder builder)
+	private BooleanAttribute(final Builder builder)
 	{
 		super(builder);
 	}
@@ -45,13 +45,13 @@ public class BooleanAttribute extends DataAttribute
 	}
 
 	@Override
-	protected void setValueInternal(Object newValue) throws DataException
+	protected void setValueInternal(final Object newValue) throws DataException
 	{
 		value = (Boolean) newValue;
 	}
 
 	@Override
-	protected Object convertType(Object newValue) throws ValidationError
+	protected Object convertType(final Object newValue) throws ValidationError
 	{
 		if (newValue == null)
 		{

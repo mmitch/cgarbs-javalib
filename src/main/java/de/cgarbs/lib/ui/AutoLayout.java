@@ -24,21 +24,21 @@ abstract public class AutoLayout
 	// Builder pattern start
 	public abstract static class Builder<T extends Builder<?>>
 	{
-		protected List<Group> groups = new ArrayList<Group>();
+		protected final List<Group> groups = new ArrayList<Group>();
 
-		public Builder<T> addAttribute(Binding binding)
+		public Builder<T> addAttribute(final Binding binding)
 		{
 			getCurrentGroup().addBinding(binding);
 			return this;
 		}
 
-		public Builder<T> addComponent(JComponent component)
+		public Builder<T> addComponent(final JComponent component)
 		{
 			getCurrentGroup().addComponent(component);
 			return this;
 		}
 
-		public Builder<T> startNextGroup(String label)
+		public Builder<T> startNextGroup(final String label)
 		{
 			groups.add(new Group(label));
 			return this;
@@ -53,7 +53,7 @@ abstract public class AutoLayout
 			return groups.get(groups.size() - 1);
 		}
 
-		protected Container wrapInScrollPane(JComponent component)
+		protected Container wrapInScrollPane(final JComponent component)
 		{
 			final JScrollPane scrollPane = new JScrollPane(component);
 
@@ -62,8 +62,8 @@ abstract public class AutoLayout
 			{
 				public void run()
 				{
-					JScrollBar v = scrollPane.getVerticalScrollBar();
-					JScrollBar h = scrollPane.getHorizontalScrollBar();
+					final JScrollBar v = scrollPane.getVerticalScrollBar();
+					final JScrollBar h = scrollPane.getHorizontalScrollBar();
 					v.setValue(v.getMinimum());
 					h.setValue(h.getMinimum());
 				}
@@ -84,7 +84,7 @@ abstract public class AutoLayout
 	 *
 	 * @param component the component to show
 	 */
-	public static void showComponent(JComponent component)
+	public static void showComponent(final JComponent component)
 	{
 		// FIXME move over to Binding class?
 
@@ -96,7 +96,7 @@ abstract public class AutoLayout
 		{
 			if (c instanceof JTabbedPane)
 			{
-				JTabbedPane tp = (JTabbedPane) c;
+				final JTabbedPane tp = (JTabbedPane) c;
 				int tabCounts = tp.getTabCount();
 				for (int tab = 0; tab < tabCounts; tab++)
 				{

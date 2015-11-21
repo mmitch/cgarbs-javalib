@@ -44,21 +44,21 @@ public class ValidationError extends LocalizedException
 
 	protected DataAttribute attribute;
 
-	public ValidationError(DataAttribute attribute, String message, ERROR error, String... params)
+	public ValidationError(final DataAttribute attribute, final String message, final ERROR error, final String... params)
 	{
 		super(message, R._(ERRORTEXT.get(error), params));
 		this.attribute = attribute;
 		this.error = error;
 	}
 
-	public ValidationError(DataAttribute attribute, String message, String localizedMessage)
+	public ValidationError(final DataAttribute attribute, final String message, final String localizedMessage)
 	{
 		super(message, localizedMessage);
 		this.attribute = attribute;
 		// FIXME: set an ERROR value!
 	}
 
-	public ValidationError(DataAttribute attribute, DataException e)
+	public ValidationError(final DataAttribute attribute, final DataException e)
 	{
 		this(attribute, e.getMessageOnly(), e.getLocalizedMessage());
 	}

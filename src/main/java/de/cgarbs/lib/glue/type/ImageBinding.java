@@ -26,7 +26,7 @@ public class ImageBinding extends Binding
 
 	protected final static Border border = BorderFactory.createEmptyBorder(2, 2, 2, 2);
 
-	public ImageBinding(DataAttribute attribute, Resource resource, String label)
+	public ImageBinding(final DataAttribute attribute, final Resource resource, final String label)
 	{
 		super(attribute, resource, label);
 	}
@@ -60,7 +60,7 @@ public class ImageBinding extends Binding
 		{
 			try
 			{
-				BufferedImage img = ImageIO.read(file);
+				final BufferedImage img = ImageIO.read(file);
 				if (img == null)
 				{
 					jLabel.setIcon(null);

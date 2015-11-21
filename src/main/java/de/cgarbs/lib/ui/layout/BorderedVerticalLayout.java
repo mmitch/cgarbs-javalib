@@ -26,24 +26,24 @@ public abstract class BorderedVerticalLayout extends AutoLayout
 		@Override
 		public Container build() throws GlueException
 		{
-			JPanel panel = new JPanel();
+			final JPanel panel = new JPanel();
 			panel.setLayout(new GridBagLayout());
-			GridBagConstraints gbc = new GridBagConstraints();
+			final GridBagConstraints gbc = new GridBagConstraints();
 			gbc.fill = GridBagConstraints.BOTH;
 			gbc.gridx = 0;
 			gbc.gridy = 0;
 			gbc.weightx = 1;
 			gbc.weighty = 1;
 
-			for (Group group: groups)
+			for (final Group group: groups)
 			{
-				JPanel groupPanel = new JPanel();
+				final JPanel groupPanel = new JPanel();
 				groupPanel.setLayout(new GridBagLayout());
-				Border newBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), group.getTitle());
+				final Border newBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), group.getTitle());
 				groupPanel.setBorder(newBorder);
 				int line = 0;
 
-				for (Element element : group.getElements())
+				for (final Element element : group.getElements())
 				{
 					element.addToComponent(groupPanel, 0, line);
 					line++;

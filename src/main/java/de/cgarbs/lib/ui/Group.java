@@ -13,20 +13,20 @@ import de.cgarbs.lib.glue.Binding;
 
 public class Group
 {
-	private List<Element> elements = new ArrayList<Element>();
-	private String title;
+	private final List<Element> elements = new ArrayList<Element>();
+	private final String title;
 
-	public Group(String title)
+	public Group(final String title)
 	{
 		this.title = title;
 	}
 
-	public void addBinding(Binding binding)
+	public void addBinding(final Binding binding)
 	{
 		elements.add(new BindingElement(binding));
 	}
 
-	public void addComponent(JComponent component)
+	public void addComponent(final JComponent component)
 	{
 		elements.add(new JComponentElement(component));
 	}

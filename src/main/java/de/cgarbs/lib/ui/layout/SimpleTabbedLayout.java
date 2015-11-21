@@ -27,22 +27,22 @@ public abstract class SimpleTabbedLayout extends AutoLayout
 		@Override
 		public Container build() throws GlueException
 		{
-			JTabbedPane component = new JTabbedPane();
+			final JTabbedPane component = new JTabbedPane();
 
-			for (Group group: groups)
+			for (final Group group: groups)
 			{
-				JPanel tab = new JPanel();
+				final JPanel tab = new JPanel();
 				tab.setLayout(new GridBagLayout());
 				int line = 0;
 
-				for (Element element: group.getElements())
+				for (final Element element: group.getElements())
 				{
 					element.addToComponent(tab,  0,  line);
 					line++;
 				}
 
-				Component remainder = Box.createGlue();
-				GridBagConstraints gbc = new GridBagConstraints();
+				final Component remainder = Box.createGlue();
+				final GridBagConstraints gbc = new GridBagConstraints();
 				gbc.gridx = 0;
 				gbc.gridy = line;
 				gbc.gridwidth = 2;
