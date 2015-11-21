@@ -2,7 +2,7 @@
  * Copyright 2015 (C)  Christian Garbs <mitch@cgarbs.de>
  * Licensed under GNU GPL 3 (or later)
  */
-package de.cgarbs.lib.ui.layout;
+package de.cgarbs.lib.ui;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -20,27 +20,26 @@ import de.cgarbs.lib.exception.GlueException;
 import de.cgarbs.lib.glue.Binding;
 import de.cgarbs.lib.glue.Glue;
 import de.cgarbs.lib.i18n.Resource;
-import de.cgarbs.lib.ui.UiTestDataModel;
 
-public abstract class BaseLayoutTest
+public abstract class UiTestBase
 {
-	final static int GROUP_COUNT = 3;
-	final static String GROUP_1 = "Group 1";
-	final static String GROUP_2 = "Group 2";
-	final static String GROUP_3 = "Group 3";
+	protected final static int GROUP_COUNT = 3;
+	protected final static String GROUP_1 = "Group 1";
+	protected final static String GROUP_2 = "Group 2";
+	protected final static String GROUP_3 = "Group 3";
 
-	final static int BINDING_COUNT = 6;
+	protected final static int BINDING_COUNT = 6;
 
-	Container container;
+	protected Container container;
 
-	Binding binding1;
-	Binding binding2;
-	Binding binding3;
-	Binding binding4;
-	Binding binding5;
-	Binding binding6;
+	protected Binding binding1;
+	protected Binding binding2;
+	protected Binding binding3;
+	protected Binding binding4;
+	protected Binding binding5;
+	protected Binding binding6;
 
-	void setUp() throws DataException, GlueException
+	protected void setUp() throws DataException, GlueException
 	{
 		Resource resource = new Resource();
 

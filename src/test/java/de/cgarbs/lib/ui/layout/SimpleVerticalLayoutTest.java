@@ -22,9 +22,10 @@ import org.junit.Test;
 
 import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.GlueException;
+import de.cgarbs.lib.ui.UiTestBase;
 import de.cgarbs.lib.ui.UiTestDataModel;
 
-public class SimpleVerticalLayoutTest extends BaseLayoutTest
+public class SimpleVerticalLayoutTest extends UiTestBase
 {
 	@Before
 	public void setUp() throws DataException, GlueException
