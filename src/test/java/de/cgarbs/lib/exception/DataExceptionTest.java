@@ -17,7 +17,7 @@ import de.cgarbs.lib.exception.DataException.ERROR;
 public class DataExceptionTest
 {
 	public static final String GIVEN_MESSAGE = "foo";
-	public static final ERROR GIVEN_ERROR = ERROR.UNDEFINED;
+	public static final ERROR GIVEN_ERROR = ERROR.DUPLICATE_USAGE;
 	public static final String GIVEN_THROWABLE_MESSAGE = "bazinga!";
 	public static final Throwable GIVEN_THROWABLE = new RuntimeException(GIVEN_THROWABLE_MESSAGE);
 
@@ -40,7 +40,7 @@ public class DataExceptionTest
 		{
 			final DataException exception = new DataException(GIVEN_ERROR, GIVEN_MESSAGE);
 
-			assertEquals(ERROR.UNDEFINED, exception.getError());
+			assertEquals(GIVEN_ERROR, exception.getError());
 			assertEquals(GIVEN_MESSAGE, exception.getMessageOnly());
 			assertTrue(exception.getMessage().contains(GIVEN_MESSAGE));
 			assertTrue(exception.getLocalizedMessage().contains(GIVEN_MESSAGE));
@@ -50,7 +50,7 @@ public class DataExceptionTest
 		{
 			final DataException exception = new DataException(GIVEN_ERROR, GIVEN_THROWABLE);
 
-			assertEquals(ERROR.UNDEFINED, exception.getError());
+			assertEquals(GIVEN_ERROR, exception.getError());
 			assertEquals(GIVEN_THROWABLE_MESSAGE, exception.getMessageOnly());
 			assertTrue(exception.getMessage().contains(GIVEN_THROWABLE_MESSAGE));
 			assertTrue(exception.getLocalizedMessage().contains(GIVEN_THROWABLE_MESSAGE));
@@ -60,7 +60,7 @@ public class DataExceptionTest
 		{
 			final DataException exception = new DataException(GIVEN_ERROR, GIVEN_MESSAGE, GIVEN_THROWABLE);
 
-			assertEquals(ERROR.UNDEFINED, exception.getError());
+			assertEquals(GIVEN_ERROR, exception.getError());
 			assertEquals(GIVEN_MESSAGE, exception.getMessageOnly());
 			assertTrue(exception.getMessage().contains(GIVEN_MESSAGE));
 			assertTrue(exception.getLocalizedMessage().contains(GIVEN_MESSAGE));
