@@ -17,7 +17,6 @@ import org.junit.Test;
 import de.cgarbs.lib.data.type.IntegerAttribute;
 import de.cgarbs.lib.data.type.StringAttribute;
 import de.cgarbs.lib.exception.ValidationErrorList;
-import de.cgarbs.lib.i18n.Resource;
 
 public class DataModelTest
 {
