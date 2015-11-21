@@ -4,13 +4,9 @@
  */
 package de.cgarbs.lib.exception;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class GlueException extends LocalizedException
 {
-	private static final long serialVersionUID = -2514745080334864317L;
-
 	/**
 	 * Error codes for this exception.
 	 *

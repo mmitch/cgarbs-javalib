@@ -10,11 +10,6 @@ import de.cgarbs.lib.i18n.Resource;
 public class ValidationError extends LocalizedException
 {
 	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
 	 * Error codes for this exception.
 	 *
 	 * @author Christian Garbs <mitch@cgarbs.de>
