@@ -16,7 +16,6 @@ import de.cgarbs.lib.i18n.Resource;
  */
 class TestDataModel extends DataModel
 {
-	private static final long serialVersionUID = 1L;
 	static final String STRING_ATTRIBUTE  = "StringAttribute";
 	static final String INTEGER_ATTRIBUTE = "IntegerAttribute";
 

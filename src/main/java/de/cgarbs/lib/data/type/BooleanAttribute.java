@@ -10,11 +10,6 @@ import de.cgarbs.lib.exception.ValidationError;
 
 public class BooleanAttribute extends DataAttribute
 {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
-
 	protected Boolean value;
 
 	// Builder pattern start

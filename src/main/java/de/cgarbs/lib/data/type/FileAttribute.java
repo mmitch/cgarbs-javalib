@@ -18,17 +18,12 @@ import de.cgarbs.lib.exception.ValidationError;
 
 public class FileAttribute extends DataAttribute
 {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
-
 	private File value;
 
-	private transient final boolean mustExist;
-	private transient final boolean mustRead;
-	private transient final boolean mustWrite;
-	private transient final FileFilter[] fileFilters;
+	private final boolean mustExist;
+	private final boolean mustRead;
+	private final boolean mustWrite;
+	private final FileFilter[] fileFilters;
 
 	// Builder pattern start
 	public static class Builder extends DataAttribute.Builder<Builder>

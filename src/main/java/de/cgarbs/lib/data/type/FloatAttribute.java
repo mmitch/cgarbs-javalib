@@ -8,13 +8,8 @@ import de.cgarbs.lib.data.NumberAttribute;
 
 public class FloatAttribute extends NumberAttribute
 {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private transient final int minDecimals;
-	private transient final int maxDecimals;
+	private final int minDecimals;
+	private final int maxDecimals;
 
 	// Builder pattern start
 	public static class Builder extends NumberAttribute.Builder<Float>

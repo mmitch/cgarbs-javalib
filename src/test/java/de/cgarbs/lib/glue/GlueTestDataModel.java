@@ -16,8 +16,6 @@ import de.cgarbs.lib.i18n.Resource;
 
 public class GlueTestDataModel extends DataModel
 {
-	private static final long serialVersionUID = 1L;
-
 	public static final String STRING_ATTRIBUTE = "StringAttribute";
 
 	public static final String BOOLEAN_ATTRIBUTE = "BooleanAttribute";

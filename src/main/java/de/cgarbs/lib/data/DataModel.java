@@ -20,7 +20,7 @@ abstract public class DataModel
 {
 	private Map<String, DataAttribute> attributes = new LinkedHashMap<String, DataAttribute>();
 
-	private transient final Resource resource;
+	private final Resource resource;
 
 	public DataModel(Resource resource)
 	{

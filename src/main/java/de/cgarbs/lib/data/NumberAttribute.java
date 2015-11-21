@@ -12,17 +12,12 @@ import de.cgarbs.lib.exception.ValidationError;
 
 public abstract class NumberAttribute extends DataAttribute
 {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
-
 	protected Number value;
 
-	private transient final Number minValue;
-	private transient final Number maxValue;
+	private final Number minValue;
+	private final Number maxValue;
 
-	protected transient NumberFormat numberFormat;
+	protected NumberFormat numberFormat;
 
 	// Builder pattern start
 	public abstract static class Builder<N extends Number> extends DataAttribute.Builder<Builder<N>>

@@ -15,9 +15,6 @@ import de.cgarbs.lib.i18n.Resource;
  */
 public class GuesserModel extends DataModel
 {
-	private static final long serialVersionUID = 1L;
-
-
 	// declare IDs for all attributes
 	public static final String THE_NUMBER = "THE_NUMBER";
 

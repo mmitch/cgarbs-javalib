@@ -11,8 +11,6 @@ import de.cgarbs.lib.i18n.Resource;
 
 public class UiTestDataModel extends DataModel
 {
-	private static final long serialVersionUID = 1L;
-
 	public static final String STRING_1 = "StringAttribute1";
 
 	public static final String STRING_2 = "StringAttribute2";

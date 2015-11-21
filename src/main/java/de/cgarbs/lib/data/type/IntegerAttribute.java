@@ -15,11 +15,6 @@ import de.cgarbs.lib.data.NumberAttribute;
  */
 public class IntegerAttribute extends NumberAttribute
 {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
-
 	// Builder pattern start
 	public static class Builder extends NumberAttribute.Builder<Integer>
 	{

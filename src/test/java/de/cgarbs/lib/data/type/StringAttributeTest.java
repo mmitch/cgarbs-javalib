@@ -121,8 +121,6 @@ public class StringAttributeTest
 
 	class StringAttributeTestDataModel extends BaseTestDataModel
 	{
-		private static final long serialVersionUID = 1L;
-
 		public StringAttributeTestDataModel(Resource resource) throws DataException
 		{
 			super(resource);

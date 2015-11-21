@@ -122,8 +122,6 @@ public class IntegerAttributeTest
 
 	class IntAttributeTestDataModel extends BaseTestDataModel
 	{
-		private static final long serialVersionUID = 1L;
-
 		public IntAttributeTestDataModel(Resource resource) throws DataException
 		{
 			super(resource);

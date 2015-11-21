@@ -190,8 +190,6 @@ public class FloatAttributeTest
 
 	class FloatAttributeTestDataModel extends BaseTestDataModel
 	{
-		private static final long serialVersionUID = 1L;
-
 		public FloatAttributeTestDataModel(Resource resource) throws DataException
 		{
 			super(resource);

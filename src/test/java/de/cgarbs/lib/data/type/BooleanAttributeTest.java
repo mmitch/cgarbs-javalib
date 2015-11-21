@@ -92,8 +92,6 @@ public class BooleanAttributeTest
 
 	class BooleanAttributeTestDataModel extends BaseTestDataModel
 	{
-		private static final long serialVersionUID = 1L;
-
 		public BooleanAttributeTestDataModel(Resource resource) throws DataException
 		{
 			super(resource);

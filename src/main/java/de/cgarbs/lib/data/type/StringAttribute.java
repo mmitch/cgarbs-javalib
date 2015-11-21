@@ -10,15 +10,10 @@ import de.cgarbs.lib.exception.ValidationError;
 
 public class StringAttribute extends DataAttribute
 {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
-
 	private String value;
 
-	private transient final Integer minLength;
-	private transient final Integer maxLength;
+	private final Integer minLength;
+	private final Integer maxLength;
 
 	// Builder pattern start
 	public static class Builder extends DataAttribute.Builder<Builder>

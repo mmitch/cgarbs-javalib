@@ -9,10 +9,10 @@ import de.cgarbs.lib.exception.ValidationError;
 
 abstract public class DataAttribute
 {
-	private transient final boolean nullable;
+	private final boolean nullable;
 	private String key;
 	private DataModel model;
-	protected transient Object cleanValue;
+	protected Object cleanValue;
 
 	abstract public Object getValue();
 	abstract protected void setValueInternal(Object newValue) throws DataException;
