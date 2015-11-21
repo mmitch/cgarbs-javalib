@@ -4,14 +4,11 @@
  */
 package de.cgarbs.lib.json.type;
 
-import java.text.ParseException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.json.simple.JSONAware;
 import org.json.simple.JSONValue;
-
-import de.cgarbs.lib.data.TypeConverter;
 
 /**
  * Base class for JSON type conversion.
