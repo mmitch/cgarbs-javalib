@@ -6,9 +6,12 @@ package de.cgarbs.lib.glue;
 
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +24,7 @@ import org.junit.Test;
 import de.cgarbs.lib.data.DataAttribute;
 import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.GlueException;
+import de.cgarbs.lib.exception.ValidationErrorList;
 import de.cgarbs.lib.i18n.Resource;
 
 public class GlueTest
@@ -32,10 +36,12 @@ public class GlueTest
 	Binding stringBinding;
 	Binding integerBinding;
 	Binding booleanBinding;
+	Binding fileBinding;
 
 	DataAttribute stringAttribute;
 	DataAttribute integerAttribute;
 	DataAttribute booleanAttribute;
+	DataAttribute fileAttribute;
 
 	Glue<GlueTestDataModel> glue;
 	GlueTestDataModel dataModel;
@@ -58,10 +64,12 @@ public class GlueTest
 		stringBinding  = bindings.get(GlueTestDataModel.STRING_ATTRIBUTE);
 		integerBinding = bindings.get(GlueTestDataModel.INTEGER_ATTRIBUTE);
 		booleanBinding = bindings.get(GlueTestDataModel.BOOLEAN_ATTRIBUTE);
+		fileBinding    = bindings.get(GlueTestDataModel.FILE_ATTRIBUTE);
 
 		stringAttribute  = dataModel.getAttribute(GlueTestDataModel.STRING_ATTRIBUTE);
 		integerAttribute = dataModel.getAttribute(GlueTestDataModel.INTEGER_ATTRIBUTE);
 		booleanAttribute = dataModel.getAttribute(GlueTestDataModel.BOOLEAN_ATTRIBUTE);
+		fileAttribute    = dataModel.getAttribute(GlueTestDataModel.FILE_ATTRIBUTE);
 	}
 
 	@Test
@@ -82,7 +90,7 @@ public class GlueTest
 		}
 
 		// check in both directions, for the case, that there are duplicate entries in one of them
-		assertThat(attributesFromGlue, containsInAnyOrder(attributesFromModel.toArray()));
+		assertThat(attributesFromGlue,  containsInAnyOrder(attributesFromModel.toArray()));
 		assertThat(attributesFromModel, containsInAnyOrder(attributesFromGlue.toArray()));
 	}
 
@@ -122,4 +130,20 @@ public class GlueTest
 		assertThat(String.valueOf(booleanBinding.getViewValue()), is(equalTo(String.valueOf(GIVEN_BOOLEAN))));
 	}
 
+	@Test
+	public void checkValidation()
+	{
+		fileBinding.setViewValue(null);
+
+		try
+		{
+			glue.validate();
+			fail("no exception thrown");
+		}
+		catch (ValidationErrorList e)
+		{
+			assertThat(e.getValidationErrors().size(), is(equalTo(1)));
+			assertThat(e.getValidationErrors(), hasItem(containsString(fileAttribute.getAttributeName())));
+		}
+	}
 }

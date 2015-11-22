@@ -97,6 +97,7 @@ public class GlueTestDataModel extends DataModel
 		addAttribute(
 				FILE_ATTRIBUTE,
 				FileAttribute.builder()
+					.setNullable(false)
 					.build()
 				);
 	}
