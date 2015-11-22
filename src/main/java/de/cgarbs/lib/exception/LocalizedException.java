@@ -16,6 +16,8 @@ import java.util.Map;
  */
 public abstract class LocalizedException extends Exception
 {
+	// FIXME incompatible! here and in all subclasses: rename error/ERROR to errorCode/ERRORCODE
+
 	/**
 	 *
 	 */
