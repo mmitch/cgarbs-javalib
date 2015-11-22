@@ -4,21 +4,14 @@
  */
 package de.cgarbs.lib.data.type;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static de.cgarbs.lib.hamcrest.File.sameFileAs;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
-import static de.cgarbs.lib.hamcrest.File.sameFileAs;
 
 import java.io.File;
-import java.text.NumberFormat;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -26,7 +19,6 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import de.cgarbs.lib.data.DataModel;
-import de.cgarbs.lib.data.NumberAttribute;
 import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.ValidationError;
 import de.cgarbs.lib.i18n.Resource;
