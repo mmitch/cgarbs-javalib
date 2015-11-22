@@ -12,7 +12,9 @@ import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
+import java.awt.Color;
 import java.io.File;
 
 import javax.swing.JLabel;
@@ -24,6 +26,7 @@ import org.junit.Test;
 
 import de.cgarbs.lib.exception.DataException;
 import de.cgarbs.lib.exception.GlueException;
+import de.cgarbs.lib.exception.ValidationError;
 import de.cgarbs.lib.glue.GlueTestDataModel;
 
 public class FileBindingTest extends BaseBindingTest
@@ -36,10 +39,15 @@ public class FileBindingTest extends BaseBindingTest
 	final File VIEW_GIVEN_VALUE_2  = createFileFrom("some", "other", "file.txt");
 	final File VIEW_NULL_VALUE     = null;
 
+	JTextField bindingTextField;
+	FileBinding fileBinding;
+
 	@Before
 	public void setUp() throws DataException, GlueException
 	{
 		setUp(GlueTestDataModel.FILE_ATTRIBUTE);
+		fileBinding = (FileBinding) binding;
+		bindingTextField = fileBinding.jTextField;
 	}
 
 	@Test
@@ -56,7 +64,7 @@ public class FileBindingTest extends BaseBindingTest
 		assertThat(jLabel.getText(), is(equalTo(getLabel())));
 
 		assertThat(binding.getJData(), is(instanceOf(JPanel.class)));
-		assertThat(((FileBinding) binding).jTextField.getText(), is(""));
+		assertThat(bindingTextField.getText(), is(""));
 	}
 
 	@Test
@@ -95,6 +103,37 @@ public class FileBindingTest extends BaseBindingTest
 		assertThat(getViewValue(), is(not(sameFileAs(VIEW_NULL_VALUE))));
 		syncToView();
 		assertThat(getViewValue(), is(sameFileAs(VIEW_NULL_VALUE)));
+	}
+
+	@Test
+	public void checkValidationError() throws ValidationError
+	{
+		final Color originalBackground = bindingTextField.getBackground();
+
+		fileBinding.setValidationError("FOO");
+		assertThat(bindingTextField.getBackground(), is(not(equalTo(originalBackground))));
+		assertThat(binding.getJData().getToolTipText(), is(equalTo("FOO")));
+		final Color errorBackground = bindingTextField.getBackground();
+
+		fileBinding.setValidationError(null);
+		assertThat(bindingTextField.getBackground(), is(equalTo(originalBackground)));
+		assertThat(binding.getJData().getToolTipText(), is(nullValue()));
+
+		fileBinding.setViewValue(null);
+		try {
+			fileBinding.validate();
+			fail("no exception thrown");
+		}
+		catch (ValidationError e)
+		{
+			assertThat(e.getError(), is(equalTo(ValidationError.ERROR.NULL_NOT_ALLOWED)));
+		}
+		assertThat(bindingTextField.getBackground(), is(equalTo(errorBackground)));
+
+		fileBinding.setViewValue(new File("foo"));
+		fileBinding.validate();
+		assertThat(bindingTextField.getBackground(), is(equalTo(originalBackground)));
+
 	}
 
 	private File getModelValue()
