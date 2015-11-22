@@ -35,6 +35,8 @@ public class GlueTestDataModel extends DataModel
 
 	public static final String PROGRESSBAR_FLOAT_ATTRIBUTE = "ProgressBarFloatAttribute";
 
+	public static final String FILE_ATTRIBUTE = "FileAttribute";
+
 	public GlueTestDataModel(Resource resource) throws DataException
 	{
 		super(resource);
@@ -89,6 +91,12 @@ public class GlueTestDataModel extends DataModel
 				FloatAttribute.builder()
 					.setMinValue((float) PROGRESSBAR_MIN_VALUE)
 					.setMaxValue((float) PROGRESSBAR_MAX_VALUE)
+					.build()
+				);
+
+		addAttribute(
+				FILE_ATTRIBUTE,
+				FileAttribute.builder()
 					.build()
 				);
 	}
