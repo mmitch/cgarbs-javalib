@@ -4,7 +4,7 @@
  */
 package de.cgarbs.lib;
 
-import java.io.File;
+import static de.cgarbs.lib.FileUtils.createPathFrom;
 
 public class TestImages
 {
@@ -27,20 +27,4 @@ public class TestImages
 			PACKAGE_PATH,
 			"black.png"
 			);
-
-	private static String createPathFrom(String... elements )
-	{
-		StringBuilder path = new StringBuilder();
-		if (elements.length > 0)
-		{
-			path.append(elements[0]);
-		}
-		for (int i=1; i<elements.length; i++)
-		{
-			path.append(File.separatorChar);
-			path.append(elements[i]);
-		}
-		return path.toString();
-	}
-
 }
