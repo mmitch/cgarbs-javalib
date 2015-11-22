@@ -7,11 +7,14 @@ package de.cgarbs.lib.data.type;
 import static de.cgarbs.lib.hamcrest.File.sameFileAs;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
+import java.awt.Color;
 import java.io.File;
+import java.net.URI;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -36,6 +39,12 @@ public class FileAttributeTest
 	File missingFile;
 	File notWritableFile;
 	File notReadableFile;
+
+	final static String FILTER_NAME_1 = "name1";
+	final static String FILTER_EXT_1a = ".jpg";
+	final static String FILTER_EXT_1b = ".txt";
+	final static String FILTER_NAME_2 = "name2";
+	final static String FILTER_EXT_2  = ".pdf";
 
 	@Before
 	public void setUp() throws Exception
@@ -71,6 +80,19 @@ public class FileAttributeTest
 
 		attribute_1_underTest.setValue(accessibleFile.getPath());
 		assertThat((File) attribute_1_underTest.getValue(), is(sameFileAs(accessibleFile)));
+
+		attribute_1_underTest.setValue(new URI("file:///foo"));
+
+		try
+		{
+			attribute_1_underTest.setValue(new Color(0));
+			fail("no exception thrown");
+		}
+		catch (DataException e)
+		{
+			assertThat(e.getError(), is(equalTo(DataException.ERROR.INVALID_VALUE)));
+			assertThat(e.getCause(), is(instanceOf(ValidationError.class)));
+		}
 	}
 
 	@Test
@@ -147,6 +169,23 @@ public class FileAttributeTest
 		assertThat(attribute_2_underTest.isNullable(),   is(false));
 	}
 
+	@Test
+	public void checkDirty() throws Exception
+	{
+		assertThat(attribute_1_underTest.isDirty(), is(false));
+		attribute_1_underTest.setValue(accessibleFile);
+		assertThat(attribute_1_underTest.isDirty(), is(true));
+	}
+
+	@Test
+	public void checkFileFilter() throws Exception
+	{
+		assertThat(attribute_1_underTest.getFileFilters().length, is(0));
+
+		assertThat(attribute_2_underTest.getFileFilters().length, is(2));
+		// TODO check contents of FileFilters
+	}
+
 	class FileAttributeTestDataModel extends BaseTestDataModel
 	{
 		public FileAttributeTestDataModel(Resource resource) throws DataException
@@ -167,6 +206,8 @@ public class FileAttributeTest
 					TEST_ATTRIBUTE_2,
 					FileAttribute.builder()
 						.setNullable(false)
+						.addFileFilter(FILTER_NAME_1, FILTER_EXT_1a, FILTER_EXT_1b)
+						.addFileFilter(FILTER_NAME_2, FILTER_EXT_2)
 						.build()
 					);
 		}
