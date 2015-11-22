@@ -76,7 +76,7 @@ public class ColorBindingTest extends BaseBindingTest
 		assertThat(getModelValue(), is(not(equalTo(MODEL_NULL_VALUE))));
 		syncToModel();
 		// FIXME weird: constructor check gets Color null, but now we have a color??
-//		assertThat(getAttributeValue(), is(equalTo(MODEL_NULL_VALUE)));
+//		assertThat(getModelValue(), is(equalTo(MODEL_NULL_VALUE)));
 		assertThat(getModelValue(), is(equalTo(DEFAULT_COLOR)));
 	}
 
