@@ -52,4 +52,33 @@ public class StringUtils
 
 		return result.toString();
 	}
+
+	/**
+	 * Truncates a string to a given length if it exceeds the length.
+	 *
+	 * @param originalString The string to be truncated.  A null value is returned unchanged..
+	 * @param maxChars The number of characters to keep.  Input strings shorter than this
+	 *                 length are returned unchanged.  Values lower than <code>1</code> result
+	 *                 in an empty string.
+	 * @return The string truncated to the given length.
+	 */
+	public static String truncate(final String originalString, final int maxChars)
+	{
+		if (originalString == null)
+		{
+			return null;
+		}
+
+		if (maxChars < 1)
+		{
+			return "";
+		}
+
+		if (maxChars >= originalString.length())
+		{
+			return originalString;
+		}
+
+		return originalString.substring(0, maxChars);
+	}
 }

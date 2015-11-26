@@ -6,6 +6,7 @@ package de.cgarbs.lib;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
@@ -94,4 +95,41 @@ public class StringUtilsTest
 				);
 	}
 
+	@Test
+	public void checkTruncate()
+	{
+		assertThat(
+				StringUtils.truncate(null, -3),
+				is(nullValue())
+				);
+		assertThat(
+				StringUtils.truncate(null, 0),
+				is(nullValue())
+				);
+		assertThat(
+				StringUtils.truncate(null, 7),
+				is(nullValue())
+				);
+
+		assertThat(
+				StringUtils.truncate("califabulatoric", -5),
+				is(equalTo(""))
+				);
+		assertThat(
+				StringUtils.truncate("califabulatoric", 0),
+				is(equalTo(""))
+				);
+		assertThat(
+				StringUtils.truncate("califabulatoric", 1),
+				is(equalTo("c"))
+				);
+		assertThat(
+				StringUtils.truncate("califabulatoric", 5),
+				is(equalTo("calif"))
+				);
+		assertThat(
+				StringUtils.truncate("califabulatoric", 500),
+				is(equalTo("califabulatoric"))
+				);
+	}
 }
