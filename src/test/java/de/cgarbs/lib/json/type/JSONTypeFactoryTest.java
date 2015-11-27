@@ -6,24 +6,16 @@ package de.cgarbs.lib.json.type;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsNull.nullValue;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.hamcrest.core.StringStartsWith.startsWith;
-
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
-
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import java.awt.Color;
-import java.text.NumberFormat;
-import java.text.ParseException;
 
 import org.json.simple.JSONValue;
-import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import de.cgarbs.lib.exception.JSONException;
 import de.cgarbs.lib.exception.JSONException.ERROR;
