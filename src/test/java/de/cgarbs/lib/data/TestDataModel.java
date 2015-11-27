@@ -7,14 +7,13 @@ package de.cgarbs.lib.data;
 import de.cgarbs.lib.data.type.IntegerAttribute;
 import de.cgarbs.lib.data.type.StringAttribute;
 import de.cgarbs.lib.exception.DataException;
-import de.cgarbs.lib.i18n.Resource;
 
 /**
  * This is the {@link DataModel} for the {@link DataModelTest} test class.
  * It needs to be a separate file because the serialization ({@link #writeToFile(java.io.File)},
  * {@link #readFromFile(java.io.File)}) does not work with inner classes.
  */
-class TestDataModel extends DataModel
+public class TestDataModel extends DataModel
 {
 	static final String STRING_ATTRIBUTE  = "StringAttribute";
 	static final String INTEGER_ATTRIBUTE = "IntegerAttribute";
