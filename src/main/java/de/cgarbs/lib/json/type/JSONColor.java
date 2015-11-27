@@ -8,8 +8,6 @@ import java.awt.Color;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.json.simple.JSONValue;
-
 import de.cgarbs.lib.data.TypeConverter;
 
 /**
@@ -54,15 +52,14 @@ public class JSONColor extends JSONType
 	}
 
 	@Override
-	String getJSONAttributes()
+	Map<String, Object> getJSONAttributes()
 	{
-		final Map<String, Integer> data = new LinkedHashMap<String, Integer>();
+		final Map<String, Object> data = new LinkedHashMap<String, Object>();
 		data.put(ATTRIBUTE_RED,   color.getRed());
 		data.put(ATTRIBUTE_GREEN, color.getGreen());
 		data.put(ATTRIBUTE_BLUE,  color.getBlue());
 		data.put(ATTRIBUTE_ALPHA, color.getAlpha());
-
-		return JSONValue.toJSONString(data);
+		return data;
 	}
 
 	@Override

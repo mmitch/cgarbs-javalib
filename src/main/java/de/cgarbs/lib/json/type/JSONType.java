@@ -27,7 +27,7 @@ public abstract class JSONType implements JSONAware
 	@Override
 	public String toJSONString()
 	{
-		final Map<String, String> json = new LinkedHashMap<String, String>();
+		final Map<String, Object> json = new LinkedHashMap<String, Object>();
 		json.put(CLASS_FIELD, getJSONClassName());
 		json.put(VERSION_FIELD, getJSONClassVersion());
 		json.put(ATTRIBUTE_FIELD, getJSONAttributes());
@@ -41,11 +41,11 @@ public abstract class JSONType implements JSONAware
 	public abstract Object toJavaValue();
 
 	/**
-	 * Returns a JSON string containing the wrapped Object.
+	 * Returns a Map representation of the Object's attributes
 	 *
-	 * @return JSON representation of the Object data
+	 * @return Map representation of the Object's attributes
 	 */
-	abstract String getJSONAttributes();
+	abstract Map<String, Object> getJSONAttributes();
 
 	/**
 	 * Returns the class name of the actual wrapper class.
