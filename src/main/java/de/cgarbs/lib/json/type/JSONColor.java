@@ -23,6 +23,11 @@ public class JSONColor extends JSONType
 	public static final String CLASS_NAME    = "JSONColor";
 	public static final String CLASS_VERSION = "1";
 
+	static final String ATTRIBUTE_RED   = "R";
+	static final String ATTRIBUTE_GREEN = "G";
+	static final String ATTRIBUTE_BLUE  = "B";
+	static final String ATTRIBUTE_ALPHA = "A";
+
 	Color color;
 
 	/**
@@ -41,10 +46,10 @@ public class JSONColor extends JSONType
 	public JSONColor(final Map<String, Object> attributesMap)
 	{
 		this.color = new Color(
-				TypeConverter.parseAsInt(attributesMap.get("R")),
-				TypeConverter.parseAsInt(attributesMap.get("G")),
-				TypeConverter.parseAsInt(attributesMap.get("B")),
-				TypeConverter.parseAsInt(attributesMap.get("A"))
+				TypeConverter.parseAsInt(attributesMap.get(ATTRIBUTE_RED)),
+				TypeConverter.parseAsInt(attributesMap.get(ATTRIBUTE_GREEN)),
+				TypeConverter.parseAsInt(attributesMap.get(ATTRIBUTE_BLUE)),
+				TypeConverter.parseAsInt(attributesMap.get(ATTRIBUTE_ALPHA))
 				);
 	}
 
@@ -52,10 +57,10 @@ public class JSONColor extends JSONType
 	String getJSONAttributes()
 	{
 		final Map<String, Integer> data = new LinkedHashMap<String, Integer>();
-		data.put("R", color.getRed());
-		data.put("G", color.getGreen());
-		data.put("B", color.getBlue());
-		data.put("A", color.getAlpha());
+		data.put(ATTRIBUTE_RED,   color.getRed());
+		data.put(ATTRIBUTE_GREEN, color.getGreen());
+		data.put(ATTRIBUTE_BLUE,  color.getBlue());
+		data.put(ATTRIBUTE_ALPHA, color.getAlpha());
 
 		return JSONValue.toJSONString(data);
 	}
