@@ -4,6 +4,7 @@
  */
 package de.cgarbs.lib.data;
 
+import de.cgarbs.lib.data.type.ColorAttribute;
 import de.cgarbs.lib.data.type.IntegerAttribute;
 import de.cgarbs.lib.data.type.StringAttribute;
 import de.cgarbs.lib.exception.DataException;
@@ -17,6 +18,7 @@ public class TestDataModel extends DataModel
 {
 	static final String STRING_ATTRIBUTE  = "StringAttribute";
 	static final String INTEGER_ATTRIBUTE = "IntegerAttribute";
+	static final String COLOR_ATTRIBUTE = "ColorAttribute";
 
 	public TestDataModel() throws DataException
 	{
@@ -33,6 +35,13 @@ public class TestDataModel extends DataModel
 		addAttribute(
 				INTEGER_ATTRIBUTE,
 				IntegerAttribute.builder()
+					.setNullable(false)
+					.build()
+				);
+
+		addAttribute(
+				COLOR_ATTRIBUTE,
+				ColorAttribute.builder()
 					.setNullable(false)
 					.build()
 				);
