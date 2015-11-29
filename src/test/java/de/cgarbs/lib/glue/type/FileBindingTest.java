@@ -108,6 +108,7 @@ public class FileBindingTest extends BaseBindingTest
 	@Test
 	public void checkValidationError() throws ValidationError
 	{
+		bindingTextField.setBackground(null);
 		final Color originalBackground = bindingTextField.getBackground();
 
 		fileBinding.setValidationError("FOO");
