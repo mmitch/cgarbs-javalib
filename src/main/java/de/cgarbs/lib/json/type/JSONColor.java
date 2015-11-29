@@ -30,7 +30,7 @@ public class JSONColor extends JSONType
 
 	/**
 	 * Creates a JSONColor object based on the given Color.
-	 * @param color the color to wrap for JSON conversion
+	 * @param color the Color to wrap for JSON conversion
 	 */
 	public JSONColor(final Color color)
 	{
