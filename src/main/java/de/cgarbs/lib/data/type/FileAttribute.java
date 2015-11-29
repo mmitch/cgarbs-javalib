@@ -169,7 +169,7 @@ public class FileAttribute extends DataAttribute
 		}
 		else if (newValue instanceof File)
 		{
-			return new File(((File) newValue).toURI());
+			return new File(((File) newValue).getPath());
 		}
 		else if (newValue instanceof String)
 		{
