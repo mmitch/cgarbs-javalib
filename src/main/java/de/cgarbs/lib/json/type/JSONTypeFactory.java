@@ -47,7 +47,7 @@ public abstract class JSONTypeFactory
 	 * @return the JSON object wrapped as a {@link JSONType}
 	 * @throws JSONException when no conversion exists for the given Object
 	 */
-	public static Object unwrapJSONObject(final Object map) throws JSONException
+	public static JSONType unwrapJSONObject(final Object map) throws JSONException
 	{
 		if (! (map instanceof Map))
 		{

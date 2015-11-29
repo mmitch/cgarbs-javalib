@@ -85,7 +85,8 @@ public abstract class JSONAdapter
 			return o;
 		}
 
-		return JSONTypeFactory.unwrapJSONObject(o);
+		JSONType wrappedJSON = JSONTypeFactory.unwrapJSONObject(o);
+		return wrappedJSON.toJavaValue();
 	}
 
 	/**
