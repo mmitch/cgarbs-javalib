@@ -19,8 +19,8 @@ public class TestDataModel extends DataModel
 {
 	static final String STRING_ATTRIBUTE  = "StringAttribute";
 	static final String INTEGER_ATTRIBUTE = "IntegerAttribute";
-	static final String COLOR_ATTRIBUTE = "ColorAttribute";
-	static final String FILE_ATTRIBUTE = null;
+	static final String COLOR_ATTRIBUTE   = "ColorAttribute";
+	static final String FILE_ATTRIBUTE    = "FileAttribute";
 
 	public TestDataModel() throws DataException
 	{
