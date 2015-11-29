@@ -10,6 +10,13 @@ TODO:
 
 === LIB ===
 
+- add tests for FileUtils.create{File,Path}From() being called with
+  (String) null and (String[]) null
+
+- throw JSONExceptions on the attributMap constructor in JSONType
+  (eg. when there is no path argument for JSONFile or the path is no list of
+   Strings)
+
 - BUG: windows filenames get their backslashes erased when an IOException is passed
   through a ValidationErrorList - find out what's de-escaping the backslashes
 
