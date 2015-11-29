@@ -5,6 +5,7 @@
 package de.cgarbs.lib.json.type;
 
 import java.awt.Color;
+import java.io.File;
 import java.util.Map;
 
 import de.cgarbs.lib.exception.JSONException;
@@ -31,6 +32,10 @@ public abstract class JSONTypeFactory
 		if (o instanceof Color)
 		{
 			return new JSONColor((Color) o);
+		}
+		else if (o instanceof File)
+		{
+			return new JSONFile((File) o);
 		}
 
 		// not yet supported
@@ -83,6 +88,10 @@ public abstract class JSONTypeFactory
 		if (JSONColor.CLASS_NAME.equals(identifier))
 		{
 			return new JSONColor(attributesMap);
+		}
+		else if (JSONFile.CLASS_NAME.equals(identifier))
+		{
+			return new JSONFile(attributesMap);
 		}
 
 		// not yet supported
