@@ -45,6 +45,25 @@ dependencies
   - bash and perl for extended build tools (both optional)
 
 
+repository
+----------
+
+To use cgarbs-javalib in your own Gradle project, use this:
+
+    repositories {
+    	maven {
+    		url "https://www.cgarbs.de/maven2/"
+    	}
+    }
+    dependencies {
+    	compile 'de.cgarbs:cgarbs-javalib:0.2.0'
+    }
+
+Adjust the version number accordingly, this is just an example.  Maven
+users should also be able to use this repository (but I don't know the
+maven syntax for that).
+
+
 examples
 --------
 
