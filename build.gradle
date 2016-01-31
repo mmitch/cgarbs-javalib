@@ -54,7 +54,7 @@ repositories {
 	repositories {
 		maven {
 			name "cgarbs.de repo"
-			url "http://www.cgarbs.de/maven2"
+			url "https://www.cgarbs.de/maven2"
 		}
 	}
 }
