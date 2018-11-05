@@ -1,8 +1,10 @@
 language: java
 
 jdk:
-  - oraclejdk7
   - oraclejdk8
+  - oraclejdk11
+  - openjdk10
+  - openjdk11
 
 # Codecov.io test coverage report
 # see https://github.com/codecov/example-java
