@@ -1,6 +1,6 @@
 apply plugin: 'java'
 /* we are a Java project, obviously */
-sourceCompatibility = '1.6'
+sourceCompatibility = '8'
 
 
 apply plugin: 'jacoco'
