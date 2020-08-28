@@ -1,18 +1,20 @@
 /*
- * Copyright 2015 (C)  Christian Garbs <mitch@cgarbs.de>
+ * Copyright 2015, 2020 (C)  Christian Garbs <mitch@cgarbs.de>
  * Licensed under GNU GPL 3 (or later)
  */
 package de.cgarbs.lib.data.type;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.lessThan;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
-import static org.junit.Assert.assertTrue;
 
 import java.text.NumberFormat;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -58,21 +60,21 @@ public class FloatAttributeTest
 	public void checkSetNull() throws Exception
 	{
 		attribute_1_underTest.setValue(null);
-		assertNull(attribute_1_underTest.getValue());
-		assertNull(attribute_1_underTest.getFormattedValue());
+		assertThat(attribute_1_underTest.getValue(), is(nullValue()));
+		assertThat(attribute_1_underTest.getFormattedValue(), is(nullValue()));
 	}
 
 	@Test
 	public void checkSetValues() throws Exception
 	{
 		attribute_1_underTest.setValue(GIVEN_STRING);
-		assertEquals(Float.valueOf(GIVEN_STRING), attribute_1_underTest.getValue());
+		assertThat(attribute_1_underTest.getValue(), is(Float.valueOf(GIVEN_STRING)));
 
 		attribute_1_underTest.setValue(GIVEN_INTEGER);
-		assertEquals(Float.valueOf(GIVEN_INTEGER), attribute_1_underTest.getValue());
+		assertThat(attribute_1_underTest.getValue(), is(Float.valueOf(GIVEN_INTEGER)));
 
 		attribute_1_underTest.setValue(GIVEN_FLOAT);
-		assertEquals(GIVEN_FLOAT, attribute_1_underTest.getValue());
+		assertThat(attribute_1_underTest.getValue(), is(GIVEN_FLOAT));
 	}
 
 	@Test
@@ -97,7 +99,7 @@ public class FloatAttributeTest
 		}
 		catch (ValidationError e)
 		{
-			assertEquals(ValidationError.ERROR.NULL_NOT_ALLOWED, e.getError());
+			assertThat(e.getError(), is(ValidationError.ERROR.NULL_NOT_ALLOWED));
 		}
 
 		try
@@ -107,7 +109,7 @@ public class FloatAttributeTest
 		}
 		catch (ValidationError e)
 		{
-			assertEquals(ValidationError.ERROR.NUMBER_TOO_LARGE, e.getError());
+			assertThat(e.getError(), is(ValidationError.ERROR.NUMBER_TOO_LARGE));
 		}
 		attribute_2_underTest.validate(GIVEN_VALUE_TOO_BIG);
 
@@ -118,7 +120,7 @@ public class FloatAttributeTest
 		}
 		catch (ValidationError e)
 		{
-			assertEquals(ValidationError.ERROR.NUMBER_TOO_SMALL, e.getError());
+			assertThat(e.getError(), is(ValidationError.ERROR.NUMBER_TOO_SMALL));
 		}
 		attribute_2_underTest.validate(GIVEN_VALUE_TOO_SMALL);
 
@@ -148,7 +150,7 @@ public class FloatAttributeTest
 			final String raw = nf.format((Float) attribute.getValue());
 			final String formatted = attribute.getFormattedValue();
 
-			assertEquals(raw, formatted);
+			assertThat(formatted, is(raw));
 		}
 
 		{
@@ -156,36 +158,36 @@ public class FloatAttributeTest
 			final String raw = nf.format((Float) attribute.getValue());
 			final String formatted = attribute.getFormattedValue();
 
-			assertNotEquals(raw, formatted);
-			assertTrue(raw.length() < formatted.length());
-			assertTrue(formatted.startsWith(raw));
+			assertThat(formatted, is(not(raw)));
+			assertThat(formatted.length(), is(greaterThan(raw.length())));
+			assertThat(formatted.startsWith(raw), is(true));
 		}
 
 		{
 			attribute.setValue(GIVEN_VALUE_TOO_MANY_DECIMALS);
 			final String raw = nf.format((Float) attribute.getValue());
-			final String formatted = attribute.getFormattedValue();
+			final String formatted = attribute.getFormattedValue(); 
 
-			assertNotEquals(raw, formatted);
-			assertTrue(raw.length() > formatted.length());
-			assertTrue(raw.startsWith(formatted));
+			assertThat(raw, is(not(formatted)));
+			assertThat(formatted.length(), is(lessThan(raw.length())));
+			assertThat(raw, Matchers.startsWith(formatted));
 		}
 	}
 
 	@Test
 	public void checkSetup()
 	{
-		assertEquals(GIVEN_MIN_VALUE, attribute_1_underTest.getMinValue());
-		assertEquals(GIVEN_MAX_VALUE, attribute_1_underTest.getMaxValue());
-		assertEquals(GIVEN_MIN_DECIMALS, attribute_1_underTest.getMinDecimals());
-		assertEquals(GIVEN_MAX_DECIMALS, attribute_1_underTest.getMaxDecimals());
-		assertTrue(attribute_1_underTest.isNullable());
+		assertThat(attribute_1_underTest.getMinValue(), is(GIVEN_MIN_VALUE));
+		assertThat(attribute_1_underTest.getMaxValue(), is(GIVEN_MAX_VALUE));
+		assertThat(attribute_1_underTest.getMinDecimals(), is(GIVEN_MIN_DECIMALS));
+		assertThat(attribute_1_underTest.getMaxDecimals(), is(GIVEN_MAX_DECIMALS));
+		assertThat(attribute_1_underTest.isNullable(), is(true));
 
-		assertNull(attribute_2_underTest.getMinValue());
-		assertNull(attribute_2_underTest.getMaxValue());
-		assertEquals(GIVEN_DECIMALS, attribute_2_underTest.getMinDecimals());
-		assertEquals(GIVEN_DECIMALS, attribute_2_underTest.getMaxDecimals());
-		assertFalse(attribute_2_underTest.isNullable());
+		assertThat(attribute_2_underTest.getMinValue(), is(nullValue()));
+		assertThat(attribute_2_underTest.getMaxValue(), is(nullValue()));
+		assertThat(attribute_2_underTest.getMinDecimals(), is(GIVEN_DECIMALS));
+		assertThat(attribute_2_underTest.getMaxDecimals(), is(GIVEN_DECIMALS));
+		assertThat(attribute_2_underTest.isNullable(), is(false));
 	}
 
 	class FloatAttributeTestDataModel extends BaseTestDataModel

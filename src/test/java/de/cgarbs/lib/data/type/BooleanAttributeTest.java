@@ -1,13 +1,12 @@
 /*
- * Copyright 2015 (C)  Christian Garbs <mitch@cgarbs.de>
+ * Copyright 2015, 2020 (C)  Christian Garbs <mitch@cgarbs.de>
  * Licensed under GNU GPL 3 (or later)
  */
 package de.cgarbs.lib.data.type;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
@@ -39,14 +38,14 @@ public class BooleanAttributeTest
 	public void checkSetNull() throws Exception
 	{
 		attribute_1_underTest.setValue(null);
-		assertNull(attribute_1_underTest.getValue());
+		assertThat(attribute_1_underTest.getValue(), is(nullValue()));
 	}
 
 	@Test
 	public void checkSetValues() throws Exception
 	{
 		attribute_1_underTest.setValue(GIVEN_BOOLEAN);
-		assertEquals(GIVEN_BOOLEAN, attribute_1_underTest.getValue());
+		assertThat(attribute_1_underTest.getValue(), is(GIVEN_BOOLEAN));
 	}
 
 	@Test
@@ -63,7 +62,7 @@ public class BooleanAttributeTest
 		}
 		catch (DataException e)
 		{
-			assertEquals(DataException.ERROR.INVALID_VALUE, e.getError());
+			assertThat(e.getError(), is(DataException.ERROR.INVALID_VALUE));
 		}
 	}
 
@@ -78,16 +77,16 @@ public class BooleanAttributeTest
 		}
 		catch (ValidationError e)
 		{
-			assertEquals(ValidationError.ERROR.NULL_NOT_ALLOWED, e.getError());
+			assertThat(e.getError(), is(ValidationError.ERROR.NULL_NOT_ALLOWED));
 		}
 	}
 
 	@Test
 	public void checkSetup()
 	{
-		assertTrue(attribute_1_underTest.isNullable());
+		assertThat(attribute_1_underTest.isNullable(), is(true));
 
-		assertFalse(attribute_2_underTest.isNullable());
+		assertThat(attribute_2_underTest.isNullable(), is(false));
 	}
 
 	class BooleanAttributeTestDataModel extends BaseTestDataModel

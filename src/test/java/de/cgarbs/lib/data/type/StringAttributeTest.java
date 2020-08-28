@@ -1,13 +1,12 @@
 /*
- * Copyright 2015 (C)  Christian Garbs <mitch@cgarbs.de>
+ * Copyright 2015, 2020 (C)  Christian Garbs <mitch@cgarbs.de>
  * Licensed under GNU GPL 3 (or later)
  */
 package de.cgarbs.lib.data.type;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
@@ -45,20 +44,20 @@ public class StringAttributeTest
 	public void checkSetNull() throws Exception
 	{
 		attribute_1_underTest.setValue(null);
-		assertNull(attribute_1_underTest.getValue());
+		assertThat(attribute_1_underTest.getValue(), is(nullValue()));
 	}
 
 	@Test
 	public void checkSetValues() throws Exception
 	{
 		attribute_1_underTest.setValue(GIVEN_STRING);
-		assertEquals(GIVEN_STRING, attribute_1_underTest.getValue());
+		assertThat(attribute_1_underTest.getValue(), is(GIVEN_STRING));
 
 		attribute_1_underTest.setValue(GIVEN_INTEGER);
-		assertEquals(GIVEN_INTEGER.toString(), attribute_1_underTest.getValue());
+		assertThat(attribute_1_underTest.getValue(), is(GIVEN_INTEGER.toString()));
 
 		attribute_1_underTest.setValue(GIVEN_FLOAT);
-		assertEquals(GIVEN_FLOAT.toString(), attribute_1_underTest.getValue());
+		assertThat(attribute_1_underTest.getValue(), is(GIVEN_FLOAT.toString()));
 	}
 
 	@Test
@@ -81,7 +80,7 @@ public class StringAttributeTest
 		}
 		catch (ValidationError e)
 		{
-			assertEquals(ValidationError.ERROR.NULL_NOT_ALLOWED, e.getError());
+			assertThat(e.getError(), is(ValidationError.ERROR.NULL_NOT_ALLOWED));
 		}
 
 		try
@@ -91,7 +90,7 @@ public class StringAttributeTest
 		}
 		catch (ValidationError e)
 		{
-			assertEquals(ValidationError.ERROR.STRING_TOO_LONG, e.getError());
+			assertThat(e.getError(), is(ValidationError.ERROR.STRING_TOO_LONG));
 		}
 		attribute_2_underTest.validate(GIVEN_STRING_TOO_LONG);
 
@@ -102,7 +101,7 @@ public class StringAttributeTest
 		}
 		catch (ValidationError e)
 		{
-			assertEquals(ValidationError.ERROR.STRING_TOO_SHORT, e.getError());
+			assertThat(e.getError(), is(ValidationError.ERROR.STRING_TOO_SHORT));
 		}
 		attribute_2_underTest.validate(GIVEN_STRING_TOO_SHORT);
 	}
@@ -110,13 +109,13 @@ public class StringAttributeTest
 	@Test
 	public void checkSetup()
 	{
-		assertEquals(GIVEN_MIN_LENGTH, attribute_1_underTest.getMinLength());
-		assertEquals(GIVEN_MAX_LENGTH, attribute_1_underTest.getMaxLength());
-		assertTrue(attribute_1_underTest.isNullable());
+		assertThat(attribute_1_underTest.getMinLength(), is(GIVEN_MIN_LENGTH));
+		assertThat(attribute_1_underTest.getMaxLength(), is(GIVEN_MAX_LENGTH));
+		assertThat(attribute_1_underTest.isNullable(), is(true));
 
-		assertNull(attribute_2_underTest.getMinLength());
-		assertNull(attribute_2_underTest.getMaxLength());
-		assertFalse(attribute_2_underTest.isNullable());
+		assertThat(attribute_2_underTest.getMinLength(), is(nullValue()));
+		assertThat(attribute_2_underTest.getMaxLength(), is(nullValue()));
+		assertThat(attribute_2_underTest.isNullable(), is(false));
 	}
 
 	class StringAttributeTestDataModel extends BaseTestDataModel

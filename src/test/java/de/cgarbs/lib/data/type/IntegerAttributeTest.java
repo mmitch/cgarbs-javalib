@@ -1,13 +1,12 @@
 /*
- * Copyright 2015 (C)  Christian Garbs <mitch@cgarbs.de>
+ * Copyright 2015, 2020 (C)  Christian Garbs <mitch@cgarbs.de>
  * Licensed under GNU GPL 3 (or later)
  */
 package de.cgarbs.lib.data.type;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
@@ -45,21 +44,21 @@ public class IntegerAttributeTest
 	public void checkSetNull() throws Exception
 	{
 		attribute_1_underTest.setValue(null);
-		assertNull(attribute_1_underTest.getValue());
-		assertNull(attribute_1_underTest.getFormattedValue());
+		assertThat(attribute_1_underTest.getValue(), is(nullValue()));
+		assertThat(attribute_1_underTest.getFormattedValue(), is(nullValue()));
 	}
 
 	@Test
 	public void checkSetValues() throws Exception
 	{
 		attribute_1_underTest.setValue(GIVEN_STRING);
-		assertEquals(Integer.valueOf(GIVEN_STRING), attribute_1_underTest.getValue());
+		assertThat(attribute_1_underTest.getValue(), is(Integer.valueOf(GIVEN_STRING)));
 
 		attribute_1_underTest.setValue(GIVEN_INTEGER);
-		assertEquals(GIVEN_INTEGER, attribute_1_underTest.getValue());
+		assertThat(attribute_1_underTest.getValue(), is(GIVEN_INTEGER));
 
 		attribute_1_underTest.setValue(GIVEN_FLOAT);
-		assertEquals(Integer.valueOf(GIVEN_FLOAT.intValue()), attribute_1_underTest.getValue());
+		assertThat(attribute_1_underTest.getValue(), is(Integer.valueOf(GIVEN_FLOAT.intValue())));
 	}
 
 	@Test
@@ -82,7 +81,7 @@ public class IntegerAttributeTest
 		}
 		catch (ValidationError e)
 		{
-			assertEquals(ValidationError.ERROR.NULL_NOT_ALLOWED, e.getError());
+			assertThat(e.getError(), is(ValidationError.ERROR.NULL_NOT_ALLOWED));
 		}
 
 		try
@@ -92,7 +91,7 @@ public class IntegerAttributeTest
 		}
 		catch (ValidationError e)
 		{
-			assertEquals(ValidationError.ERROR.NUMBER_TOO_LARGE, e.getError());
+			assertThat(e.getError(), is(ValidationError.ERROR.NUMBER_TOO_LARGE));
 		}
 		attribute_2_underTest.validate(GIVEN_VALUE_TOO_BIG);
 
@@ -103,7 +102,7 @@ public class IntegerAttributeTest
 		}
 		catch (ValidationError e)
 		{
-			assertEquals(ValidationError.ERROR.NUMBER_TOO_SMALL, e.getError());
+			assertThat(e.getError(), is(ValidationError.ERROR.NUMBER_TOO_SMALL));
 		}
 		attribute_2_underTest.validate(GIVEN_VALUE_TOO_SMALL);
 	}
@@ -111,13 +110,13 @@ public class IntegerAttributeTest
 	@Test
 	public void checkSetup()
 	{
-		assertEquals(GIVEN_MIN_VALUE, attribute_1_underTest.getMinValue());
-		assertEquals(GIVEN_MAX_VALUE, attribute_1_underTest.getMaxValue());
-		assertTrue(attribute_1_underTest.isNullable());
+		assertThat(attribute_1_underTest.getMinValue(), is(GIVEN_MIN_VALUE));
+		assertThat(attribute_1_underTest.getMaxValue(), is(GIVEN_MAX_VALUE));
+		assertThat(attribute_1_underTest.isNullable(), is(true));
 
-		assertNull(attribute_2_underTest.getMinValue());
-		assertNull(attribute_2_underTest.getMaxValue());
-		assertFalse(attribute_2_underTest.isNullable());
+		assertThat(attribute_2_underTest.getMinValue(), is(nullValue()));
+		assertThat(attribute_2_underTest.getMaxValue(), is(nullValue()));
+		assertThat(attribute_2_underTest.isNullable(), is(false));
 	}
 
 	class IntAttributeTestDataModel extends BaseTestDataModel
