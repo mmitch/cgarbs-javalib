@@ -41,7 +41,7 @@ publishing {
 publishing {
 	repositories {
 		maven {
-			name "cgarbs.de local repo"
+			name "cgarbs.de-local-repo"
 			url "file:/home/mitch/pub/www/maven2"
 			/* sad panda: aparrently SFTP currently only works with passwords, not with pubkey */
 		}
