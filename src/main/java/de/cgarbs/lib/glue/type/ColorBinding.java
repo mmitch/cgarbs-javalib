@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 (C)  Christian Garbs <mitch@cgarbs.de>
+ * Copyright 2014, 2020 (C)  Christian Garbs <mitch@cgarbs.de>
  * Licensed under GNU GPL 3 (or later)
  */
 package de.cgarbs.lib.glue.type;
@@ -42,14 +42,14 @@ public class ColorBinding extends Binding
 		jPanel = new JPanel();
 
 		jButton = new JButton("...");
-		jButton.setToolTipText(R._("TIT_COLORCHOOSER", txtLabel));
+		jButton.setToolTipText(R.get("TIT_COLORCHOOSER", txtLabel));
 
 		jButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
 			{
 				final Color newColor = JColorChooser.showDialog(
 						jButton,
-						R._("TIT_COLORCHOOSER", txtLabel),
+						R.get("TIT_COLORCHOOSER", txtLabel),
 						jPanel.getBackground());
 				if (newColor != null)
 				{

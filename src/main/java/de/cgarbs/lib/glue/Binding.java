@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 (C)  Christian Garbs <mitch@cgarbs.de>
+ * Copyright 2014, 2020 (C)  Christian Garbs <mitch@cgarbs.de>
  * Licensed under GNU GPL 3 (or later)
  */
 package de.cgarbs.lib.glue;
@@ -22,9 +22,9 @@ abstract public class Binding
 	protected static Color ERROR_COLOR = Color.RED;
 
 	protected DataAttribute attribute;
-	protected JLabel     jLabel;
-	protected JComponent jData;
-	protected String     txtLabel;
+	protected JLabel        jLabel;
+	protected JComponent    jData;
+	protected String        txtLabel;
 
 	private Set<Binding> listeningBindings = new HashSet<Binding>(); // FIXME or List? -> check!
 	private final Color originalColor;
@@ -49,7 +49,7 @@ abstract public class Binding
 		if (label == null)
 		{
 			// default label from attribute resource
-			this.txtLabel = resource._("LBL_"+attribute.getAttributeName());
+			this.txtLabel = resource.get("LBL_"+attribute.getAttributeName());
 		}
 		else
 		{

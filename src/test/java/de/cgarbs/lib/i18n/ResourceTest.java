@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 (C)  Christian Garbs <mitch@cgarbs.de>
+ * Copyright 2015, 2020 (C)  Christian Garbs <mitch@cgarbs.de>
  * Licensed under GNU GPL 3 (or later)
  */
 package de.cgarbs.lib.i18n;
@@ -48,24 +48,24 @@ public class ResourceTest
 			Locale.setDefault(Locale.FRENCH);
 			final Resource r = new Resource(ResourceTest.class);
 
-			assertEquals(EXPECTED_LANGUAGE_FRENCH, r._(KEY_LANGUAGE));
-			assertEquals(EXPECTED_HELLO_ENGLISH, r._(KEY_HELLO));
+			assertEquals(EXPECTED_LANGUAGE_FRENCH, r.get(KEY_LANGUAGE));
+			assertEquals(EXPECTED_HELLO_ENGLISH, r.get(KEY_HELLO));
 		}
 
 		{
 			Locale.setDefault(Locale.ENGLISH);
 			final Resource r = new Resource(ResourceTest.class);
 
-			assertEquals(EXPECTED_LANGUAGE_ENGLISH, r._(KEY_LANGUAGE));
-			assertEquals(EXPECTED_HELLO_ENGLISH, r._(KEY_HELLO));
+			assertEquals(EXPECTED_LANGUAGE_ENGLISH, r.get(KEY_LANGUAGE));
+			assertEquals(EXPECTED_HELLO_ENGLISH, r.get(KEY_HELLO));
 		}
 
 		{
 			Locale.setDefault(Locale.GERMAN);
 			final Resource r = new Resource(ResourceTest.class);
 
-			assertEquals(EXPECTED_LANGUAGE_GERMAN, r._(KEY_LANGUAGE));
-			assertEquals(EXPECTED_HELLO_GERMAN, r._(KEY_HELLO));
+			assertEquals(EXPECTED_LANGUAGE_GERMAN, r.get(KEY_LANGUAGE));
+			assertEquals(EXPECTED_HELLO_GERMAN, r.get(KEY_HELLO));
 		}
 
 		Locale.setDefault(oldLocale);
@@ -78,7 +78,7 @@ public class ResourceTest
 
 		/* matching parameters */
 		{
-			final String msg = r._(KEY_PARAMS, PARAM_0, PARAM_1);
+			final String msg = r.get(KEY_PARAMS, PARAM_0, PARAM_1);
 
 			/* parameter string is $1:$0, so PARAM_2 comes first! */
 			assertTrue(msg.startsWith(PARAM_1));
@@ -90,7 +90,7 @@ public class ResourceTest
 		/* too few parameters */
 		// FIXME also check for the text {PARAMETER n NOT SET}
 		{
-			final String msg = r._(KEY_PARAMS, PARAM_0);
+			final String msg = r.get(KEY_PARAMS, PARAM_0);
 
 			assertTrue(msg.endsWith(PARAM_0));
 			assertFalse(msg.contains(PARAM_1));
@@ -98,7 +98,7 @@ public class ResourceTest
 			assertTrue(msg.contains(PARAM_UNEXPANDED));
 		}
 		{
-			final String msg = r._(KEY_PARAMS);
+			final String msg = r.get(KEY_PARAMS);
 
 			assertFalse(msg.contains(PARAM_0));
 			assertFalse(msg.contains(PARAM_1));
@@ -108,7 +108,7 @@ public class ResourceTest
 
 		/* too many parameters */
 		{
-			final String msg = r._(KEY_PARAMS, PARAM_0, PARAM_1, PARAM_2);
+			final String msg = r.get(KEY_PARAMS, PARAM_0, PARAM_1, PARAM_2);
 
 			assertTrue(msg.startsWith(PARAM_1));
 			assertTrue(msg.endsWith(PARAM_0));
@@ -122,8 +122,8 @@ public class ResourceTest
 	{
 		final Resource r = new Resource(ResourceTest.class);
 
-		assertNull(r._(KEY_NULL));
-		assertNull(r._(KEY_NULL, PARAM_0));
+		assertNull(r.get(KEY_NULL));
+		assertNull(r.get(KEY_NULL, PARAM_0));
 	}
 
 	@Test
@@ -132,7 +132,7 @@ public class ResourceTest
 		final Resource r = new Resource(ResourceTest.class);
 
 		{
-			final String msg = r._(KEY_MISSING);
+			final String msg = r.get(KEY_MISSING);
 
 			/* missing keys return the key instead of exploding */
 			assertNotNull(msg);
@@ -140,7 +140,7 @@ public class ResourceTest
 		}
 
 		{
-			final String msg = r._(KEY_MISSING, PARAM_0, PARAM_1);
+			final String msg = r.get(KEY_MISSING, PARAM_0, PARAM_1);
 
 			assertNotNull(msg);
 			assertEquals(KEY_MISSING, KEY_MISSING);
@@ -154,13 +154,13 @@ public class ResourceTest
 		final Resource r = new Resource();
 
 		{
-			final String msg = r._(KEY_MISSING);
+			final String msg = r.get(KEY_MISSING);
 
 			assertEquals(KEY_MISSING, msg);
 		}
 
 		{
-			final String msg = r._(KEY_WITH_PARAMS, PARAM_0, PARAM_1);
+			final String msg = r.get(KEY_WITH_PARAMS, PARAM_0, PARAM_1);
 
 //			assertNotEquals(KEY_MISSING, msg); // FIXME reactivate
 			assertTrue(msg.startsWith(PARAM_0));

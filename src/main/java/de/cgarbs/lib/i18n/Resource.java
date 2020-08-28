@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 (C)  Christian Garbs <mitch@cgarbs.de>
+ * Copyright 2014, 2020 (C)  Christian Garbs <mitch@cgarbs.de>
  * Licensed under GNU GPL 3 (or later)
  */
 package de.cgarbs.lib.i18n;
@@ -37,16 +37,18 @@ public class Resource
 	}
 
 	/**
-	 * parameter markers are $0, $1, $2...
+	 * parameter markers are $0, $1, $2...<br>
 	 * $$ escapes a $
 	 *
 	 * missing key results in no exception, key is given back (with expanded parameters, where possible)
 	 *
 	 * @param key
 	 * @param values
-	 * @return
+	 * @return resource text with expanded parameters
+	 * 
+	 * @since 1.0.0
 	 */
-	public String _(final String key, final String... values)
+	public String get(final String key, final String... values)
 	{
 		if (key == null)
 		{

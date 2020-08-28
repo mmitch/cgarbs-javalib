@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 (C)  Christian Garbs <mitch@cgarbs.de>
+ * Copyright 2014, 2020 (C)  Christian Garbs <mitch@cgarbs.de>
  * Licensed under GNU GPL 3 (or later)
  */
 package de.cgarbs.lib.glue.type;
@@ -40,7 +40,7 @@ public class FileBinding extends Binding
 		jTextField.setEditable(false);
 
 		jButton = new JButton("...");
-		jButton.setToolTipText(R._("TIT_FILECHOOSER", txtLabel));
+		jButton.setToolTipText(R.get("TIT_FILECHOOSER", txtLabel));
 
 		jButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0)
@@ -60,10 +60,10 @@ public class FileBinding extends Binding
 					}
 				}
 				fc.setSelectedFile((File)getViewValue());
-				fc.setDialogTitle(R._("TIT_FILECHOOSER", txtLabel));
+				fc.setDialogTitle(R.get("TIT_FILECHOOSER", txtLabel));
 				if (fc.showDialog(
 						jButton,
-						R._("BTN_FILECHOOSER"))
+						R.get("BTN_FILECHOOSER"))
 						== JFileChooser.APPROVE_OPTION)
 				{
 					setViewValue(fc.getSelectedFile());

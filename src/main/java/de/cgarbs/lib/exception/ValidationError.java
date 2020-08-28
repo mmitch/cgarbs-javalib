@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 (C)  Christian Garbs <mitch@cgarbs.de>
+ * Copyright 2014, 2020 (C)  Christian Garbs <mitch@cgarbs.de>
  * Licensed under GNU GPL 3 (or later)
  */
 package de.cgarbs.lib.exception;
@@ -46,7 +46,7 @@ public class ValidationError extends LocalizedException
 
 	public ValidationError(final DataAttribute attribute, final String message, final ERROR error, final String... params)
 	{
-		super(message, R._(ERRORTEXT.get(error), params));
+		super(message, R.get(ERRORTEXT.get(error), params));
 		this.attribute = attribute;
 		this.error = error;
 	}
